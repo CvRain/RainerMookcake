@@ -1,0 +1,36 @@
+# See https://docs.minecraftforge.net/en/1.21.x/gettingstarted/modfiles/#modstoml
+# There are lots of things you can do with the mods.toml, and not all fields are included with this MDK
+# References: https://github.com/MinecraftForge/MDKExamples
+
+modLoader="javafml"
+loaderVersion="[62,)"
+license="MIT"
+#issueTrackerURL="https://github.com/MyOrganization/MyMod/" #optional
+#clientSideOnly=true #optional, default=false
+
+[[mods]]
+modId="rainer_mooncake"
+version="1.0-SNAPSHOT"
+displayName="Rainer`s MoonCake"
+#updateJSONURL="https://example.com/updates.json" #optional
+#displayURL="https://example.com/" #optional
+#logoFile="rainer_mooncake.png" #optional
+#credits="" #optional
+authors="" #optional
+#displayTest="MATCH_VERSION" #optional, default=MATCH_VERSION when not clientSideOnly, else IGNORE_ALL_VERSION
+
+description='''Rainer`s MoonCake.'''
+
+[[dependencies.rainer_mooncake]] #recommended
+    modId="forge"
+    mandatory=true
+    versionRange="[62,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.rainer_mooncake]] #recommended
+    modId="minecraft"
+    mandatory=true
+    versionRange="[26.1,26.2,)"
+    ordering="NONE"
+    side="BOTH"
