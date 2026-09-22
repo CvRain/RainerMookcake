@@ -1,0 +1,19 @@
+{
+  "itemGroup.mooncake_overflow.mooncakes": "月饼溢出",
+  "item.mooncake_overflow.cocoa_bean_paste": "可可豆豆沙",
+  "item.mooncake_overflow.mooncake_dough": "月饼面团",
+  "item.mooncake_overflow.mooncake_mold": "圆形模具",
+  "block.mooncake_overflow.filled_mooncake_dough": "带馅面饼",
+  "block.mooncake_overflow.mooncake_dough_block": "带馅面饼",
+  "block.mooncake_overflow.raw_mooncake": "生圆月饼",
+  "block.mooncake_overflow.mooncake": "月饼",
+  "block.mooncake_overflow.mooncake_block": "月饼",
+  "mooncake_overflow.mooncake.kind.round_round": "圆形月饼",
+  "mooncake_overflow.mooncake.kind.round_square": "圆月饼·方纹",
+  "mooncake_overflow.mooncake.kind.round_flower": "圆月饼·花形纹",
+  "mooncake_overflow.mooncake.kind.square_round": "方月饼·圆纹",
+  "mooncake_overflow.mooncake.kind.square_square": "方形月饼",
+  "mooncake_overflow.mooncake.kind.square_flower": "方月饼·花形纹",
+  "item.mooncake_overflow.square_mooncake_mold": "方形模具",
+  "block.mooncake_overflow.square_raw_mooncake": "生方月饼"
+}

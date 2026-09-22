@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "mooncake_dough",
+  "ingredients": [
+    "minecraft:wheat",
+    "minecraft:wheat",
+    "minecraft:wheat",
+    "minecraft:wheat",
+    "minecraft:sugar",
+    "minecraft:egg"
+  ],
+  "result": {
+    "id": "mooncake_overflow:mooncake_dough",
+    "count": 4
+  }
+}

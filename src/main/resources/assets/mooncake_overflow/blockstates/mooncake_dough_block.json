@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "shape=round,stamped=false": {
+      "model": "mooncake_overflow:block/mooncake_dough_block_round"
+    },
+    "shape=round,stamped=true": {
+      "model": "mooncake_overflow:block/mooncake_dough_block_round_stamped"
+    },
+    "shape=square,stamped=false": {
+      "model": "mooncake_overflow:block/mooncake_dough_block_square"
+    },
+    "shape=square,stamped=true": {
+      "model": "mooncake_overflow:block/mooncake_dough_block_square_stamped"
+    }
+  }
+}

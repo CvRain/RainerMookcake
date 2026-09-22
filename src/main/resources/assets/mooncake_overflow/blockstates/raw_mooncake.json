@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "shape=round": {
+      "model": "mooncake_overflow:block/raw_mooncake_round"
+    },
+    "shape=square": {
+      "model": "mooncake_overflow:block/raw_mooncake_square"
+    }
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "nw": "round_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_round_nw"
+      }
+    },
+    {
+      "when": {
+        "nw": "round_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_square_nw"
+      }
+    },
+    {
+      "when": {
+        "nw": "round_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_flower_nw"
+      }
+    },
+    {
+      "when": {
+        "nw": "square_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_round_nw"
+      }
+    },
+    {
+      "when": {
+        "nw": "square_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_square_nw"
+      }
+    },
+    {
+      "when": {
+        "nw": "square_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_flower_nw"
+      }
+    },
+    {
+      "when": {
+        "ne": "round_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_round_ne"
+      }
+    },
+    {
+      "when": {
+        "ne": "round_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_square_ne"
+      }
+    },
+    {
+      "when": {
+        "ne": "round_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_flower_ne"
+      }
+    },
+    {
+      "when": {
+        "ne": "square_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_round_ne"
+      }
+    },
+    {
+      "when": {
+        "ne": "square_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_square_ne"
+      }
+    },
+    {
+      "when": {
+        "ne": "square_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_flower_ne"
+      }
+    },
+    {
+      "when": {
+        "sw": "round_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_round_sw"
+      }
+    },
+    {
+      "when": {
+        "sw": "round_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_square_sw"
+      }
+    },
+    {
+      "when": {
+        "sw": "round_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_flower_sw"
+      }
+    },
+    {
+      "when": {
+        "sw": "square_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_round_sw"
+      }
+    },
+    {
+      "when": {
+        "sw": "square_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_square_sw"
+      }
+    },
+    {
+      "when": {
+        "sw": "square_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_flower_sw"
+      }
+    },
+    {
+      "when": {
+        "se": "round_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_round_se"
+      }
+    },
+    {
+      "when": {
+        "se": "round_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_square_se"
+      }
+    },
+    {
+      "when": {
+        "se": "round_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_round_flower_se"
+      }
+    },
+    {
+      "when": {
+        "se": "square_round"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_round_se"
+      }
+    },
+    {
+      "when": {
+        "se": "square_square"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_square_se"
+      }
+    },
+    {
+      "when": {
+        "se": "square_flower"
+      },
+      "apply": {
+        "model": "mooncake_overflow:block/mooncake_piece_square_flower_se"
+      }
+    }
+  ]
+}

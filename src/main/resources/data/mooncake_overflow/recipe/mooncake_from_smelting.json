@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "ingredient": "mooncake_overflow:raw_mooncake",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "result": {
+    "id": "mooncake_overflow:mooncake"
+  }
+}

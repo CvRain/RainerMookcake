@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": "mooncake_overflow:square_raw_mooncake",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "result": {
+    "id": "mooncake_overflow:mooncake",
+    "components": {
+      "mooncake_overflow:mooncake_kind": "square_round"
+    }
+  }
+}

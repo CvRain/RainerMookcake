@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "filled_mooncake_dough",
+  "ingredients": [
+    "mooncake_overflow:mooncake_dough",
+    "mooncake_overflow:mooncake_dough",
+    "mooncake_overflow:mooncake_dough",
+    "mooncake_overflow:mooncake_dough",
+    "mooncake_overflow:cocoa_bean_paste"
+  ],
+  "result": {
+    "id": "mooncake_overflow:filled_mooncake_dough",
+    "count": 4
+  }
+}

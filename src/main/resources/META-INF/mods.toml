@@ -5,30 +5,33 @@
 modLoader="javafml"
 loaderVersion="[62,)"
 license="MIT"
-#issueTrackerURL="https://github.com/MyOrganization/MyMod/" #optional
+#issueTrackerURL="https://github.com/ClaudeRainer/RainerMooncake/issues" #optional
 #clientSideOnly=true #optional, default=false
 
 [[mods]]
-modId="rainer_mooncake"
-version="1.0-SNAPSHOT"
-displayName="Rainer`s MoonCake"
+modId="mooncake_overflow"
+version="0.1.0-SNAPSHOT"
+displayName="Mooncake Overflow"
 #updateJSONURL="https://example.com/updates.json" #optional
-#displayURL="https://example.com/" #optional
-#logoFile="rainer_mooncake.png" #optional
+displayURL="https://github.com/ClaudeRainer/RainerMooncake" #optional
+#logoFile="mooncake_overflow.png" #optional
 #credits="" #optional
-authors="" #optional
+authors="ClaudeRainer" #optional
 #displayTest="MATCH_VERSION" #optional, default=MATCH_VERSION when not clientSideOnly, else IGNORE_ALL_VERSION
 
-description='''Rainer`s MoonCake.'''
+description='''347 Variants, None of Them Good.
 
-[[dependencies.rainer_mooncake]] #recommended
+月饼溢出 —— 把中秋月饼塞进 Minecraft，然后把它氧化、涂蜡、切制、切开四份、再拼回去。
+灵感来自铜块变体的那个经典段子：既然铜块能有三百多种变体，月饼凭什么不能。'''
+
+[[dependencies.mooncake_overflow]] #recommended
     modId="forge"
     mandatory=true
     versionRange="[62,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.rainer_mooncake]] #recommended
+[[dependencies.mooncake_overflow]] #recommended
     modId="minecraft"
     mandatory=true
     versionRange="[26.1,26.2,)"

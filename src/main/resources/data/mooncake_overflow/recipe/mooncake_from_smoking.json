@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "ingredient": "mooncake_overflow:raw_mooncake",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "result": {
+    "id": "mooncake_overflow:mooncake"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:component",
+    "component": "mooncake_overflow:mooncake_kind",
+    "cases": [
+      {
+        "when": "round_square",
+        "model": {
+          "type": "minecraft:model",
+          "model": "mooncake_overflow:block/mooncake_item_round_square"
+        }
+      },
+      {
+        "when": "round_flower",
+        "model": {
+          "type": "minecraft:model",
+          "model": "mooncake_overflow:block/mooncake_item_round_flower"
+        }
+      },
+      {
+        "when": "square_round",
+        "model": {
+          "type": "minecraft:model",
+          "model": "mooncake_overflow:block/mooncake_item_square_round"
+        }
+      },
+      {
+        "when": "square_square",
+        "model": {
+          "type": "minecraft:model",
+          "model": "mooncake_overflow:block/mooncake_item_square_square"
+        }
+      },
+      {
+        "when": "square_flower",
+        "model": {
+          "type": "minecraft:model",
+          "model": "mooncake_overflow:block/mooncake_item_square_flower"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "mooncake_overflow:block/mooncake_item_round_round"
+    }
+  }
+}

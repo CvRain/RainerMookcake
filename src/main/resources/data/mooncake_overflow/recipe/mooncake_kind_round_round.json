@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "mooncake_overflow:mooncake",
+  "result": {
+    "id": "mooncake_overflow:mooncake"
+  }
+}

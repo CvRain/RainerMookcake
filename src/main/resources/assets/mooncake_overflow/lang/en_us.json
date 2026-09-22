@@ -1,0 +1,19 @@
+{
+  "itemGroup.mooncake_overflow.mooncakes": "Mooncake Overflow",
+  "item.mooncake_overflow.cocoa_bean_paste": "Cocoa Bean Paste",
+  "item.mooncake_overflow.mooncake_dough": "Mooncake Dough",
+  "item.mooncake_overflow.mooncake_mold": "Round Mooncake Mold",
+  "block.mooncake_overflow.filled_mooncake_dough": "Filled Mooncake Dough",
+  "block.mooncake_overflow.mooncake_dough_block": "Filled Mooncake Dough",
+  "block.mooncake_overflow.raw_mooncake": "Raw Round Mooncake",
+  "block.mooncake_overflow.mooncake": "Mooncake",
+  "block.mooncake_overflow.mooncake_block": "Mooncake",
+  "mooncake_overflow.mooncake.kind.round_round": "Round Mooncake",
+  "mooncake_overflow.mooncake.kind.round_square": "Round Mooncake (Square Motif)",
+  "mooncake_overflow.mooncake.kind.round_flower": "Round Mooncake (Flower Motif)",
+  "mooncake_overflow.mooncake.kind.square_round": "Square Mooncake (Round Motif)",
+  "mooncake_overflow.mooncake.kind.square_square": "Square Mooncake",
+  "mooncake_overflow.mooncake.kind.square_flower": "Square Mooncake (Flower Motif)",
+  "item.mooncake_overflow.square_mooncake_mold": "Square Mooncake Mold",
+  "block.mooncake_overflow.square_raw_mooncake": "Raw Square Mooncake"
+}
