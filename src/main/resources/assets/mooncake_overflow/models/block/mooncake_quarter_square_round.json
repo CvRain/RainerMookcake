@@ -25,7 +25,7 @@
             16,
             16
           ],
-          "texture": "mooncake_overflow:block/mooncake_side_plain"
+          "texture": "#side"
         },
         "up": {
           "uv": [
@@ -34,7 +34,7 @@
             8.0,
             8.0
           ],
-          "texture": "mooncake_overflow:block/mooncake_top_round_plain"
+          "texture": "#top"
         },
         "north": {
           "uv": [
@@ -43,7 +43,7 @@
             16,
             16
           ],
-          "texture": "mooncake_overflow:block/mooncake_side_plain"
+          "texture": "#side"
         },
         "south": {
           "uv": [
@@ -52,7 +52,7 @@
             16,
             16
           ],
-          "texture": "mooncake_overflow:block/mooncake_filling"
+          "texture": "#filling"
         },
         "west": {
           "uv": [
@@ -61,7 +61,7 @@
             16,
             16
           ],
-          "texture": "mooncake_overflow:block/mooncake_side_plain"
+          "texture": "#side"
         },
         "east": {
           "uv": [
@@ -70,7 +70,7 @@
             16,
             16
           ],
-          "texture": "mooncake_overflow:block/mooncake_filling"
+          "texture": "#filling"
         }
       }
     }

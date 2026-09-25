@@ -158,7 +158,7 @@ def main() -> int:
         if not refs:
             errors.append(f"items/{item}.json: 没找到任何模型引用")
             continue
-        for ref in refs:
+    for ref in refs:
             check_model_exists(ref, f"items/{item}.json")
 
     # --- 2. blockstates/<id>.json 必须存在 ---
@@ -207,6 +207,31 @@ def main() -> int:
         for key, value in (data.get("textures") or {}).items():
             if isinstance(value, str) and not value.startswith("#"):
                 check_textures(value, os.path.relpath(path, ROOT))
+
+        # 面里的贴图**必须**写成 #别名。
+        # 直接写路径即使文件存在，26.1 的模型加载器也不认 ——
+        # 表现是物品图标变成紫黑格子（四分之一块就这么翻过一次车）。
+        for element in data.get("elements", []):
+            for face_name, face in (element.get("faces") or {}).items():
+                raw = face.get("texture", "")
+                if raw and not raw.startswith("#"):
+                    errors.append(
+                        f"{os.path.relpath(path, ROOT)}: 面 {face_name} 直接写了贴图 {raw}，"
+                        f"必须改成 #别名（否则渲染成紫黑格）")
+
+    # 兜底：把 models/ 下**每一个**模型都走一遍。
+    #
+    # 只查"items/*.json 能引用到的"是不够的 —— select / condition 分支里的模型
+    # （四分之一块就是）从入口根本走不到，坏了也查不出来。
+    # 四分之一块的贴图丢失就是这么溜过去的。
+    for sub in ("block", "item"):
+        folder = os.path.join(ASSETS, "models", sub)
+        for root, _dirs, files in os.walk(folder):
+            for fname in files:
+                if not fname.endswith(".json"):
+                    continue
+                rel = os.path.relpath(os.path.join(root, fname), folder)
+                walk(f"{MODID}:{sub}/{rel[:-5]}")
 
     for item in items:
         entry = os.path.join(items_dir, f"{item}.json")

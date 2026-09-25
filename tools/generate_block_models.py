@@ -128,12 +128,12 @@ def quarter_model(top: str, side: str, height: int, square: bool) -> dict:
             if face == "up":
                 faces[face] = {"uv": [round((bx0 - x0) * scale, 2), round((bz0 - z0) * scale, 2),
                                       round((bx1 - x0) * scale, 2), round((bz1 - z0) * scale, 2)],
-                               "texture": top}
+                               "texture": "#top"}
                 continue
             # 内侧（东、南）是切面 → 用馅；外面是饼皮
             is_cut = face in ("east", "south")
             faces[face] = {"uv": [0, 0, 16, 16],
-                           "texture": FILLING_TEXTURE if is_cut else side}
+                           "texture": "#filling" if is_cut else "#side"}
         elements.append({"from": [bx0, 0, bz0], "to": [bx1, height, bz1], "faces": faces})
     return {"textures": {"particle": top, "top": top, "side": side, "filling": FILLING_TEXTURE},
             "elements": elements}
