@@ -581,6 +581,11 @@ return TransmuteRecipe.createWithOriginalComponents(result(), input.getItem(0));
 
 ## 待办
 
+- **馅料扩展**（进行中）：6 种原版食物当馅料 + 吃下去的效果，
+  设计见 [`docs/fillings.md`](docs/fillings.md)。关键结论：
+  原版配方不继承组件，但**每种馅料是不同的原料，所以每条配方写死自己的馅料组件即可**，
+  只有"压印"和"烤制"两步要动 Java
+
 ### 1. 把弩的箭换成月饼
 
 现在四分之一块挂在 `minecraft:arrows` 标签上、又继承了 `ArrowItem`，
