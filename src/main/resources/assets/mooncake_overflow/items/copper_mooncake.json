@@ -15,21 +15,21 @@
               "when": "tarnished",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_round_square_tarnished"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_square_tarnished"
               }
             },
             {
               "when": "rusted",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_round_square_rusted"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_square_rusted"
               }
             },
             {
               "when": "oxidized",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_round_square_oxidized"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_square_oxidized"
               }
             }
           ],
@@ -50,21 +50,21 @@
               "when": "tarnished",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_round_flower_tarnished"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_flower_tarnished"
               }
             },
             {
               "when": "rusted",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_round_flower_rusted"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_flower_rusted"
               }
             },
             {
               "when": "oxidized",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_round_flower_oxidized"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_flower_oxidized"
               }
             }
           ],
@@ -85,21 +85,21 @@
               "when": "tarnished",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_round_tarnished"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_round_tarnished"
               }
             },
             {
               "when": "rusted",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_round_rusted"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_round_rusted"
               }
             },
             {
               "when": "oxidized",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_round_oxidized"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_round_oxidized"
               }
             }
           ],
@@ -120,21 +120,21 @@
               "when": "tarnished",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_square_tarnished"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_square_tarnished"
               }
             },
             {
               "when": "rusted",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_square_rusted"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_square_rusted"
               }
             },
             {
               "when": "oxidized",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_square_oxidized"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_square_oxidized"
               }
             }
           ],
@@ -155,21 +155,21 @@
               "when": "tarnished",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_flower_tarnished"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_flower_tarnished"
               }
             },
             {
               "when": "rusted",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_flower_rusted"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_flower_rusted"
               }
             },
             {
               "when": "oxidized",
               "model": {
                 "type": "minecraft:model",
-                "model": "mooncake_overflow:block/copper_mooncake_item_square_flower_oxidized"
+                "model": "mooncake_overflow:item/copper_mooncake_icon_flower_oxidized"
               }
             }
           ],
@@ -189,21 +189,21 @@
           "when": "tarnished",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_round_round_tarnished"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_round_tarnished"
           }
         },
         {
           "when": "rusted",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_round_round_rusted"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_round_rusted"
           }
         },
         {
           "when": "oxidized",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_round_round_oxidized"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_round_oxidized"
           }
         }
       ],

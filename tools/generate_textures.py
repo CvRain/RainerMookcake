@@ -719,6 +719,134 @@ def save(img: Image.Image, rel: str) -> str:
     return path
 
 
+# ---------------------------------------------------------------- 物品图标（2D 平铺）
+
+#: 物品图标做成**平铺的 2D 贴图**，不用立体模型。
+#: 原版的食物（饼干、南瓜派、西瓜片）都是这么画的 ——
+#: 立体模型在 16×16 的格子里只占中间一小块，纹样根本看不清（踩过这个坑）。
+def _pattern_for(pattern: str):
+    return {"round": _pattern_round, "square": _pattern_square, "flower": _pattern_flower}[pattern]
+
+
+def item_mooncake_icon(pattern: str, ox: str = "copper", plain: bool = True) -> Image.Image:
+    """一整块月饼的图标：正俯视的圆盘 + 裙边 + 压纹，铺满整个格子。"""
+    img = new_image()
+    cx = cy = 7.5
+    copper_ring = (5.6, 6.4) if not plain else None
+    for y in range(SIZE):
+        for x in range(SIZE):
+            d = dist(x, y, 1.0, 1.0)
+            if d > 7.6:
+                continue
+            if copper_ring and copper_ring[0] < d <= copper_ring[1]:
+                put(img, x, y, COPPER_LIGHT if (x + y) < 15 else COPPER_MID)
+                continue
+            if d > 6.4:
+                # 裙边：沿角度分瓣，左上受光
+                ang = math.atan2(y - cy, x - cx)
+                pleat = int((ang + math.pi) / (math.pi / 8.0)) % 2 == 0
+                put(img, x, y, CRUST_LIGHT if pleat else CRUST_MID)
+                continue
+            t = 0.66 - (d - 1.5) / 9.0 - ((x + y) - 15) / 90.0
+            put(img, x, y, dither(x, y, t, (FACE_DARK, FACE_MID, FACE_LIGHT)))
+
+    _pattern_for(pattern)(img, 0.68 if copper_ring else 0.78)
+    add_outline(img, OUTLINE)
+    return img if plain else oxidize(img, ox)
+
+
+def item_mooncake_quarter_icon(pattern: str, ox: str = "copper",
+                                plain: bool = True) -> Image.Image:
+    """四分之一块的图标：**一个扇形**（圆心在右下），两条直边就是刀切面。
+
+    关键在那两条直边画成**馅**的颜色 —— 一看就知道是从一整块上切下来的一角，
+    而不是一块小月饼。
+    """
+    img = new_image()
+    cx = cy = 12.5
+    radius = 12.6
+    ring = (radius - 4.2, radius - 2.4)
+
+    def inside(x: int, y: int) -> float:
+        return math.hypot(x - cx, y - cy)
+
+    for y in range(SIZE):
+        for x in range(SIZE):
+            if x >= 12 or y >= 12:
+                continue                      # 两条切面单独画
+            d = inside(x, y)
+            if d > radius:
+                continue
+            if not plain and ring[0] < d <= ring[1]:
+                put(img, x, y, COPPER_LIGHT if (x + y) < 13 else COPPER_MID)
+                continue
+            if d > radius - 2.4:
+                put(img, x, y, CRUST_LIGHT if (x + y) < 13 else CRUST_MID)
+                continue
+            t = 0.62 - (d - 2.0) / 14.0
+            put(img, x, y, dither(x, y, t, (FACE_DARK, FACE_MID, FACE_LIGHT)))
+
+    # 两条直边 = 切面 = 馅。这一层最后画，压在饼皮上面
+    for y in range(12):
+        put(img, 12, y, PASTE_MID if y % 3 else PASTE_LIGHT)
+    for x in range(12):
+        put(img, x, 12, PASTE_MID if x % 3 else PASTE_LIGHT)
+
+    _pattern_quarter(img, pattern, 0.52)
+    add_outline(img, OUTLINE)
+    return img if plain else oxidize(img, ox)
+
+
+def item_composite_icon() -> Image.Image:
+    """五仁月饼的图标：**四个象限各是一种纹样和色调** —— "四种拼起来的"一眼可见。"""
+    img = new_image()
+    cx = cy = 7.5
+    quadrant_tone = {(0, 0): -0.10, (1, 0): 0.14, (0, 1): 0.06, (1, 1): -0.02}
+    for y in range(SIZE):
+        for x in range(SIZE):
+            d = dist(x, y, 1.0, 1.0)
+            if d > 7.6:
+                continue
+            if d > 6.4:
+                ang = math.atan2(y - cy, x - cx)
+                pleat = int((ang + math.pi) / (math.pi / 8.0)) % 2 == 0
+                put(img, x, y, CRUST_LIGHT if pleat else CRUST_MID)
+                continue
+            tone = quadrant_tone[(1 if x > 7 else 0, 1 if y > 7 else 0)]
+            t = 0.66 - (d - 1.5) / 9.0 + tone
+            put(img, x, y, dither(x, y, t, (FACE_DARK, FACE_MID, FACE_LIGHT)))
+
+    # 四个象限各压一种纹样
+    quad_pattern = {(0, 0): "round", (1, 0): "square", (0, 1): "flower", (1, 1): "round"}
+    for (qx, qy), pattern in quad_pattern.items():
+        stamp = new_image()
+        _pattern_for(pattern)(stamp, 0.50)
+        for y in range(SIZE):
+            for x in range(SIZE):
+                if (1 if x > 7 else 0, 1 if y > 7 else 0) != (qx, qy):
+                    continue
+                if dist(x, y, 1.0, 1.0) > 6.0:
+                    continue
+                px = stamp.getpixel((x, y))
+                if px[3] != 0 and x not in (7, 8):
+                    put(img, x, y, px)
+    add_outline(img, OUTLINE)
+    return img
+
+
+def _pattern_quarter(img, pattern: str, s: float) -> None:
+    """扇形图标上的半截纹样 —— 先画在空白图上，再只把扇区内的像素搬过来。"""
+    stamp = new_image()
+    _pattern_for(pattern)(stamp, s)
+    for y in range(12):
+        for x in range(12):
+            if math.hypot(x - 12.5, y - 12.5) > 9.6:
+                continue
+            px = stamp.getpixel((x, y))
+            if px[3] != 0:
+                put(img, x, y, px)
+
+
 def main() -> None:
     outputs = {
         "item/cocoa_bean_paste.png": item_paste(),
@@ -743,6 +871,17 @@ def main() -> None:
     outputs["block/mooncake_composite_top.png"] = block_mooncake_composite_top()
     # 切面（四分之一块的内侧两面）
     outputs["block/mooncake_filling.png"] = block_mooncake_filling()
+
+    # 物品图标：平铺的 2D 贴图（原版食物都是这么画的），铺满格子
+    outputs["item/mooncake_composite.png"] = item_composite_icon()
+    for pattern in ("round", "square", "flower"):
+        outputs[f"item/mooncake_{pattern}.png"] = item_mooncake_icon(pattern)
+        outputs[f"item/mooncake_quarter_{pattern}.png"] = item_mooncake_quarter_icon(pattern)
+        for stage in OXIDATIONS:
+            outputs[f"item/copper_mooncake_{pattern}_{stage}.png"] = \
+                item_mooncake_icon(pattern, stage, plain=False)
+            outputs[f"item/copper_mooncake_quarter_{pattern}_{stage}.png"] = \
+                item_mooncake_quarter_icon(pattern, stage, plain=False)
 
     # 铜月饼：饼面外面包了一圈铜，所以是 3 纹样 × 4 氧化度
     for pattern in ("round", "square", "flower"):

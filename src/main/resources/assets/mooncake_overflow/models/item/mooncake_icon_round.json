@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mooncake_overflow:item/mooncake_round"
+  }
+}

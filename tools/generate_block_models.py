@@ -243,20 +243,41 @@ def main() -> None:
         ],
     })
 
+    # ---------- 物品图标：平铺的 2D 贴图（原版食物都这么做） ----------
+    #
+    # 之前用立体模型，在 16×16 的格子里只占中间一小块，纹样看不清。
+    # 原版的饼干/南瓜派/西瓜片都是 item/generated + 一张 16×16 的平铺贴图。
+    def icon(name: str, texture: str) -> str:
+        write(f"models/item/{name}", {"parent": "minecraft:item/generated",
+                                      "textures": {"layer0": texture}})
+        return f"mooncake_overflow:item/{name}"
+
+    icon("mooncake_icon_composite", "mooncake_overflow:item/mooncake_composite")
+    for kind in KINDS:
+        pattern = kind.split("_", 1)[1]
+        icon(f"mooncake_icon_{pattern}", f"mooncake_overflow:item/mooncake_{pattern}")
+        icon(f"mooncake_quarter_icon_{pattern}",
+             f"mooncake_overflow:item/mooncake_quarter_{pattern}")
+        for ox in OXIDATIONS:
+            icon(f"copper_mooncake_icon_{pattern}_{ox}",
+                 f"mooncake_overflow:item/copper_mooncake_{pattern}_{ox}")
+            icon(f"copper_mooncake_quarter_icon_{pattern}_{ox}",
+                 f"mooncake_overflow:item/copper_mooncake_quarter_{pattern}_{ox}")
+
     # 物品模型：一层 select，按形态切换（缝合月饼用 has_component 条件整个换掉）
     write("items/mooncake", {"model": {
         "type": "minecraft:condition",
         "property": "minecraft:has_component",
         "component": "minecraft:custom_name",
         "on_true": {"type": "minecraft:model",
-                    "model": "mooncake_overflow:block/mooncake_composite"},
+                    "model": "mooncake_overflow:item/mooncake_icon_composite"},
         "on_false": {
         "type": "minecraft:select",
         "property": "minecraft:component",
         "component": "mooncake_overflow:mooncake_kind",
         "cases": [
             {"when": kind, "model": {"type": "minecraft:model",
-                                     "model": f"mooncake_overflow:block/mooncake_item_{kind}"}}
+                                     "model": f"mooncake_overflow:item/mooncake_icon_{kind.split('_', 1)[1]}"}}
             for kind in KINDS if kind != "round_round"
         ],
             "fallback": {"type": "minecraft:model",
@@ -288,7 +309,7 @@ def main() -> None:
             "component": "mooncake_overflow:mooncake_oxidation",
             "cases": [
                 {"when": ox, "model": {"type": "minecraft:model",
-                                       "model": f"mooncake_overflow:block/copper_mooncake_item_{kind}_{ox}"}}
+                                       "model": f"mooncake_overflow:item/copper_mooncake_icon_{kind.split('_', 1)[1]}_{ox}"}}
                 for ox in OXIDATIONS if ox != "copper"
             ],
             "fallback": {"type": "minecraft:model",
@@ -328,11 +349,11 @@ def main() -> None:
             "component": "mooncake_overflow:mooncake_oxidation",
             "cases": [
                 {"when": ox, "model": {"type": "minecraft:model",
-                                       "model": f"mooncake_overflow:block/copper_mooncake_quarter_{kind}_{ox}"}}
+                                       "model": f"mooncake_overflow:item/copper_mooncake_quarter_icon_{kind.split('_', 1)[1]}_{ox}"}}
                 for ox in OXIDATIONS if ox != "copper"
             ],
             "fallback": {"type": "minecraft:model",
-                         "model": f"mooncake_overflow:block/copper_mooncake_quarter_{kind}_copper"},
+                         "model": f"mooncake_overflow:item/copper_mooncake_quarter_icon_{kind.split('_', 1)[1]}_copper"},
         }
 
     def quarter_copper_select(kind: str) -> dict:
@@ -342,7 +363,7 @@ def main() -> None:
             "component": "mooncake_overflow:mooncake_copper",
             "cases": [{"when": True, "model": quarter_ox_select(kind)}],
             "fallback": {"type": "minecraft:model",
-                         "model": f"mooncake_overflow:block/mooncake_quarter_{kind}"},
+                         "model": f"mooncake_overflow:item/mooncake_quarter_icon_{kind.split('_', 1)[1]}"},
         }
 
     write("items/mooncake_quarter", {"model": {

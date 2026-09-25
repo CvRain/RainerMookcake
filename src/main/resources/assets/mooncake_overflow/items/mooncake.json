@@ -5,7 +5,7 @@
     "component": "minecraft:custom_name",
     "on_true": {
       "type": "minecraft:model",
-      "model": "mooncake_overflow:block/mooncake_composite"
+      "model": "mooncake_overflow:item/mooncake_icon_composite"
     },
     "on_false": {
       "type": "minecraft:select",
@@ -16,35 +16,35 @@
           "when": "round_square",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/mooncake_item_round_square"
+            "model": "mooncake_overflow:item/mooncake_icon_square"
           }
         },
         {
           "when": "round_flower",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/mooncake_item_round_flower"
+            "model": "mooncake_overflow:item/mooncake_icon_flower"
           }
         },
         {
           "when": "square_round",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/mooncake_item_square_round"
+            "model": "mooncake_overflow:item/mooncake_icon_round"
           }
         },
         {
           "when": "square_square",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/mooncake_item_square_square"
+            "model": "mooncake_overflow:item/mooncake_icon_square"
           }
         },
         {
           "when": "square_flower",
           "model": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/mooncake_item_square_flower"
+            "model": "mooncake_overflow:item/mooncake_icon_flower"
           }
         }
       ],
