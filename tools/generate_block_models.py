@@ -125,12 +125,43 @@ def main() -> None:
         write(f"models/block/mooncake_item_{kind}",
               model(CENTER, CENTER, CENTER_SIZE, HEIGHT, square, top, side))
 
-    # blockstate：multipart，每格 × 形态 一条规则 = 24 条
-    write("blockstates/mooncake_block", {"multipart": [
-        {"when": {cell: kind},
-         "apply": {"model": f"mooncake_overflow:block/mooncake_piece_{cell}_{kind}"}}
-        for cell in CELLS for kind in KINDS
-    ]})
+    # ---------- 月饼堆的方块状态：只记几何 ----------
+    # 四个格子各是 空/圆/方，3^4 = 81 种。**必须能从状态推出来**：
+    # 26.1 会给每个方块状态缓存碰撞箱和遮挡箱，所以几何不能依赖方块实体。
+    # 方块自己 INVISIBLE，所以这 81 个状态统统指向一个空模型。
+    cells = ("none", "round", "square")
+    variants = {}
+    for nw in cells:
+        for ne in cells:
+            for sw in cells:
+                for se in cells:
+                    key = f"nw={nw},ne={ne},sw={sw},se={se}"
+                    variants[key] = {"model": "mooncake_overflow:block/mooncake_pile_empty"}
+    write("blockstates/mooncake_block", {"variants": variants})
+
+    # ---------- 技术方块 mooncake_piece：渲染器的模型表 ----------
+    # 26.1 没有"按名字取方块模型"的接口，方块几何只能通过方块状态查到，
+    # 所以每种「格子 × 形态 × 铜不铜 × 氧化度」都得有一个状态指向对应的单格模型。
+    # 放在一个从不被放置的方块上，免得和月饼堆的几何状态相乘。
+    piece_variants = {}
+    for cell in ("none", *CELLS):
+        for kind in ("none", *KINDS):
+            for copper in (False, True):
+                for ox in OXIDATIONS:
+                    key = f"cell={cell},kind={kind},copper={str(copper).lower()},oxidation={ox}"
+                    if cell == "none" or kind == "none":
+                        target = "mooncake_overflow:block/mooncake_pile_empty"
+                    elif copper:
+                        target = f"mooncake_overflow:block/copper_mooncake_piece_{cell}_{kind}_{ox}"
+                    else:
+                        target = f"mooncake_overflow:block/mooncake_piece_{cell}_{kind}"
+                    piece_variants[key] = {"model": target}
+    write("blockstates/mooncake_piece", {"variants": piece_variants})
+
+    # 空模型：月饼堆的 81 个状态都指向它（方块是 INVISIBLE，本来也不画）
+    write("models/block/mooncake_pile_empty", {
+        "textures": {"particle": "mooncake_overflow:block/mooncake_top_round_plain"},
+    })
 
     # 物品模型：一层 select，按形态切换
     write("items/mooncake", {"model": {
@@ -146,8 +177,8 @@ def main() -> None:
                      "model": "mooncake_overflow:block/mooncake_item_round_round"},
     }})
 
-    # ---------- 铜月饼堆 ----------
-    # 「月饼外面包了一圈铜」才氧化，所以这一个方块比普通月饼堆多一个氧化度的轴。
+    # ---------- 铜月饼的模型 ----------
+    # 「月饼外面包了一圈铜」才氧化，所以这一套比普通月饼多一个氧化度的轴。
     for kind in KINDS:
         pattern = kind.split("_", 1)[1]
         square = kind.startswith("square")
@@ -159,13 +190,6 @@ def main() -> None:
                       model(x, z, PIECE, HEIGHT, square, top, side))
             write(f"models/block/copper_mooncake_item_{kind}_{ox}",
                   model(CENTER, CENTER, CENTER_SIZE, HEIGHT, square, top, side))
-
-    # blockstate：每格 × 形态 × 氧化度 一条规则 = 96 条
-    write("blockstates/copper_mooncake_block", {"multipart": [
-        {"when": {cell: kind, "oxidation": ox},
-         "apply": {"model": f"mooncake_overflow:block/copper_mooncake_piece_{cell}_{kind}_{ox}"}}
-        for cell in CELLS for kind in KINDS for ox in OXIDATIONS
-    ]})
 
     # 物品模型：两层嵌套 select —— 外层按形态、内层按氧化度
     def ox_select(kind: str) -> dict:

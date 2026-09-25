@@ -13,11 +13,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.Result;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.cvrain.mooncakeoverflow.block.MooncakePileBlock;
+import org.cvrain.mooncakeoverflow.registry.ModBlockEntities;
 import org.cvrain.mooncakeoverflow.registry.ModBlocks;
 import org.cvrain.mooncakeoverflow.registry.ModCreativeTabs;
 import org.cvrain.mooncakeoverflow.registry.ModDataComponents;
@@ -61,9 +64,13 @@ public final class MooncakeOverflow {
         ModItems.ITEMS.register(modBusGroup);
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modBusGroup);
         ModDataComponents.DATA_COMPONENTS.register(modBusGroup);
+        ModBlockEntities.BLOCK_ENTITIES.register(modBusGroup);
 
         // 炼药锅交互（原版的 CauldronInteraction.Dispatcher.put 是包私有的，所以走事件）
         PlayerInteractEvent.RightClickBlock.BUS.addListener(MooncakeOverflow::onRightClickBlock);
+
+        // Shift + 左键 = 只拿走一块月饼，而不是把整堆挖掉
+        PlayerInteractEvent.LeftClickBlock.BUS.addListener(MooncakeOverflow::onLeftClickBlock);
 
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
@@ -77,6 +84,34 @@ public final class MooncakeOverflow {
                 LOGGER.error(line);
             }
         }
+    }
+
+    /**
+     * Shift + 左键点月饼堆 → 只拿走一块。
+     *
+     * <p>不按 Shift 时是原版行为：整堆挖掉，四块一起掉。
+     *
+     * <p>这里必须用 {@code LeftClickBlock} 而不是 {@code BlockEvent.BreakEvent}：
+     * 后者是在「已经开始挖」之后才取消的，客户端已经预测过一次破坏，
+     * 方块会先消失再被服务端同步回来 —— 取四块就是闪四次。
+     * {@code setUseBlock(DENY)} 是**在挖之前**拦下来，客户端就不会预测，也就不会闪。
+     */
+    private static void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+        Player player = event.getEntity();
+        if (!player.isShiftKeyDown()) {
+            return;
+        }
+
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        if (!level.getBlockState(pos).is(ModBlocks.MOONCAKE_BLOCK.get())) {
+            return;
+        }
+        if (!MooncakePileBlock.takeOne(level, pos, player, null)) {
+            return; // 空堆，按原版处理
+        }
+        event.setUseBlock(Result.DENY);
+        event.setUseItem(Result.DENY);
     }
 
     /**

@@ -1,196 +1,247 @@
 {
-  "multipart": [
-    {
-      "when": {
-        "nw": "round_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_nw_round_round"
-      }
+  "variants": {
+    "nw=none,ne=none,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "nw": "round_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_nw_round_square"
-      }
+    "nw=none,ne=none,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "nw": "round_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_nw_round_flower"
-      }
+    "nw=none,ne=none,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "nw": "square_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_nw_square_round"
-      }
+    "nw=none,ne=none,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "nw": "square_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_nw_square_square"
-      }
+    "nw=none,ne=none,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "nw": "square_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_nw_square_flower"
-      }
+    "nw=none,ne=none,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "ne": "round_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_ne_round_round"
-      }
+    "nw=none,ne=none,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "ne": "round_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_ne_round_square"
-      }
+    "nw=none,ne=none,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "ne": "round_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_ne_round_flower"
-      }
+    "nw=none,ne=none,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "ne": "square_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_ne_square_round"
-      }
+    "nw=none,ne=round,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "ne": "square_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_ne_square_square"
-      }
+    "nw=none,ne=round,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "ne": "square_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_ne_square_flower"
-      }
+    "nw=none,ne=round,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "sw": "round_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_sw_round_round"
-      }
+    "nw=none,ne=round,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "sw": "round_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_sw_round_square"
-      }
+    "nw=none,ne=round,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "sw": "round_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_sw_round_flower"
-      }
+    "nw=none,ne=round,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "sw": "square_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_sw_square_round"
-      }
+    "nw=none,ne=round,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "sw": "square_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_sw_square_square"
-      }
+    "nw=none,ne=round,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "sw": "square_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_sw_square_flower"
-      }
+    "nw=none,ne=round,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "se": "round_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_se_round_round"
-      }
+    "nw=none,ne=square,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "se": "round_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_se_round_square"
-      }
+    "nw=none,ne=square,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "se": "round_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_se_round_flower"
-      }
+    "nw=none,ne=square,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "se": "square_round"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_se_square_round"
-      }
+    "nw=none,ne=square,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "se": "square_square"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_se_square_square"
-      }
+    "nw=none,ne=square,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    {
-      "when": {
-        "se": "square_flower"
-      },
-      "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_se_square_flower"
-      }
+    "nw=none,ne=square,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=none,ne=square,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=none,ne=square,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=none,ne=square,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=none,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=round,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=round,ne=square,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=none,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=round,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=none,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=none,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=none,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=round,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=round,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=round,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=square,se=none": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=square,se=round": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "nw=square,ne=square,sw=square,se=square": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
     }
-  ]
+  }
 }

@@ -16,6 +16,7 @@
 - [核心设计：正交轴](#核心设计正交轴)
 - [阶段一：月饼本体](#阶段一月饼本体已实现)
 - [阶段二：氧化与涂蜡](#阶段二氧化与涂蜡已实现)
+- [阶段三：方块实体 + 渲染器](#阶段三方块实体--渲染器已实现)
 - [开发状态](#开发状态)
 - [环境要求](#环境要求)
 - [构建](#构建)
@@ -140,6 +141,15 @@
   - **Shift + 右键** → 摆到地上；对着已有的月饼堆按可以继续叠，**一格最多 4 块**（2×2 摆开，仿原版海泡菜）
   - 按住 Shift 时不会进食，免得"想摆一块结果吃掉了"
   - 挖掉月饼堆掉落**相应数量**的月饼
+- **只想拿一块，不想把整堆挖下来** —— 有两条路，都按 Shift：
+  - **Shift + 左键**点月饼堆 → 拿走**最上面那一块**，方块留在原地
+  - **Shift + 空手右键** → 同上
+  - **不按 Shift 左键** → 原版行为，整堆挖掉，四块一起掉
+  - 拿到的月饼**直接进背包**（背包满了才掉在脚下），并且保留它自己的形态/氧化度/涂蜡
+  - 为什么左键那条要用 `PlayerInteractEvent.LeftClickBlock` 而不是 `BlockEvent.BreakEvent`：
+    后者是在「已经开始挖」之后才取消的，客户端已经预测过一次破坏，
+    方块会先消失再被服务端同步回来 —— 取四块就是闪四次。
+    `LeftClickBlock.setUseBlock(DENY)` 是**在挖之前**拦下来，客户端不会预测，也就不会闪
 - **月饼有两个互相独立的轴**，别混为一谈：
 
   | 轴 | 取值 | 决定什么 | 在哪设置 |
@@ -212,18 +222,30 @@
 前缀是**两层可翻译文本套出来的**（`"锈蚀的%s"` 套在名字外面），
 不是给 4 氧化度 × 2 涂蜡 × 6 形态 = 48 种组合各写一条语言键。
 
-### 为什么是「两个方块」而不是「一个方块多两个属性」
+### 为什么最后换成了「方块实体 + 渲染器」
 
-普通月饼堆 `mooncake_block` 只有四格形态（2401 种状态），
-铜月饼堆 `copper_mooncake_block` 才有氧化度和涂蜡（19208 种）。
-两者都是 2×2 四格、都能混装形态，但**不能混装到同一堆里** ——
-它们终究是两种东西。
+一开始是**两个方块**：普通月饼堆只有四格形态（2401 种状态），
+铜月饼堆才有氧化度和涂蜡（19208 种），两者不能混装到同一堆里。
 
-属性是**整块共用**的，普通月饼用不上氧化度和涂蜡。
-把两个方块合成一个的话，普通月饼堆要白背 4 × 2 倍的状态数（变成 48020），
-纯浪费。拆开之后总共 21609，比 48020 少一半还多。
+但"任意月饼放在一起"这个要求把这条路堵死了：每格要独立记
+「形态 × 是不是铜月饼 × 氧化度 × 涂蜡」，而**方块状态是四格相乘的** ——
 
-代价是两份方块状态文件和两套模型 —— 反正是脚本生成的，不值一提。
+```
+7⁴（形态） × 4⁴（氧化度） × 2⁴（涂蜡） ≈ 980 万
+```
+
+所以内容搬进了方块实体，一个方块装下所有组合：
+
+| | 方块状态数 |
+|---|---|
+| 两个方块的老方案 | 2401 + 19208 = **21609** |
+| 压扁成一个方块（每格全轴相乘） | ≈ **980 万**（必炸） |
+| **方块实体 + 渲染器（现在）** | **280**（只是给渲染器查模型的表） |
+
+副产品：普通月饼和铜月饼现在能混在同一堆里了 ——
+因为它们不再是两个方块，哪一格是什么记在方块实体上。
+
+细节在[阶段三](#阶段三方块实体--渲染器已实现)。
 
 ### 为什么铜月饼不能再用切石机改纹样
 
@@ -332,6 +354,103 @@
 不然想直接看效果得真等几个小时。
 **普通月饼只有铜阶段，没有氧化度** —— 它不会坏。
 
+## 阶段三：方块实体 + 渲染器（已实现）
+
+月饼堆的**内容**现在住在方块实体里，渲染交给方块实体渲染器。
+这一步是为了让「四格各放各的」在数学上成立 —— 见
+[阶段二那节](#为什么最后换成了方块实体--渲染器)。
+
+### 数据在方块实体里
+
+`MooncakePileBlockEntity` 就一个长度 4 的数组，每格是：
+
+```java
+record Piece(MooncakeKind kind, boolean copper, MooncakeOxidation oxidation, boolean waxed)
+```
+
+`copper=false` 就是普通月饼（永远不会氧化），`true` 才是铜月饼。
+同一堆里两种可以混着放，每格各记各的。
+
+存读走 26.1 的 `ValueOutput` / `ValueInput`（`saveAdditional` / `loadAdditional`），
+同步走 `getUpdateTag` + `getUpdatePacket`，改完调 `setChanged()` + `sendBlockUpdated`。
+
+### ⚠️ 26.1 最硬的一个坑：碰撞箱是按**方块状态**缓存的
+
+`BlockStateBase` 内部有一个 `Cache`，里面存着 `collisionShape`、
+`largeCollisionShape`、`isCollisionShapeFullBlock`、`faceSturdy` ——
+而且是在**构造成员时用 `EmptyBlockGetter` + `BlockPos.ZERO` 算一次**。
+
+也就是说：
+
+> **`getCollisionShape` 不能依赖坐标，也不能读方块实体。**
+> 想按格区分碰撞箱，几何就必须能**只从方块状态推出来**。
+
+我第一版把 `getShape` 写成读方块实体，方块实体拿不到时退化成整块；
+那个"整块"被缓存进了碰撞箱和遮挡箱，于是：
+
+- 地上多出一圈阴影（遮挡箱是整块 → 环境光遮蔽把邻居方块压暗了）
+- 没放月饼的格子也走不过去（碰撞箱是整块）
+
+所以现在的分工是：**几何进方块状态，外观和内容进方块实体**。
+
+### 几何：四个 `CellShape`（81 种状态）
+
+| | 住哪 | 管什么 |
+|---|---|---|
+| `nw` / `ne` / `sw` / `se`（空/圆/方） | 方块状态 | 碰撞箱、准星轮廓、踩上去的高度 |
+| 纹样 / 是不是铜月饼 / 氧化度 / 涂蜡 | 方块实体 | 外观、掉落、氧化、涂蜡 |
+
+几何只关心"圆还是方"，所以四格 3⁴ = **81** 种状态就够（原版海泡菜也是这个路子）。
+`getOcclusionShape()` 直接返回空 —— 3/16 高的月饼本来就不该在邻居方块上投阴影。
+
+### 外观：模型表放在一个技术方块上
+
+26.1 **删掉了「按 Identifier 取方块模型」的接口** ——
+`ModelManager` 只剩 `getItemModel(Identifier)`，方块几何只能通过
+`BlockStateModelSet.get(BlockState)` 拿到。**想要一个模型，得先有一个方块状态。**
+
+本来可以把模型表的属性挂在月饼堆自己身上，但那样状态数是
+`81 × 280 = 22680`，还要生成一份几 MB 的 blockstate 文件。
+所以模型表挪到一个**从不被放置的技术方块** `mooncake_piece` 上：
+
+| 方块 | 状态数 | 作用 |
+|---|---|---|
+| `mooncake_block` | 81 | 真实摆放的月饼堆（几何） |
+| `mooncake_piece` | 280 | 模型表：格子 × 形态 × 铜不铜 × 氧化度 |
+
+`mooncake_piece` 没有物品、创造栏里没有、`RenderShape` 也是 `INVISIBLE`，
+正常玩法碰不到它。渲染器每格干两件事：
+
+```java
+// 1. 用技术方块编一个"查表用"的状态
+BlockState model = pieceBlock.modelStateFor(cell, kind, copper, oxidation);
+// 2. 交给原版那条"活塞推方块"的路去画
+collector.submitMovingBlock(poseStack, movingBlockState);
+```
+
+用 `submitMovingBlock` 而不是自己拼 `submitBlockModel`，是因为它帮我们把
+模型查找、光照、渲染类型都处理好了（照抄 `PistonHeadRenderer#createMovingBlock`）。
+
+### 26.1 的三个坑（都踩过）
+
+1. **`BlockEntityType` 的构造器和 `register` 都是 private**，Forge 也没补公开工厂。
+   模组想自己造只能开 Access Transformer：
+   `META-INF/accesstransformer.cfg` 里把构造器改成 public。
+2. ⚠️ **AT 文件里不能写注释** —— 解析器把每一行都当规则，
+   一行 `#` 开头就直接 `Invalid AccessTransformer config` 启动失败。
+3. **`EntityRenderersEvent.RegisterRenderers` 不在 MOD 总线组上**，
+   它在默认那个（`Mod.EventBusSubscriber.Bus.FORGE`）。
+   写成 `Bus.MOD` 会报 "is on the default BusGroup but you are asking to register"。
+4. ⚠️ **碰撞箱 / 遮挡箱是按方块状态缓存的**（见上面那节）——
+   位置相关或读方块实体的形状会被算错并永久缓存，现象是"看不见的整块"。
+
+### 瞄准哪一块就取哪一块
+
+Shift + 空手右键 / Shift + 左键拿的是**准星指着的那一格**，而不是固定"最上面那块"。
+格子靠命中点算：把世界坐标转成方块内的相对坐标，x 和 z 各以 0.5 为界，
+正好对应左上 / 右上 / 左下 / 右下。空手右键那条路有原版给的精确命中点；
+左键那条路（`LeftClickBlock` 事件不给命中点）用 `player.pick(...)` 自己补一个。
+
 ## 开发状态
 
 🟢 **月饼系统完成** —— 构建、资源、交互全部跑通，并经玩家在客户端逐项实测确认。
@@ -340,13 +459,15 @@
 - [x] `runClient` / `runServer` / `runData` 全部可用
 - [x] **工艺链**：豆沙 → 面团 → 带馅面饼 → 压印 → 生月饼 → 烤制 → 月饼
 - [x] **形态系统**：形状（圆/方）× 纹样（圆/方/花）= 6 种，切石机切换，组件承载
-- [x] **四格混装**：一个方块 2×2 四格各自独立，可以混着摆不同形态
+- [x] **四格混装**：一个方块 2×2 四格各自独立；**普通月饼和铜月饼也能混放在同一堆**
 - [x] 食用（随时可吃）、Shift 摆放、取暖、掉落、中英文本地化
 - [x] **铜月饼**（阶段二）：月饼 + 铜锭，形态原样保留；**只有它才会氧化**
 - [x] **氧化**（阶段二）：方块走随机刻、物品走 `inventoryTick`，四个等级都能摆成月饼堆
 - [x] **涂蜡**（阶段二）：蜜脾右键方块 / 蜜脾合成物品，锁死氧化度且**不改外观**
 - [x] **刮除**（阶段二）：斧头右键方块，有蜡刮蜡、没蜡退一档氧化
-- [ ] **切开 / 拼合**（阶段三）：把一个圆月饼切成四份再拼成缝合怪
+- [x] **方块实体 + 渲染器**（阶段三）：内容进方块实体，方块状态从 21609 掉到 280
+- [ ] **切开 / 拼合**（阶段三·未完）：铜月饼切成左上/左下/右上/右下四块、
+      四块当弩弹药、再拼回一个名字更复杂的月饼
 - [ ] **月饼块全家桶**（阶段四）：数据包驱动自动生成形态矩阵
 - [ ] **月亮系统**（阶段五）：吃月亮
 - [ ] **玉兔 / 五仁 / 礼盒 / 元游戏嘲讽**（阶段六）
@@ -447,8 +568,12 @@ earlyWindowControl = false
     │   ├── block/
     │   │   ├── MooncakeDoughBlock.java    # 可压印的月饼面团方块
     │   │   ├── PattyBlock.java            # 平放的饼（生月饼用）
-    │   │   ├── PlainMooncakeBlock.java    # 普通月饼堆：只有四格形态
-    │   │   └── CopperMooncakeBlock.java   # 铜月饼堆：再加氧化 + 涂蜡
+    │   │   ├── MooncakePileBlock.java     # 月饼堆：内容在方块实体里，自己不画
+    │   │   └── MooncakePileBlockEntity.java # 四格内容 + 整堆涂蜡/氧化/刮除
+    │   ├── client/
+    │   │   ├── ClientSetup.java           # 注册方块实体渲染器
+    │   │   ├── MooncakePileRenderer.java  # 四格月饼全靠它画
+    │   │   └── MooncakePileRenderState.java
     │   ├── item/
     │   │   ├── MooncakeBlockItem.java     # Shift 右键放置 / 右键进食 / 名字
     │   │   ├── CopperMooncakeBlockItem.java # 铜月饼：名字前缀 + 背包变质 + 混装校验
@@ -458,14 +583,17 @@ earlyWindowControl = false
     │   │   ├── MooncakePattern.java       # 轴二：纹样（圆 / 方 / 花）
     │   │   ├── MooncakeKind.java          # 两轴的组合，6 种（+ 空格子 NONE）
     │   │   ├── MooncakeOxidation.java     # 氧化度：铜 / 斑驳 / 锈蚀 / 氧化
+    │   │   ├── PileCell.java              # 四格 + 渲染器的模型表槽位
     │   │   └── MooncakeData.java          # 物品侧组件的读写（默认值不写组件）
     │   └── registry/
     │       ├── ModBlocks.java
+    │       ├── ModBlockEntities.java
     │       ├── ModItems.java
     │       ├── ModCreativeTabs.java
     │       └── ModDataComponents.java     # mooncake_kind / _oxidation / _waxed
     └── resources/
         ├── META-INF/mods.toml
+        ├── META-INF/accesstransformer.cfg # 26.1 只能这样造 BlockEntityType
         ├── pack.mcmeta
         ├── assets/mooncake_overflow/      # items/ blockstates/ models/ textures/ lang/
         └── data/mooncake_overflow/        # recipe/ loot_table/
@@ -487,34 +615,35 @@ earlyWindowControl = false
 
 ### 方块状态预算
 
-方块状态是**唯一**会随轴数量指数膨胀、而且绕不过去的东西。现在的账：
+方块状态是**唯一**会随轴数量指数膨胀、而且绕不过去的东西。
+一个月饼堆每格要独立记「形态 × 是不是铜月饼 × 氧化度 × 涂蜡」，四格相乘就是天文数字：
 
-| 方块 | 属性 | 粒度 | 取值数 | 状态数 |
-|---|---|---|---|---|
-| `mooncake_block` | `nw`/`ne`/`sw`/`se` | 每格 | 7（空 + 6 形态） | 7⁴ = **2401** |
-| `copper_mooncake_block` | 同上 + `oxidation` + `waxed` | 每格 / 整块 / 整块 | 7 / 4 / 2 | 7⁴ × 4 × 2 = **19208** |
-| | | | **合计** | **21609** |
+| 方案 | 状态数 |
+|---|---|
+| 每格全轴相乘（形态⁴ × 氧化度⁴ × 涂蜡⁴） | ≈ **980 万** —— 必炸 |
+| 两个方块、氧化度与涂蜡整块共用（老方案） | 2401 + 19208 = **21609** |
+| **方块实体 + 渲染器（现在）** | 81（几何）+ 280（模型表，在技术方块上）= **361** |
 
-对比一下**没有**采用的方案：
+所以现在这条红线是：**内容进方块实体，方块状态只留「渲染器查模型用的表」**。
+代价是画东西要自己写渲染器，而且 26.1 查模型必须绕方块状态（见阶段三）。
 
-- 两个方块合成一个（普通月饼也背上氧化度和涂蜡）：`7⁴ × 4 × 2 × 2` 里外里变成 **48020**，纯浪费
-- 氧化度也按格拆开：`7⁴ × 4⁴ × 2 ≈ 39 万`，做实了就是玩家会来投诉的那种卡
-- 形态按整块共用（只能整堆一种形态）：`7 × 4 × 2 = 56`，但玩家明确要"各种月饼混着摆"，这是玩法需求
-
-所以规则是：**玩家能直接看见、且明确要求过的差异，才给一格一个属性**。
-
-涂蜡之所以不额外占模型，是因为它**不影响外观** ——
-两个方块的 24 + 96 条 multipart 规则里，一条都没提到 `waxed`，它纯粹是个行为开关位。
-
-> **实测**：新增铜月饼之后，资源重载里的模型烘焙阶段比之前慢了 ——
-> 旧代码 8～14 秒，新代码 20～23 秒（偶尔飙到 68 秒）。
-> MC 的模型烘焙是多线程的（`Worker-Main` 线程池），同一份代码的波动本身就很大，
-> 上面每组只有两三次采样，所以这个"2 倍"未必准。
-> 但状态数确实涨了 12%，慢一点是合理的。
-> 整轮启动（含烘焙）约 25 秒，属于**一次性的加载开销**，不影响游戏内帧率。
+> **关于加载耗时的更正**：铜月饼那次改动我一度报告"模型烘焙从 8 秒变成 20～23 秒"，
+> 那个结论是**错的**。原因是我停 `runClient` 的过滤条件写错了
+> （匹配的是 slime-launcher 包装进程，而不是真正的游戏 JVM），
+> 于是每次测试都残留着 1～3 个旧客户端在后台抢 CPU ——
+> 同一份代码能测出 8 秒、34 秒、68 秒、2.5 分钟。
 >
-> 如果哪天觉得不能接受，最有效的一刀是把「每格独立形态」改成「形态整块共用」，
-> 状态数会从 21609 直接掉到两千以内 —— 代价是丢掉你要的混装。
+> 正确的停进程过滤条件是命令行里含 `net.minecraftforge.launcher.Main`：
+>
+> ```bash
+> for p in $(pgrep -x java); do
+>   tr '\0' '\n' < /proc/$p/cmdline | grep -q net.minecraftforge.launcher.Main && kill $p
+> done
+> ```
+>
+> 结论：烘焙耗时基本由**机器当时的负载**决定（自己开着的应用也算），
+> 而且它是一次性加载开销，不影响游戏内帧率。
+> 换成方块实体之后状态数掉到 280，这一项基本可以不用再担心了。
 
 ## 资源与命名约定
 
@@ -605,6 +734,24 @@ earlyWindowControl = false
     做斧头刮蜡这种交互时不用自己去算 `EquipmentSlot`
   - ⚠️ **创造模式物品栏不允许重复条目**，同一个 `ItemStack` 放两次直接
     `IllegalStateException: Accidentally adding the same item stack twice`（踩过两次）
+  - ⚠️ **26.1 的 `BlockEntityType` 构造器和 `register` 都是 private**，Forge 没补公开工厂。
+    只能开 Access Transformer（`META-INF/accesstransformer.cfg`）。
+    而且 **AT 文件里不能写注释**，一行 `#` 开头就 `Invalid AccessTransformer config` 启动失败
+  - **方块实体存档换成了 Codec 那一套**：`saveAdditional(ValueOutput)` /
+    `loadAdditional(ValueInput)`（`output.store("k", CODEC, v)` /
+    `input.read("k", CODEC)`），同步还是 `getUpdateTag(HolderLookup.Provider)` + `getUpdatePacket()`
+  - ⚠️ **26.1 没有「按 Identifier 取方块模型」的接口**。`ModelManager` 只剩
+    `getItemModel(Identifier)`；方块几何只能 `BlockStateModelSet.get(BlockState)`。
+    想在渲染器里画任意几何，就得先给它准备一个**方块状态当模型表的键**
+  - **渲染器里画一个方块模型，抄 `PistonHeadRenderer`**：
+    `extractRenderState` 里把目标状态包成 `MovingBlockRenderState`
+    （`blockPos` / `blockState` / `biome` / `cardinalLighting` / `lightEngine`），
+    `submit` 里 `collector.submitMovingBlock(poseStack, state)`。
+    比自己去碰 `RenderType` 和 tint 数组省事得多
+  - ⚠️ **`EntityRenderersEvent.RegisterRenderers` 在默认总线组上**，
+    自动订阅要用 `@Mod.EventBusSubscriber(bus = Bus.FORGE)`；
+    写成 `Bus.MOD` 会报 "is on the default BusGroup but you are asking to register"
+  - `Level#isClientSide` 是**字段**且 private，判断端要用方法 `isClientSide()`
 
 ### 改完资源记得跑检查
 

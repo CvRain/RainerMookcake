@@ -13,9 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import org.cvrain.mooncakeoverflow.block.PlainMooncakeBlock;
+import org.cvrain.mooncakeoverflow.block.MooncakePileBlock;
+import org.cvrain.mooncakeoverflow.block.MooncakePileBlockEntity;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
 
@@ -25,7 +24,8 @@ import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
  * <p>月饼既能吃也能摆，所以用 Shift 区分：
  * <ul>
  *   <li><b>右键</b> → 进食（走原版食物逻辑）</li>
- *   <li><b>Shift + 右键</b> → 放置 / 往已有的月饼堆里再放一块（**不同形态可以混装**）</li>
+ *   <li><b>Shift + 右键</b> → 放置 / 往已有的月饼堆里再放一块
+ *       （**任意月饼都能混进同一堆**，形态 / 是不是铜的 / 氧化度 / 涂蜡各记各的）</li>
  * </ul>
  *
  * <p>原理：{@link #useOn} 在不按 Shift 时返回 {@code PASS}，
@@ -41,20 +41,19 @@ public class MooncakeBlockItem extends BlockItem {
         return MooncakeData.kindOf(stack);
     }
 
+    /** 这一摞是不是铜月饼（只有铜月饼会氧化）。 */
+    public boolean isCopperItem() {
+        return false;
+    }
+
+    public static boolean isCopper(ItemStack stack) {
+        return stack.getItem() instanceof MooncakeBlockItem item && item.isCopperItem();
+    }
+
     /** 名字随形态变化，例如「圆月饼·方纹」。 */
     @Override
     public Component getName(ItemStack stack) {
         return Component.translatable(kindOf(stack).nameKey());
-    }
-
-    /**
-     * 能不能往这一堆里再加一块。
-     *
-     * <p>普通月饼只看形态，所以永远可以；铜月饼还要看氧化度和涂蜡是否一致
-     * （那两项是整块共用的），见 {@code CopperMooncakeBlockItem}。
-     */
-    protected boolean canAddTo(BlockState state, ItemStack stack) {
-        return true;
     }
 
     @Override
@@ -68,24 +67,23 @@ public class MooncakeBlockItem extends BlockItem {
 
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        BlockState state = level.getBlockState(pos);
-        ItemStack stack = context.getItemInHand();
 
-        // 目标不是同一堆月饼 → 走普通的方块放置（getStateForPlacement 会把状态带进去）
-        if (!state.is(getBlock())) {
+        // 目标不是月饼堆 → 走普通的方块放置（setPlacedBy 会把这一块塞进方块实体）
+        if (!level.getBlockState(pos).is(getBlock())) {
             return super.useOn(context);
         }
 
-        EnumProperty<MooncakeKind> empty = PlainMooncakeBlock.firstEmptySlot(state);
-        if (empty == null || !canAddTo(state, stack)) {
-            return InteractionResult.PASS; // 四格满了 / 状态对不上
+        MooncakePileBlockEntity pile = MooncakePileBlock.pileAt(level, pos);
+        if (pile == null || !pile.hasRoom()) {
+            return InteractionResult.PASS; // 四格都满了
         }
 
         if (!(level instanceof ServerLevel serverLevel)) {
             return InteractionResult.SUCCESS; // 客户端不做事，等服务端同步
         }
 
-        serverLevel.setBlockAndUpdate(pos, state.setValue(empty, kindOf(stack)));
+        ItemStack stack = context.getItemInHand();
+        MooncakePileBlock.addPiece(level, pos, MooncakePileBlockEntity.Piece.of(stack));
         serverLevel.playSound(null, pos, SoundEvents.SLIME_BLOCK_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
         if (!player.getAbilities().instabuild) {

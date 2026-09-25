@@ -113,7 +113,7 @@ public final class ModItems {
      * 因为它身上没有任何可氧化的东西。
      */
     public static final RegistryObject<Item> COPPER_MOONCAKE = ITEMS.register("copper_mooncake",
-            () -> new CopperMooncakeBlockItem(ModBlocks.COPPER_MOONCAKE_BLOCK.get(),
+            () -> new CopperMooncakeBlockItem(ModBlocks.MOONCAKE_BLOCK.get(),
                     new Item.Properties()
                             .setId(ITEMS.key("copper_mooncake"))
                             .useBlockDescriptionPrefix()

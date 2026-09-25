@@ -6,25 +6,29 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import org.cvrain.mooncakeoverflow.Config;
-import org.cvrain.mooncakeoverflow.block.CopperMooncakeBlock;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeOxidation;
 
 /**
  * 铜月饼的物品形态 —— 月饼外面包了一圈铜，所以它会**变质**。
  *
- * <p>和普通月饼的区别只有三点：
+ * <p>和普通月饼的区别只有两点：
  * <ol>
  *   <li>名字多套两层前缀（氧化度、涂蜡）</li>
  *   <li>放在背包里会随时间氧化，见 {@link #inventoryTick}</li>
- *   <li>往一堆里加的时候，氧化度和涂蜡必须和这一堆一致</li>
  * </ol>
+ *
+ * <p>两者可以放进同一堆月饼里 —— 哪一格是铜的、氧化到哪一步，都记在方块实体上。
  */
 public class CopperMooncakeBlockItem extends MooncakeBlockItem {
     public CopperMooncakeBlockItem(Block block, Properties properties) {
         super(block, properties);
+    }
+
+    @Override
+    public boolean isCopperItem() {
+        return true;
     }
 
     /**
@@ -45,13 +49,6 @@ public class CopperMooncakeBlockItem extends MooncakeBlockItem {
             name = Component.translatable("mooncake_overflow.waxed", name);
         }
         return name;
-    }
-
-    /** 氧化度和涂蜡是整堆共用的，对不上就不许塞进去。 */
-    @Override
-    protected boolean canAddTo(BlockState state, ItemStack stack) {
-        return state.getValue(CopperMooncakeBlock.OXIDATION) == MooncakeData.oxidationOf(stack)
-                && state.getValue(CopperMooncakeBlock.WAXED) == MooncakeData.isWaxed(stack);
     }
 
     /**

@@ -15,7 +15,6 @@
   "mooncake_overflow.mooncake.kind.square_square": "方形月饼",
   "mooncake_overflow.mooncake.kind.square_flower": "方月饼·花形纹",
   "block.mooncake_overflow.copper_mooncake": "铜月饼",
-  "block.mooncake_overflow.copper_mooncake_block": "铜月饼",
   "mooncake_overflow.copper_mooncake.kind.round_round": "圆铜月饼",
   "mooncake_overflow.copper_mooncake.kind.round_square": "圆铜月饼·方纹",
   "mooncake_overflow.copper_mooncake.kind.round_flower": "圆铜月饼·花形纹",
@@ -27,5 +26,6 @@
   "mooncake_overflow.oxidation.tarnished": "斑驳的%s",
   "mooncake_overflow.oxidation.rusted": "锈蚀的%s",
   "mooncake_overflow.oxidation.oxidized": "氧化的%s",
-  "mooncake_overflow.waxed": "涂蜡的%s"
+  "mooncake_overflow.waxed": "涂蜡的%s",
+  "block.mooncake_overflow.mooncake_piece": "月饼部件（技术方块）"
 }

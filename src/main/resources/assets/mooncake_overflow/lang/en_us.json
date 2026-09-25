@@ -15,7 +15,6 @@
   "mooncake_overflow.mooncake.kind.square_square": "Square Mooncake",
   "mooncake_overflow.mooncake.kind.square_flower": "Square Mooncake (Flower Motif)",
   "block.mooncake_overflow.copper_mooncake": "Copper Mooncake",
-  "block.mooncake_overflow.copper_mooncake_block": "Copper Mooncake",
   "mooncake_overflow.copper_mooncake.kind.round_round": "Round Copper Mooncake",
   "mooncake_overflow.copper_mooncake.kind.round_square": "Round Copper Mooncake (Square Motif)",
   "mooncake_overflow.copper_mooncake.kind.round_flower": "Round Copper Mooncake (Flower Motif)",
@@ -27,5 +26,6 @@
   "mooncake_overflow.oxidation.tarnished": "Tarnished %s",
   "mooncake_overflow.oxidation.rusted": "Rusted %s",
   "mooncake_overflow.oxidation.oxidized": "Oxidized %s",
-  "mooncake_overflow.waxed": "Waxed %s"
+  "mooncake_overflow.waxed": "Waxed %s",
+  "block.mooncake_overflow.mooncake_piece": "Mooncake Piece (technical)"
 }

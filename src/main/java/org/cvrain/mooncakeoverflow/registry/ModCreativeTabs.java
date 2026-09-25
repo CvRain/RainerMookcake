@@ -8,8 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.cvrain.mooncakeoverflow.MooncakeOverflow;
-import org.cvrain.mooncakeoverflow.block.CopperMooncakeBlock;
-import org.cvrain.mooncakeoverflow.block.PlainMooncakeBlock;
+
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeOxidation;
@@ -46,14 +45,14 @@ public final class ModCreativeTabs {
                         // 否则创造模式只能拿到默认的圆形，其它形态得靠切石机
                         for (MooncakeKind kind : MooncakeKind.values()) {
                             if (!kind.isEmpty()) {
-                                output.accept(PlainMooncakeBlock.stackOf(kind));
+                                output.accept(MooncakeData.plain(kind));
                             }
                         }
 
                         // 铜月饼：同样 6 种形态（这些才会氧化）
                         for (MooncakeKind kind : MooncakeKind.values()) {
                             if (!kind.isEmpty()) {
-                                output.accept(CopperMooncakeBlock.stackOf(kind));
+                                output.accept(MooncakeData.copper(kind, MooncakeOxidation.DEFAULT, false));
                             }
                         }
 
