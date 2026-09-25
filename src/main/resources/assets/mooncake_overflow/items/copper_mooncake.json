@@ -35,7 +35,7 @@
           ],
           "fallback": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_round_square_copper"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_square_copper"
           }
         }
       },
@@ -70,7 +70,7 @@
           ],
           "fallback": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_round_flower_copper"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_flower_copper"
           }
         }
       },
@@ -105,7 +105,7 @@
           ],
           "fallback": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_square_round_copper"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_round_copper"
           }
         }
       },
@@ -140,7 +140,7 @@
           ],
           "fallback": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_square_square_copper"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_square_copper"
           }
         }
       },
@@ -175,7 +175,7 @@
           ],
           "fallback": {
             "type": "minecraft:model",
-            "model": "mooncake_overflow:block/copper_mooncake_item_square_flower_copper"
+            "model": "mooncake_overflow:item/copper_mooncake_icon_flower_copper"
           }
         }
       }
@@ -209,7 +209,7 @@
       ],
       "fallback": {
         "type": "minecraft:model",
-        "model": "mooncake_overflow:block/copper_mooncake_item_round_round_copper"
+        "model": "mooncake_overflow:item/copper_mooncake_icon_round_copper"
       }
     }
   }

@@ -797,6 +797,34 @@ def item_mooncake_quarter_icon(pattern: str, ox: str = "copper",
     return img if plain else oxidize(img, ox)
 
 
+def _flat_from_top(top: Image.Image, square: bool, radius: float = 7.2) -> Image.Image:
+    """把方块顶面贴图裁成**平铺图标**：圆形或方形，背景透明 + 描边。
+
+    这几种物品（面团、生月饼）的设计保持不变，只是从立体模型改成平铺贴图 ——
+    原版的食物（饼干、南瓜派）都是平铺的，立体块在格子里只占中间一小块，
+    和月饼的图标风格也不统一。
+    """
+    img = new_image()
+    for y in range(SIZE):
+        for x in range(SIZE):
+            inside = (1 <= x <= 14 and 1 <= y <= 14) if square \
+                else dist(x, y, 1.0, 1.0) <= radius
+            if inside:
+                put(img, x, y, top.getpixel((x, y)))
+    add_outline(img, OUTLINE)
+    return img
+
+
+def item_raw_mooncake_icon(square: bool = False) -> Image.Image:
+    """生月饼（还没烤的月饼坯）的图标。"""
+    return _flat_from_top(block_raw_mooncake_top(), square)
+
+
+def item_dough_ball_icon() -> Image.Image:
+    """压过、包好豆沙的面团图标。"""
+    return _flat_from_top(block_dough(True), False)
+
+
 def item_composite_icon() -> Image.Image:
     """五仁月饼的图标：**四个象限各是一种纹样和色调** —— "四种拼起来的"一眼可见。"""
     img = new_image()
@@ -874,6 +902,9 @@ def main() -> None:
 
     # 物品图标：平铺的 2D 贴图（原版食物都是这么画的），铺满格子
     outputs["item/mooncake_composite.png"] = item_composite_icon()
+    outputs["item/raw_mooncake.png"] = item_raw_mooncake_icon(False)
+    outputs["item/square_raw_mooncake.png"] = item_raw_mooncake_icon(True)
+    outputs["item/filled_mooncake_dough_icon.png"] = item_dough_ball_icon()
     for pattern in ("round", "square", "flower"):
         outputs[f"item/mooncake_{pattern}.png"] = item_mooncake_icon(pattern)
         outputs[f"item/mooncake_quarter_{pattern}.png"] = item_mooncake_quarter_icon(pattern)

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "mooncake_overflow:block/raw_mooncake_square"
+    "model": "mooncake_overflow:item/square_raw_mooncake_icon"
   }
 }

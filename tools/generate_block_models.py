@@ -253,6 +253,9 @@ def main() -> None:
         return f"mooncake_overflow:item/{name}"
 
     icon("mooncake_icon_composite", "mooncake_overflow:item/mooncake_composite")
+    icon("raw_mooncake_icon", "mooncake_overflow:item/raw_mooncake")
+    icon("square_raw_mooncake_icon", "mooncake_overflow:item/square_raw_mooncake")
+    icon("filled_dough_icon", "mooncake_overflow:item/filled_mooncake_dough_icon")
     for kind in KINDS:
         pattern = kind.split("_", 1)[1]
         icon(f"mooncake_icon_{pattern}", f"mooncake_overflow:item/mooncake_{pattern}")
@@ -313,7 +316,7 @@ def main() -> None:
                 for ox in OXIDATIONS if ox != "copper"
             ],
             "fallback": {"type": "minecraft:model",
-                         "model": f"mooncake_overflow:block/copper_mooncake_item_{kind}_copper"},
+                         "model": f"mooncake_overflow:item/copper_mooncake_icon_{kind.split('_', 1)[1]}_copper"},
         }
 
     write("items/copper_mooncake", {"model": {
@@ -408,11 +411,11 @@ def main() -> None:
         "variants": {f"shape={shape}": {
             "model": f"mooncake_overflow:block/raw_mooncake_{shape}"} for shape in SHAPES}
     })
-    # 生月饼的两个物品：入口在 items/，指向对应形状的方块模型
+    # 生月饼的两个物品：用平铺图标（和月饼图标统一），方块本身仍然是立体模型
     write("items/raw_mooncake", {"model": {
-        "type": "minecraft:model", "model": "mooncake_overflow:block/raw_mooncake_round"}})
+        "type": "minecraft:model", "model": "mooncake_overflow:item/raw_mooncake_icon"}})
     write("items/square_raw_mooncake", {"model": {
-        "type": "minecraft:model", "model": "mooncake_overflow:block/raw_mooncake_square"}})
+        "type": "minecraft:model", "model": "mooncake_overflow:item/square_raw_mooncake_icon"}})
 
 
 if __name__ == "__main__":
