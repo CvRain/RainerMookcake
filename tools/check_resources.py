@@ -233,6 +233,37 @@ def main() -> int:
                 rel = os.path.relpath(os.path.join(root, fname), folder)
                 walk(f"{MODID}:{sub}/{rel[:-5]}")
 
+    # 物品图标必须全部是**平铺贴图**（item/ 下的 item/generated 模型）。
+    #
+    # 原版的食物都是平铺贴图；立体方块模型在 16×16 的格子里只占中间一小块，
+    # 和月饼图标混在一起风格就不统一了。
+    #
+    # 注意：select / condition 的**每一个分支都要走到**，包括 fallback ——
+    # "默认圆形月饼"恰恰就在 fallback 里，漏过它一次（而且当时的自查脚本
+    # 递归写错了，报了个假的 ✅）。所以这里直接遍历整棵 JSON 树。
+    def icon_models(node, out: list) -> list:
+        if isinstance(node, dict):
+            if node.get("type") == "minecraft:model" and node.get("model"):
+                out.append(node["model"])
+            for key, value in node.items():
+                if key == "model" and node.get("type") != "minecraft:model":
+                    icon_models(value, out)
+                elif key in ("on_true", "on_false", "fallback"):
+                    icon_models(value, out)
+                elif key == "cases":
+                    for case in value or []:
+                        icon_models(case.get("model"), out)
+        return out
+
+    for item in items:
+        path = os.path.join(items_dir, f"{item}.json")
+        if not os.path.exists(path):
+            continue
+        for model_ref in dict.fromkeys(icon_models(load_json(path), [])):
+            if ":block/" in model_ref:
+                errors.append(f"物品 {item}: 图标用了立体模型 {model_ref}，"
+                              f"应改成 item/ 下的平铺图标（否则和月饼图标风格不统一）")
+
     for item in items:
         entry = os.path.join(items_dir, f"{item}.json")
         if os.path.exists(entry):

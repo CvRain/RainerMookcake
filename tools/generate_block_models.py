@@ -284,7 +284,7 @@ def main() -> None:
             for kind in KINDS if kind != "round_round"
         ],
             "fallback": {"type": "minecraft:model",
-                         "model": "mooncake_overflow:block/mooncake_item_round_round"},
+                         "model": "mooncake_overflow:item/mooncake_icon_round"},
         },
     }})
 
