@@ -94,6 +94,51 @@ def element(px0: int, pz0: int, px1: int, pz1: int,
     return {"from": [x0, 0, z0], "to": [x1, height, z1], "faces": faces}
 
 
+#: 四分之一块的"切面"用馅贴图 —— 物品栏里一眼就看得出这是切开的，
+#: 而不是一整块小月饼。四角共用同一个朝向（左上角被切）：
+#: 名字里写着是哪一角，图标只负责表达"这是四分之一"。
+FILLING_TEXTURE = "mooncake_overflow:block/mooncake_filling"
+
+
+def quarter_model(top: str, side: str, height: int, square: bool) -> dict:
+    """四分之一块月饼的物品模型 —— 一个**象限**。
+
+    两件事让它一眼读得出"这是切开的四分之一"，而不是一块小月饼：
+
+    1. **顶面只取整个纹样的那一象限**（左上角的 8×8）——
+       一整块月饼的顶面是 16×16，四片各占一角，拼起来才是完整的纹样
+    2. **内侧两个面（东、南）用馅贴图** —— 那正是刀切下去的地方，
+       露出来的是里面的豆沙，不是饼皮
+
+    圆形月饼的象限还要切掉**外角**（左上角），不然看着是方块不是扇形。
+    四角共用同一个朝向：名字里写着是哪一角，图标只表达"这是四分之一"。
+    """
+    x0, z0, x1, z1 = 4, 4, 11, 11
+    cut = 3                                  # 外角（左上）切掉的边长，圆形才有
+    if square:
+        boxes_ = [(x0, z0, x1, z1)]
+    else:
+        boxes_ = [(x0, z0 + cut, x1, z1),    # 下横条
+                  (x0 + cut, z0, x1, z0 + cut)]  # 右上竖条
+    scale = 8.0 / (x1 - x0)                  # 顶面 UV：映射到纹样的左上一象限
+    elements = []
+    for bx0, bz0, bx1, bz1 in boxes_:
+        faces = {}
+        for face in FACES:
+            if face == "up":
+                faces[face] = {"uv": [round((bx0 - x0) * scale, 2), round((bz0 - z0) * scale, 2),
+                                      round((bx1 - x0) * scale, 2), round((bz1 - z0) * scale, 2)],
+                               "texture": top}
+                continue
+            # 内侧（东、南）是切面 → 用馅；外面是饼皮
+            is_cut = face in ("east", "south")
+            faces[face] = {"uv": [0, 0, 16, 16],
+                           "texture": FILLING_TEXTURE if is_cut else side}
+        elements.append({"from": [bx0, 0, bz0], "to": [bx1, height, bz1], "faces": faces})
+    return {"textures": {"particle": top, "top": top, "side": side, "filling": FILLING_TEXTURE},
+            "elements": elements}
+
+
 def model(x0: int, z0: int, size: int, height: int, square: bool,
           top: str, side: str, partial: bool = False) -> dict:
     return {
@@ -268,14 +313,12 @@ def main() -> None:
         pattern = kind.split("_", 1)[1]
         square = kind.startswith("square")
         write(f"models/block/mooncake_quarter_{kind}",
-              model(CENTER, CENTER, PIECE, 4, square,
-                    f"mooncake_overflow:block/mooncake_top_{pattern}_plain",
-                    "mooncake_overflow:block/mooncake_side_plain"))
+              quarter_model(f"mooncake_overflow:block/mooncake_top_{pattern}_plain",
+                            "mooncake_overflow:block/mooncake_side_plain", 4, square))
         for ox in OXIDATIONS:
             write(f"models/block/copper_mooncake_quarter_{kind}_{ox}",
-                  model(CENTER, CENTER, PIECE, 4, square,
-                        f"mooncake_overflow:block/copper_mooncake_top_{pattern}_{ox}",
-                        f"mooncake_overflow:block/copper_mooncake_side_{ox}"))
+                  quarter_model(f"mooncake_overflow:block/copper_mooncake_top_{pattern}_{ox}",
+                                f"mooncake_overflow:block/copper_mooncake_side_{ox}", 4, square))
 
     # 物品模型：三层 select —— 形态 → 是不是铜的 → 氧化度
     def quarter_ox_select(kind: str) -> dict:

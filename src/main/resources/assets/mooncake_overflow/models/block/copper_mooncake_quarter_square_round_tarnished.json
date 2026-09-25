@@ -1,9 +1,9 @@
 {
-  "parent": "minecraft:block/block",
   "textures": {
     "particle": "mooncake_overflow:block/copper_mooncake_top_round_tarnished",
     "top": "mooncake_overflow:block/copper_mooncake_top_round_tarnished",
-    "side": "mooncake_overflow:block/copper_mooncake_side_tarnished"
+    "side": "mooncake_overflow:block/copper_mooncake_side_tarnished",
+    "filling": "mooncake_overflow:block/mooncake_filling"
   },
   "elements": [
     {
@@ -25,17 +25,16 @@
             16,
             16
           ],
-          "texture": "#side",
-          "cullface": "down"
+          "texture": "mooncake_overflow:block/copper_mooncake_side_tarnished"
         },
         "up": {
           "uv": [
             0.0,
             0.0,
-            16.0,
-            16.0
+            8.0,
+            8.0
           ],
-          "texture": "#top"
+          "texture": "mooncake_overflow:block/copper_mooncake_top_round_tarnished"
         },
         "north": {
           "uv": [
@@ -44,7 +43,7 @@
             16,
             16
           ],
-          "texture": "#side"
+          "texture": "mooncake_overflow:block/copper_mooncake_side_tarnished"
         },
         "south": {
           "uv": [
@@ -53,7 +52,7 @@
             16,
             16
           ],
-          "texture": "#side"
+          "texture": "mooncake_overflow:block/mooncake_filling"
         },
         "west": {
           "uv": [
@@ -62,7 +61,7 @@
             16,
             16
           ],
-          "texture": "#side"
+          "texture": "mooncake_overflow:block/copper_mooncake_side_tarnished"
         },
         "east": {
           "uv": [
@@ -71,7 +70,7 @@
             16,
             16
           ],
-          "texture": "#side"
+          "texture": "mooncake_overflow:block/mooncake_filling"
         }
       }
     }

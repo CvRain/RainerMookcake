@@ -138,7 +138,49 @@ def scallop(img, r, squash, color, step=30):
             color)
 
 
-# ---------------------------------------------------------------- 月饼压纹
+# ---------------------------------------------------------------- 像素画工具
+
+#: 4×4 Bayer 有序抖动矩阵。渐变靠它做，**不要用随机噪声** ——
+#: 随机噪声在 16×16 上就是"脏"，有序抖动才像手画的像素画。
+BAYER4 = ((0, 8, 2, 10), (12, 4, 14, 6), (3, 11, 1, 9), (15, 7, 13, 5))
+
+
+def dither(x: int, y: int, t: float, levels):
+    """在 levels 之间按 t（0..1）用有序抖动挑一个颜色。"""
+    n = len(levels)
+    if t <= 0.0:
+        return levels[0]
+    if t >= 1.0:
+        return levels[-1]
+    pos = t * (n - 1)
+    i = min(int(pos), n - 2)
+    return levels[i + 1] if (pos - i) > ((BAYER4[y % 4][x % 4] + 0.5) / 16.0) else levels[i]
+
+
+def circle(img: Image.Image, cx: float, cy: float, r: int, color) -> None:
+    """中点画圆（Bresenham）—— 1 像素宽的干净圆。
+
+    别用"距离落在某个区间里就涂"那种做法：在 16×16 上会得到一圈断续的糊点。
+    """
+    x, y, d = r, 0, 1 - r
+    while x >= y:
+        for px, py in ((x, y), (y, x), (-x, y), (-y, x),
+                       (x, -y), (y, -x), (-x, -y), (-y, -x)):
+            put(img, int(cx + px), int(cy + py), color)
+        y += 1
+        if d < 0:
+            d += 2 * y + 1
+        else:
+            x -= 1
+            d += 2 * (y - x) + 1
+
+
+def blob(img, cx: float, cy: float, size: int, color) -> None:
+    """在 (cx,cy) 压一个 size×size 方块 —— 16×16 下单像素点是看不见的。"""
+    x0, y0 = int(round(cx)), int(round(cy))
+    for dx in range(size):
+        for dy in range(size):
+            put(img, x0 + dx, y0 + dy, color)
 
 
 def mooncake_pattern(img, main, accent, squash=1.0, scale=1.0):
@@ -396,52 +438,61 @@ def _sc(v: float, s: float) -> int:
     return int(round(C + (v - C) * s))
 
 
+#: 圆形饼模：12×12 的手写像素图，印章式同心纹。
+#: `#` = 压线（暗），`o` = 亮线 —— 外暗内亮是浮雕感的来源。
+#: 用显式像素图而不是几何算法：16×16 上"距离落在区间里"那种画法必然走样。
+MAP_ROUND = (
+    "...######...",
+    ".##......##.",
+    ".#..####..#.",
+    "##.##oo##.##",
+    "#..#oooo#..#",
+    "#.#.oooo.#.#",
+    "#.#.oooo.#.#",
+    "#..#oooo#..#",
+    "##.##oo##.##",
+    ".#..####..#.",
+    ".##......##.",
+    "...######...",
+)
+
+
+def stamp_map(img, rows, s: float = 1.0) -> None:
+    """把 12×12 的像素图盖在饼面正中（坐标按 s 缩放，铜圈里的纹样要缩小让位）。"""
+    for y, row in enumerate(rows):
+        for x, ch in enumerate(row):
+            if ch == ".":
+                continue
+            color = CRUST_DARK if ch == "#" else (CRUST_HI if ch == "+" else CRUST_LIGHT)
+            px = _sc(2 + x, s)
+            py = _sc(2 + y, s)
+            if 0 <= px < SIZE and 0 <= py < SIZE:
+                put(img, px, py, color)
+
+
 def _pattern_round(img, s: float = 1.0) -> None:
-    """圆形：外圈 + 八瓣花 + 一圈装饰点（经典月饼）。"""
-    ring(img, 6.0 * s, 6.7 * s, CRUST_DARK)
-    mooncake_pattern(img, CRUST_DARK, CRUST_LIGHT, scale=s)
+    """圆形：印章式同心纹（手写像素图）。"""
+    stamp_map(img, MAP_ROUND, s)
+    put(img, _sc(7.5, s), _sc(7.5, s), CRUST_HI)
 
 
 def _pattern_square(img, s: float = 1.0) -> None:
-    """方形：双层方框 + 四角点。"""
-    lo, hi = _sc(3, s), _sc(12, s)
-    for i in range(lo, hi + 1):
-        put(img, i, lo, CRUST_DARK)
-        put(img, i, hi, CRUST_DARK)
-        put(img, lo, i, CRUST_DARK)
-        put(img, hi, i, CRUST_DARK)
-    ilo, ihi = _sc(6, s), _sc(9, s)
-    for i in range(ilo, ihi + 1):
-        put(img, i, ilo, CRUST_DARK)
-        put(img, i, ihi, CRUST_DARK)
-        put(img, ilo, i, CRUST_DARK)
-        put(img, ihi, i, CRUST_DARK)
-    for x, y in [(1, 1), (14, 1), (1, 14), (14, 14)]:
-        put(img, _sc(x, s), _sc(y, s), CRUST_DARK)
-    for x, y in [(7, 7), (8, 7), (7, 8), (8, 8)]:
-        put(img, _sc(x, s), _sc(y, s), CRUST_LIGHT)
+    """方形：三层同心方框 + 花心，和圆纹同一套"外暗内亮"的画法。"""
+    for lo, hi, color in ((1, 12, CRUST_DARK), (3, 10, CRUST_LIGHT),
+                          (4, 9, CRUST_DARK), (6, 7, CRUST_LIGHT)):
+        for i in range(_sc(2 + lo, s), _sc(2 + hi, s) + 1):
+            for v in (_sc(2 + lo, s), _sc(2 + hi, s)):
+                put(img, i, v, color)
+                put(img, v, i, color)
+    put(img, _sc(7.5, s), _sc(7.5, s), CRUST_HI)
 
 
 def _pattern_flower(img, s: float = 1.0) -> None:
-    """花形：五瓣花 + 3×3 花心 + 四角点。
-
-    用显式坐标而不是极坐标 —— 16×16 下手算偏移很容易错位，
-    写死坐标反而好读好调。
-    """
-    petals = [
-        (6, 2), (7, 2), (8, 2),                      # 上
-        (3, 5), (4, 5), (3, 6), (4, 6),              # 左上
-        (11, 5), (12, 5), (11, 6), (12, 6),          # 右上
-        (4, 10), (5, 10), (4, 11), (5, 11),          # 左下
-        (10, 10), (11, 10), (10, 11), (11, 11),      # 右下
-    ]
-    for x, y in petals:
-        put(img, _sc(x, s), _sc(y, s), CRUST_DARK)
-    for x in range(_sc(6, s), _sc(9, s) + 1):
-        for y in range(_sc(6, s), _sc(9, s) + 1):
-            put(img, x, y, CRUST_LIGHT)
-    for x, y in [(1, 1), (14, 1), (1, 14), (14, 14)]:
-        put(img, _sc(x, s), _sc(y, s), CRUST_DARK)
+    """花形：五瓣（3×3 的块，太小的花瓣在 16×16 上看不见）+ 花心。"""
+    for cx, cy in ((7.5, 3.5), (4.4, 6.2), (10.6, 6.2), (5.6, 10.4), (9.4, 10.4)):
+        blob(img, _sc(2 + cx - 2, s), _sc(2 + cy - 2, s), 3, CRUST_DARK)
+    blob(img, _sc(6.0, s), _sc(6.0, s), 3, CRUST_LIGHT)
+    put(img, _sc(7.5, s), _sc(7.5, s), CRUST_HI)
 
 
 # ---------------------------------------------------------------- 氧化
@@ -538,21 +589,41 @@ def oxidize(img: Image.Image, stage: str, seed: int = 7) -> Image.Image:
 
 
 def block_mooncake_top(pattern: str, s: float = 1.0) -> Image.Image:
-    """月饼方块顶面：金黄的成品月饼，纹样按图案区分。
+    """月饼方块顶面 —— 作者化像素画，不是算法噪声。
+
+    三层结构（从外到内）：
+      1. 外圈 1 像素压深（饼模的外沿）
+      2. 2 像素**褶边**：每 2 像素一瓣，上/左受光、下/右背光 —— 真月饼的裙边
+      3. 饼面：中心略鼓的柔和渐变（**有序抖动**，没有随机噪声）+ 压纹
 
     {@code s} 是纹样缩放系数 —— 铜月饼的饼面被铜圈占掉一圈，纹样要缩小让位。
     """
     img = new_image()
-    rng = random.Random(30)
+
+    levels = (FACE_DARK, FACE_MID, FACE_LIGHT)
     for y in range(SIZE):
         for x in range(SIZE):
-            n = rng.random()
-            put(img, x, y, FACE_LIGHT if n > 0.9 else FACE_MID)
+            t = 0.62 - (dist(x, y, 1.0, 1.0) - 3.0) / 11.0 - ((x + y) - 15) / 90.0
+            put(img, x, y, dither(x, y, t, levels))
+
     for i in range(SIZE):
-        put(img, i, 0, CRUST_MID)
-        put(img, i, SIZE - 1, CRUST_MID)
-        put(img, 0, i, CRUST_MID)
-        put(img, SIZE - 1, i, CRUST_MID)
+        put(img, i, 0, CRUST_DARK)
+        put(img, i, SIZE - 1, CRUST_DARK)
+        put(img, 0, i, CRUST_DARK)
+        put(img, SIZE - 1, i, CRUST_DARK)
+
+    for i in range(1, SIZE - 1):
+        pleat = (i // 2) % 2 == 0
+        put(img, i, 1, CRUST_LIGHT if pleat else CRUST_MID)
+        put(img, 1, i, CRUST_LIGHT if pleat else CRUST_MID)
+        put(img, i, SIZE - 2, CRUST_MID if pleat else CRUST_DARK)
+        put(img, SIZE - 2, i, CRUST_MID if pleat else CRUST_DARK)
+
+    for i in range(2, SIZE - 2):
+        put(img, i, 2, CRUST_MID)
+        put(img, 2, i, CRUST_MID)
+        put(img, i, SIZE - 3, CRUST_MID)
+        put(img, SIZE - 3, i, CRUST_MID)
 
     {"round": _pattern_round, "square": _pattern_square, "flower": _pattern_flower}[pattern](img, s)
     return img
@@ -569,19 +640,22 @@ def block_mooncake_top_copper(pattern: str) -> Image.Image:
 
 
 def block_mooncake_side() -> Image.Image:
-    """月饼方块侧面：一条金黄的饼边。"""
+    """月饼方块侧面：一条金黄的饼边，带竖褶（不是几道横杠）。
+
+    上 2 像素接着顶面的褶边，中间是竖褶，下 2 像素压深。
+    """
     img = new_image()
     for y in range(SIZE):
         for x in range(SIZE):
-            col = FACE_MID
-            if y < 4:
-                col = FACE_LIGHT
-            elif y > 11:
-                col = CRUST_MID
+            if y < 2:
+                col = CRUST_LIGHT if (x // 2) % 2 == 0 else CRUST_MID
+            elif y > SIZE - 3:
+                col = CRUST_DARK
+            else:
+                lit = x % 2 == 0
+                k = max(0.0, (y - SIZE // 2) / float(SIZE // 2))
+                col = shade(FACE_LIGHT if lit else FACE_MID, CRUST_DARK, k * 0.55)
             put(img, x, y, col)
-    for x in range(0, SIZE, 5):
-        put(img, x, 7, CRUST_MID)
-        put(img, x, 8, CRUST_MID)
     return img
 
 
@@ -622,7 +696,20 @@ def block_mooncake_composite_top() -> Image.Image:
     return img
 
 
-# ---------------------------------------------------------------- 输出
+def block_mooncake_filling() -> Image.Image:
+    """切面：豆沙馅 + 一点碎屑。
+
+    给"四分之一块"**切开的那两个面**用 —— 一眼看出是切开的，而不是一块小月饼。
+    馅不跟着氧化，所以只用一套。
+    """
+    img = new_image()
+    levels = (PASTE_DARK, PASTE_MID, PASTE_LIGHT)
+    for y in range(SIZE):
+        for x in range(SIZE):
+            put(img, x, y, dither(x + 3, y + 5, 0.30 + (x + y) / 40.0, levels))
+    for x, y in ((3, 4), (10, 3), (5, 11), (12, 9), (7, 7), (2, 9), (13, 5)):
+        put(img, x, y, PASTE_HI)
+    return img
 
 
 def save(img: Image.Image, rel: str) -> str:
@@ -654,6 +741,8 @@ def main() -> None:
     outputs["block/mooncake_side_plain.png"] = block_mooncake_side()
     # 缝合月饼（四块拼回来那一块）的顶面
     outputs["block/mooncake_composite_top.png"] = block_mooncake_composite_top()
+    # 切面（四分之一块的内侧两面）
+    outputs["block/mooncake_filling.png"] = block_mooncake_filling()
 
     # 铜月饼：饼面外面包了一圈铜，所以是 3 纹样 × 4 氧化度
     for pattern in ("round", "square", "flower"):
