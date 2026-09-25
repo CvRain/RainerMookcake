@@ -579,7 +579,9 @@ return TransmuteRecipe.createWithOriginalComponents(result(), input.getItem(0));
 （`Ingredient` 只是个 `HolderSet<Item>`），只有 `CustomRecipe` 能在 `assemble` 里自己拼数据。
 它是个"特殊配方"（`isSpecial()`），不进配方书，也不需要任何 JSON 参数。
 
-## 待办：把弩的箭换成月饼
+## 待办
+
+### 1. 把弩的箭换成月饼
 
 现在四分之一块挂在 `minecraft:arrows` 标签上、又继承了 `ArrowItem`，
 所以弩**能**用它当弹药，但射出去的是一支普通的箭。
@@ -902,6 +904,15 @@ earlyWindowControl = false
     自动订阅要用 `@Mod.EventBusSubscriber(bus = Bus.FORGE)`；
     写成 `Bus.MOD` 会报 "is on the default BusGroup but you are asking to register"
   - `Level#isClientSide` 是**字段**且 private，判断端要用方法 `isClientSide()`
+  - ⚠️ **DFU 的 `RecordCodecBuilder` 不允许字段的 codec 解码出 `null`**。
+    它解码每个字段时会做 `Optional.of(值)`，所以"可空字段"
+    （比如 `@Nullable Component` + `xmap(opt -> opt.orElse(null), …)`）在字段缺失时直接 NPE。
+    字段类型就该用 `Optional<T>`，配 `optionalFieldOf("k").forGetter(...)`。
+    **而且这个 NPE 的后果不对称**：服务端从区块读时原版会 catch 并记一条 ERROR，
+    客户端收到方块实体同步包那条路**原版不 catch** —— 直接"Failed to handle packet"然后整个客户端崩。
+    方块实体的 `loadAdditional` 里自己兜一层 try/catch 是值得的
+  - ⚠️ **Access Transformer 文件里不能写注释** —— 解析器把每一行都当规则，
+    一行 `#` 开头就 `Invalid AccessTransformer config` 启动失败
 
 ### 改完资源记得跑检查
 
@@ -921,3 +932,9 @@ python3 tools/check_resources.py
 ## 许可
 
 `mods.toml` 中声明为 **MIT**，但仓库中尚无 `LICENSE` 文件，待补充。
+
+### 2. 物品贴图（用户提过，优先级低）
+
+- **四分之一块**：四角通用一个小方块，看不出"这是四分之一"，也看不出是哪一角
+- **五仁月饼**：固定的"四色拼盘"贴图，不反映它实际是哪四个角拼的
+  （静态贴图做不到，除非把清单塞进能同步的组件 —— 目前只有原版 `custom_name` 靠得住）
