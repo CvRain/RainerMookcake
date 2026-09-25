@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "mooncake_overflow:block/mooncake_top_round",
-    "top": "mooncake_overflow:block/mooncake_top_round",
-    "side": "mooncake_overflow:block/mooncake_side"
+    "particle": "mooncake_overflow:block/mooncake_top_round_plain",
+    "top": "mooncake_overflow:block/mooncake_top_round_plain",
+    "side": "mooncake_overflow:block/mooncake_side_plain"
   },
   "elements": [
     {

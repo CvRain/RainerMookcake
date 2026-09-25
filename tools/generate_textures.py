@@ -391,31 +391,38 @@ def block_raw_mooncake_side() -> Image.Image:
     return img
 
 
-def _pattern_round(img) -> None:
+def _sc(v: float, s: float) -> int:
+    """把坐标按 s 围绕中心缩放 —— 纹样要缩小才塞得进铜圈里。"""
+    return int(round(C + (v - C) * s))
+
+
+def _pattern_round(img, s: float = 1.0) -> None:
     """圆形：外圈 + 八瓣花 + 一圈装饰点（经典月饼）。"""
-    ring(img, 6.0, 6.7, CRUST_DARK)
-    mooncake_pattern(img, CRUST_DARK, CRUST_LIGHT)
+    ring(img, 6.0 * s, 6.7 * s, CRUST_DARK)
+    mooncake_pattern(img, CRUST_DARK, CRUST_LIGHT, scale=s)
 
 
-def _pattern_square(img) -> None:
+def _pattern_square(img, s: float = 1.0) -> None:
     """方形：双层方框 + 四角点。"""
-    for i in range(3, 13):
-        put(img, i, 3, CRUST_DARK)
-        put(img, i, 12, CRUST_DARK)
-        put(img, 3, i, CRUST_DARK)
-        put(img, 12, i, CRUST_DARK)
-    for i in range(6, 10):
-        put(img, i, 6, CRUST_DARK)
-        put(img, i, 9, CRUST_DARK)
-        put(img, 6, i, CRUST_DARK)
-        put(img, 9, i, CRUST_DARK)
+    lo, hi = _sc(3, s), _sc(12, s)
+    for i in range(lo, hi + 1):
+        put(img, i, lo, CRUST_DARK)
+        put(img, i, hi, CRUST_DARK)
+        put(img, lo, i, CRUST_DARK)
+        put(img, hi, i, CRUST_DARK)
+    ilo, ihi = _sc(6, s), _sc(9, s)
+    for i in range(ilo, ihi + 1):
+        put(img, i, ilo, CRUST_DARK)
+        put(img, i, ihi, CRUST_DARK)
+        put(img, ilo, i, CRUST_DARK)
+        put(img, ihi, i, CRUST_DARK)
     for x, y in [(1, 1), (14, 1), (1, 14), (14, 14)]:
-        put(img, x, y, CRUST_DARK)
+        put(img, _sc(x, s), _sc(y, s), CRUST_DARK)
     for x, y in [(7, 7), (8, 7), (7, 8), (8, 8)]:
-        put(img, x, y, CRUST_LIGHT)
+        put(img, _sc(x, s), _sc(y, s), CRUST_LIGHT)
 
 
-def _pattern_flower(img) -> None:
+def _pattern_flower(img, s: float = 1.0) -> None:
     """花形：五瓣花 + 3×3 花心 + 四角点。
 
     用显式坐标而不是极坐标 —— 16×16 下手算偏移很容易错位，
@@ -429,16 +436,112 @@ def _pattern_flower(img) -> None:
         (10, 10), (11, 10), (10, 11), (11, 11),      # 右下
     ]
     for x, y in petals:
-        put(img, x, y, CRUST_DARK)
-    for x in range(6, 10):
-        for y in range(6, 10):
+        put(img, _sc(x, s), _sc(y, s), CRUST_DARK)
+    for x in range(_sc(6, s), _sc(9, s) + 1):
+        for y in range(_sc(6, s), _sc(9, s) + 1):
             put(img, x, y, CRUST_LIGHT)
     for x, y in [(1, 1), (14, 1), (1, 14), (14, 14)]:
-        put(img, x, y, CRUST_DARK)
+        put(img, _sc(x, s), _sc(y, s), CRUST_DARK)
 
 
-def block_mooncake_top(pattern: str) -> Image.Image:
-    """月饼方块顶面：金黄的成品月饼，纹样按图案区分。"""
+# ---------------------------------------------------------------- 氧化
+
+# 四个氧化阶段：越往后越往青绿（铜绿 / verdigris）偏，并撒上斑块。
+# 用「向目标色混合」而不是「乘一个系数」—— 因为橙金色乘任何系数都变不出青绿（蓝通道本来就最低）。
+OXIDATION_TARGET = {
+    "copper": (0, 0, 0),
+    "tarnished": (152, 148, 104),
+    "rusted": (114, 150, 108),
+    "oxidized": (86, 150, 132),
+}
+OXIDATION_MIX = {"copper": 0.0, "tarnished": 0.35, "rusted": 0.60, "oxidized": 0.80}
+PATINA_DENSITY = {"copper": 0.0, "tarnished": 0.10, "rusted": 0.22, "oxidized": 0.34}
+PATINA = (74, 138, 112, 255)
+
+OXIDATIONS = ("copper", "tarnished", "rusted", "oxidized")
+
+
+# ---------------------------------------------------------------- 铜圈
+
+# 「包了一圈铜」的视觉：饼面外面套一圈**有金属反光**的铜边。
+# 关键是和饼皮区分开 —— 饼皮本身就是橙金色的，所以铜圈必须更饱和、更亮、有高光和压深线。
+COPPER_HI = (250, 200, 150, 255)
+COPPER_LIGHT = (226, 146, 88, 255)
+COPPER_MID = (183, 96, 50, 255)
+COPPER_DARK = (124, 60, 30, 255)
+COPPER_EDGE = (70, 33, 16, 255)
+
+#: 铜圈厚度（像素）。饼面上的纹样会按 COPPER_PATTERN_SCALE 缩小给它让位
+BAND = 2
+#: 纹样缩放。试过 0.72 —— 八瓣花会挤成一团糊，0.88 是还能看清纹样的下限
+COPPER_PATTERN_SCALE = 0.88
+
+
+def copper_band(img: Image.Image) -> None:
+    """在饼面外面套一圈铜边（原地修改）。
+
+    光照和饼面保持一致（左上打光）：上/左亮、下/右暗。
+    """
+    for i in range(SIZE):
+        # 外圈：上/左受光，下/右背光
+        put(img, i, 0, COPPER_LIGHT)
+        put(img, 0, i, COPPER_LIGHT)
+        put(img, i, SIZE - 1, COPPER_DARK)
+        put(img, SIZE - 1, i, COPPER_DARK)
+        # 内一圈
+        put(img, i, 1, COPPER_MID)
+        put(img, 1, i, COPPER_MID)
+        put(img, i, SIZE - 2, COPPER_DARK)
+        put(img, SIZE - 2, i, COPPER_DARK)
+
+    # 高光点：让铜圈看起来是一圈金属而不是一条色带
+    for x, y in [(0, 0), (SIZE - 1, 0), (0, SIZE - 1), (SIZE - 1, SIZE - 1)]:
+        put(img, x, y, COPPER_HI)
+    for i in range(4, SIZE - 4, 2):
+        put(img, i, 0, COPPER_HI)
+        put(img, 0, i, COPPER_HI)
+
+    # 内圈压深，把铜圈和饼面分开
+    for i in range(BAND, SIZE - BAND):
+        put(img, i, BAND, COPPER_EDGE)
+        put(img, i, SIZE - 1 - BAND, COPPER_EDGE)
+        put(img, BAND, i, COPPER_EDGE)
+        put(img, SIZE - 1 - BAND, i, COPPER_EDGE)
+
+
+def oxidize(img: Image.Image, stage: str, seed: int = 7) -> Image.Image:
+    """按氧化阶段调色 + 撒铜绿斑点。"""
+    mix = OXIDATION_MIX[stage]
+    target = OXIDATION_TARGET[stage]
+    rng = random.Random(seed)
+
+    out = new_image()
+    for y in range(SIZE):
+        for x in range(SIZE):
+            r, g, b, a = img.getpixel((x, y))
+            if a == 0:
+                continue
+            r = int(r * (1 - mix) + target[0] * mix)
+            g = int(g * (1 - mix) + target[1] * mix)
+            b = int(b * (1 - mix) + target[2] * mix)
+            put(out, x, y, (r, g, b, a))
+
+    density = PATINA_DENSITY[stage]
+    if density > 0:
+        for y in range(SIZE):
+            for x in range(SIZE):
+                base = out.getpixel((x, y))
+                if base[3] == 0 or rng.random() >= density:
+                    continue
+                put(out, x, y, tuple(int(p * 0.45 + q * 0.55) for p, q in zip(base, PATINA)))
+    return out
+
+
+def block_mooncake_top(pattern: str, s: float = 1.0) -> Image.Image:
+    """月饼方块顶面：金黄的成品月饼，纹样按图案区分。
+
+    {@code s} 是纹样缩放系数 —— 铜月饼的饼面被铜圈占掉一圈，纹样要缩小让位。
+    """
     img = new_image()
     rng = random.Random(30)
     for y in range(SIZE):
@@ -451,7 +554,17 @@ def block_mooncake_top(pattern: str) -> Image.Image:
         put(img, 0, i, CRUST_MID)
         put(img, SIZE - 1, i, CRUST_MID)
 
-    {"round": _pattern_round, "square": _pattern_square, "flower": _pattern_flower}[pattern](img)
+    {"round": _pattern_round, "square": _pattern_square, "flower": _pattern_flower}[pattern](img, s)
+    return img
+
+
+def block_mooncake_top_copper(pattern: str) -> Image.Image:
+    """铜月饼顶面：先在饼皮上压好缩小版纹样，再套铜圈。
+
+    顺序很重要 —— 先纹样后铜圈，铜圈才能干净地盖在外面不吃到纹样。
+    """
+    img = block_mooncake_top(pattern, s=COPPER_PATTERN_SCALE)
+    copper_band(img)
     return img
 
 
@@ -469,6 +582,29 @@ def block_mooncake_side() -> Image.Image:
     for x in range(0, SIZE, 5):
         put(img, x, 7, CRUST_MID)
         put(img, x, 8, CRUST_MID)
+    return img
+
+
+def block_mooncake_side_copper() -> Image.Image:
+    """铜月饼侧面：整条金属铜边（上亮下暗），顶部留一条饼皮。"""
+    img = new_image()
+    for y in range(SIZE):
+        for x in range(SIZE):
+            if y < 3:
+                col = FACE_MID if y > 0 else CRUST_MID
+            elif y < 5:
+                col = COPPER_LIGHT
+            elif y < 13:
+                col = COPPER_MID
+            else:
+                col = COPPER_DARK
+            put(img, x, y, col)
+    # 金属高光 + 接缝，避免看起来只是一块纯色
+    for x in range(1, SIZE - 1, 3):
+        put(img, x, 5, COPPER_HI)
+        put(img, x, 6, COPPER_LIGHT)
+    for x in range(0, SIZE, 5):
+        put(img, x, 12, COPPER_DARK)
     return img
 
 
@@ -495,11 +631,23 @@ def main() -> None:
         "block/mooncake_dough_side.png": block_mooncake_dough_side(),
         "block/raw_mooncake_top.png": block_raw_mooncake_top(),
         "block/raw_mooncake_side.png": block_raw_mooncake_side(),
-        "block/mooncake_top_round.png": block_mooncake_top("round"),
-        "block/mooncake_top_square.png": block_mooncake_top("square"),
-        "block/mooncake_top_flower.png": block_mooncake_top("flower"),
-        "block/mooncake_side.png": block_mooncake_side(),
+        "block/mooncake_dough_side.png": block_mooncake_dough_side(),
     }
+
+    # 普通月饼：3 纹样，**不氧化**，所以每个纹样只有一张贴图
+    for pattern in ("round", "square", "flower"):
+        outputs[f"block/mooncake_top_{pattern}_plain.png"] = block_mooncake_top(pattern)
+    outputs["block/mooncake_side_plain.png"] = block_mooncake_side()
+
+    # 铜月饼：饼面外面包了一圈铜，所以是 3 纹样 × 4 氧化度
+    for pattern in ("round", "square", "flower"):
+        base_copper = block_mooncake_top_copper(pattern)
+        for stage in OXIDATIONS:
+            outputs[f"block/copper_mooncake_top_{pattern}_{stage}.png"] = oxidize(
+                base_copper, stage, seed=hash(pattern) % 97)
+    base_copper_side = block_mooncake_side_copper()
+    for stage in OXIDATIONS:
+        outputs[f"block/copper_mooncake_side_{stage}.png"] = oxidize(base_copper_side, stage)
 
     for rel, img in outputs.items():
         print("wrote", os.path.relpath(save(img, rel), ROOT))

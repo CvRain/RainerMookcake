@@ -254,10 +254,16 @@ def main() -> int:
     live |= {f"block.{MODID}.{i}" for i in block_items}   # 方块物品的名字键
     live |= {f"block.{MODID}.{b}" for b in blocks}        # 方块自己的名字键
     live.add(f"itemGroup.{MODID}.mooncakes")
-    # 形态名是代码里拼出来的键（MooncakeKind#nameKey），检查器看不到，显式登记
+    # 形态名是代码里拼出来的键（MooncakeKind#nameKey / #copperNameKey），检查器看不到，显式登记
     live |= {f"{MODID}.mooncake.kind.{k}" for k in (
         "round_round", "round_square", "round_flower",
         "square_round", "square_square", "square_flower")}
+    live |= {f"{MODID}.copper_mooncake.kind.{k}" for k in (
+        "round_round", "round_square", "round_flower",
+        "square_round", "square_square", "square_flower")}
+    # 氧化前缀（MooncakeOxidation#prefixKey）和涂蜡前缀（MooncakeBlockItem#getName）
+    live |= {f"{MODID}.oxidation.{k}" for k in ("tarnished", "rusted", "oxidized")}
+    live.add(f"{MODID}.waxed")
     for lang in ("en_us", "zh_cn"):
         path = os.path.join(ASSETS, "lang", f"{lang}.json")
         if not os.path.exists(path):

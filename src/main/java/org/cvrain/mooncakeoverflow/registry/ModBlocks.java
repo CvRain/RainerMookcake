@@ -8,7 +8,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.cvrain.mooncakeoverflow.MooncakeOverflow;
-import org.cvrain.mooncakeoverflow.block.MooncakeBlock;
+import org.cvrain.mooncakeoverflow.block.CopperMooncakeBlock;
+import org.cvrain.mooncakeoverflow.block.PlainMooncakeBlock;
 import org.cvrain.mooncakeoverflow.block.MooncakeDoughBlock;
 import org.cvrain.mooncakeoverflow.block.PattyBlock;
 
@@ -46,11 +47,22 @@ public final class ModBlocks {
             ));
 
     public static final RegistryObject<Block> MOONCAKE_BLOCK = BLOCKS.register("mooncake_block",
-            () -> new MooncakeBlock(BlockBehaviour.Properties.of()
+            () -> new PlainMooncakeBlock(BlockBehaviour.Properties.of()
                     .setId(BLOCKS.key("mooncake_block"))
                     .mapColor(MapColor.SAND)
                     .strength(0.3F)
                     .sound(SoundType.SLIME_BLOCK)
+                    .noOcclusion()
+            ));
+
+    /** 铜月饼堆：会氧化的那种，所以要 {@code randomTicks()}。 */
+    public static final RegistryObject<Block> COPPER_MOONCAKE_BLOCK = BLOCKS.register("copper_mooncake_block",
+            () -> new CopperMooncakeBlock(BlockBehaviour.Properties.of()
+                    .setId(BLOCKS.key("copper_mooncake_block"))
+                    .mapColor(MapColor.METAL)
+                    .strength(0.3F)
+                    .sound(SoundType.SLIME_BLOCK)
+                    .randomTicks()
                     .noOcclusion()
             ));
 }

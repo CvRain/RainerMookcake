@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.cvrain.mooncakeoverflow.MooncakeOverflow;
+import org.cvrain.mooncakeoverflow.item.CopperMooncakeBlockItem;
 import org.cvrain.mooncakeoverflow.item.MooncakeBlockItem;
 import org.cvrain.mooncakeoverflow.item.ShapeBlockItem;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeShape;
@@ -20,7 +21,8 @@ import org.cvrain.mooncakeoverflow.mooncake.MooncakeShape;
  *   FILLED_MOONCAKE_DOUGH 带馅面饼    ← 4 月饼面团 + 豆沙（可放置）
  *   MOONCAKE_MOLD        月饼模具     ← 铁锭 + 木棍
  *   RAW_MOONCAKE         生月饼       ← 用模具压印面团后取出
- *   MOONCAKE             月饼         ← 烤生月饼（可食用）
+ *   MOONCAKE             月饼         ← 烤生月饼（可食用，不会氧化）
+ *   COPPER_MOONCAKE      铜月饼       ← 月饼 + 铜锭（会氧化）
  * </pre>
  */
 public final class ModItems {
@@ -97,6 +99,23 @@ public final class ModItems {
             () -> new MooncakeBlockItem(ModBlocks.MOONCAKE_BLOCK.get(),
                     new Item.Properties()
                             .setId(ITEMS.key("mooncake"))
+                            .useBlockDescriptionPrefix()
+                            .food(new FoodProperties.Builder()
+                                    .nutrition(6)
+                                    .saturationModifier(0.8F)
+                                    .alwaysEdible()
+                                    .build())));
+
+    /**
+     * 铜月饼：月饼外面包了一圈铜（合成台：月饼 + 铜锭）。
+     *
+     * <p>这是**会氧化的那一个**。没包铜的普通月饼放多久都不会坏，
+     * 因为它身上没有任何可氧化的东西。
+     */
+    public static final RegistryObject<Item> COPPER_MOONCAKE = ITEMS.register("copper_mooncake",
+            () -> new CopperMooncakeBlockItem(ModBlocks.COPPER_MOONCAKE_BLOCK.get(),
+                    new Item.Properties()
+                            .setId(ITEMS.key("copper_mooncake"))
                             .useBlockDescriptionPrefix()
                             .food(new FoodProperties.Builder()
                                     .nutrition(6)

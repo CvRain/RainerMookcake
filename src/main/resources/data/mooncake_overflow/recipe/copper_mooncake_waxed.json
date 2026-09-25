@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "misc",
+  "group": "copper_mooncake_waxing",
+  "input": "mooncake_overflow:copper_mooncake",
+  "material": "minecraft:honeycomb",
+  "result": {
+    "id": "mooncake_overflow:copper_mooncake",
+    "components": {
+      "mooncake_overflow:mooncake_waxed": true
+    }
+  }
+}

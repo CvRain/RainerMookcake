@@ -76,6 +76,16 @@ public enum MooncakeKind implements StringRepresentable {
         return "mooncake_overflow.mooncake.kind." + this.name;
     }
 
+    /**
+     * 铜月饼的语言键：{@code mooncake_overflow.copper_mooncake.kind.<name>}。
+     *
+     * <p>单独一套而不是"在名字前面加个铜" —— 中文里「圆形月饼」包铜后是「圆铜月饼」，
+     * 不是「铜圆形月饼」，拼接拼不出来。
+     */
+    public String copperNameKey() {
+        return "mooncake_overflow.copper_mooncake.kind." + this.name;
+    }
+
     public static MooncakeKind of(MooncakeShape shape, MooncakePattern pattern) {
         for (MooncakeKind kind : values()) {
             if (kind.shape == shape && kind.pattern == pattern) {

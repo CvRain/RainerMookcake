@@ -8,11 +8,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.cvrain.mooncakeoverflow.MooncakeOverflow;
-import org.cvrain.mooncakeoverflow.block.MooncakeBlock;
+import org.cvrain.mooncakeoverflow.block.CopperMooncakeBlock;
+import org.cvrain.mooncakeoverflow.block.PlainMooncakeBlock;
+import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
+import org.cvrain.mooncakeoverflow.mooncake.MooncakeOxidation;
 
 /**
  * 创造模式物品栏。
+ *
+ * <p>注意创造栏**不允许重复条目**，同一个 ItemStack 放两次会直接崩
+ * （{@code IllegalStateException: Accidentally adding the same item stack twice}）。
+ * 氧化链的样本要跳过铜阶段 —— 那正好就是上面那轮里的「圆形月饼」。
  */
 public final class ModCreativeTabs {
     private ModCreativeTabs() {
@@ -34,13 +41,34 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.SQUARE_MOONCAKE_MOLD.get());
                         output.accept(ModItems.RAW_MOONCAKE.get());
                         output.accept(ModItems.SQUARE_RAW_MOONCAKE.get());
-                        // 形状 × 纹样 = 6 种形态全放进来，
+
+                        // 普通月饼：形状 × 纹样 = 6 种形态全放进来，
                         // 否则创造模式只能拿到默认的圆形，其它形态得靠切石机
                         for (MooncakeKind kind : MooncakeKind.values()) {
                             if (!kind.isEmpty()) {
-                                output.accept(MooncakeBlock.stackOf(kind));
+                                output.accept(PlainMooncakeBlock.stackOf(kind));
                             }
                         }
+
+                        // 铜月饼：同样 6 种形态（这些才会氧化）
+                        for (MooncakeKind kind : MooncakeKind.values()) {
+                            if (!kind.isEmpty()) {
+                                output.accept(CopperMooncakeBlock.stackOf(kind));
+                            }
+                        }
+
+                        // 氧化链和涂蜡各来一个样本 —— 真等它自己氧化要好几个小时，
+                        // 想直接看效果的话从这里拿。
+                        // 铜阶段跳过：上面那轮的圆铜月饼就是它，重复放会直接崩
+                        for (MooncakeOxidation oxidation : MooncakeOxidation.values()) {
+                            if (oxidation == MooncakeOxidation.DEFAULT) {
+                                continue;
+                            }
+                            output.accept(MooncakeData.copper(
+                                    MooncakeKind.DEFAULT, oxidation, false));
+                        }
+                        output.accept(MooncakeData.copper(
+                                MooncakeKind.DEFAULT, MooncakeOxidation.DEFAULT, true));
                     })
                     .build());
 }

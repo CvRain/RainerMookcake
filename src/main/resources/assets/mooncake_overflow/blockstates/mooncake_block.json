@@ -5,7 +5,7 @@
         "nw": "round_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_round_nw"
+        "model": "mooncake_overflow:block/mooncake_piece_nw_round_round"
       }
     },
     {
@@ -13,7 +13,7 @@
         "nw": "round_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_square_nw"
+        "model": "mooncake_overflow:block/mooncake_piece_nw_round_square"
       }
     },
     {
@@ -21,7 +21,7 @@
         "nw": "round_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_flower_nw"
+        "model": "mooncake_overflow:block/mooncake_piece_nw_round_flower"
       }
     },
     {
@@ -29,7 +29,7 @@
         "nw": "square_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_round_nw"
+        "model": "mooncake_overflow:block/mooncake_piece_nw_square_round"
       }
     },
     {
@@ -37,7 +37,7 @@
         "nw": "square_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_square_nw"
+        "model": "mooncake_overflow:block/mooncake_piece_nw_square_square"
       }
     },
     {
@@ -45,7 +45,7 @@
         "nw": "square_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_flower_nw"
+        "model": "mooncake_overflow:block/mooncake_piece_nw_square_flower"
       }
     },
     {
@@ -53,7 +53,7 @@
         "ne": "round_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_round_ne"
+        "model": "mooncake_overflow:block/mooncake_piece_ne_round_round"
       }
     },
     {
@@ -61,7 +61,7 @@
         "ne": "round_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_square_ne"
+        "model": "mooncake_overflow:block/mooncake_piece_ne_round_square"
       }
     },
     {
@@ -69,7 +69,7 @@
         "ne": "round_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_flower_ne"
+        "model": "mooncake_overflow:block/mooncake_piece_ne_round_flower"
       }
     },
     {
@@ -77,7 +77,7 @@
         "ne": "square_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_round_ne"
+        "model": "mooncake_overflow:block/mooncake_piece_ne_square_round"
       }
     },
     {
@@ -85,7 +85,7 @@
         "ne": "square_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_square_ne"
+        "model": "mooncake_overflow:block/mooncake_piece_ne_square_square"
       }
     },
     {
@@ -93,7 +93,7 @@
         "ne": "square_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_flower_ne"
+        "model": "mooncake_overflow:block/mooncake_piece_ne_square_flower"
       }
     },
     {
@@ -101,7 +101,7 @@
         "sw": "round_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_round_sw"
+        "model": "mooncake_overflow:block/mooncake_piece_sw_round_round"
       }
     },
     {
@@ -109,7 +109,7 @@
         "sw": "round_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_square_sw"
+        "model": "mooncake_overflow:block/mooncake_piece_sw_round_square"
       }
     },
     {
@@ -117,7 +117,7 @@
         "sw": "round_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_flower_sw"
+        "model": "mooncake_overflow:block/mooncake_piece_sw_round_flower"
       }
     },
     {
@@ -125,7 +125,7 @@
         "sw": "square_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_round_sw"
+        "model": "mooncake_overflow:block/mooncake_piece_sw_square_round"
       }
     },
     {
@@ -133,7 +133,7 @@
         "sw": "square_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_square_sw"
+        "model": "mooncake_overflow:block/mooncake_piece_sw_square_square"
       }
     },
     {
@@ -141,7 +141,7 @@
         "sw": "square_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_flower_sw"
+        "model": "mooncake_overflow:block/mooncake_piece_sw_square_flower"
       }
     },
     {
@@ -149,7 +149,7 @@
         "se": "round_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_round_se"
+        "model": "mooncake_overflow:block/mooncake_piece_se_round_round"
       }
     },
     {
@@ -157,7 +157,7 @@
         "se": "round_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_square_se"
+        "model": "mooncake_overflow:block/mooncake_piece_se_round_square"
       }
     },
     {
@@ -165,7 +165,7 @@
         "se": "round_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_round_flower_se"
+        "model": "mooncake_overflow:block/mooncake_piece_se_round_flower"
       }
     },
     {
@@ -173,7 +173,7 @@
         "se": "square_round"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_round_se"
+        "model": "mooncake_overflow:block/mooncake_piece_se_square_round"
       }
     },
     {
@@ -181,7 +181,7 @@
         "se": "square_square"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_square_se"
+        "model": "mooncake_overflow:block/mooncake_piece_se_square_square"
       }
     },
     {
@@ -189,7 +189,7 @@
         "se": "square_flower"
       },
       "apply": {
-        "model": "mooncake_overflow:block/mooncake_piece_square_flower_se"
+        "model": "mooncake_overflow:block/mooncake_piece_se_square_flower"
       }
     }
   ]

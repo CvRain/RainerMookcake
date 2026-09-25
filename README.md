@@ -15,6 +15,7 @@
 - [这是什么](#这是什么)
 - [核心设计：正交轴](#核心设计正交轴)
 - [阶段一：月饼本体](#阶段一月饼本体已实现)
+- [阶段二：氧化与涂蜡](#阶段二氧化与涂蜡已实现)
 - [开发状态](#开发状态)
 - [环境要求](#环境要求)
 - [构建](#构建)
@@ -49,6 +50,7 @@
 | 轴 | 取值 | 作用 |
 |---|---|---|
 | **馅料** | 可可豆 / 南瓜 / 莲蓉 / 五仁 / 豆沙 / … | 基础食用效果 |
+| **包铜** | 是 / 否 | **只有包了铜的月饼才会氧化**；普通月饼放多久都不会坏 |
 | **氧化度** | 铜 / 斑驳 / 锈蚀 / 氧化 | 影响硬度（扣血量）与饱食度 |
 | **涂蜡** | 是 / 否 | 蜜脾右键，锁死氧化度 |
 | **加工形态** | 面团 / 生胚 / 烤熟 / 切制 / 竖半砖 / 月饼块 / 台阶 / 楼梯 / … | 复刻铜块全家桶 |
@@ -58,8 +60,8 @@
 名字由轴组合**自动生成**：
 
 ```
-涂蜡的斑驳的切制莲蓉半月月饼
-氧化五仁竖半砖月饼
+涂蜡的斑驳的切制莲蓉半月铜月饼
+氧化五仁竖半砖铜月饼
 ```
 
 轴一多，名字长度就会指数增长 —— **放任它溢出 tooltip 宽度**，并给一个成就「名称溢出」。
@@ -82,6 +84,13 @@
                               右键吃（随时可吃）
                               Shift + 右键摆到地上，一格最多叠 4 块
 切石机（月饼 → 月饼）       →  6 种形态任选：形状 × 纹样
+```
+
+然后进入阶段二：
+
+```
+月饼 + 铜锭                 →  铜月饼（形态原样保留）
+切石机（铜月饼 → 铜月饼）   →  ✗ 没有这条 —— 见下方「为什么铜月饼不能切」
 ```
 
 ### 两个轴
@@ -109,9 +118,11 @@
 | 方块 + 物品 | `filled_mooncake_dough` | 带馅面饼 | Filled Mooncake Dough |
 | 物品 | `mooncake_mold` | 月饼模具 | Mooncake Mold |
 | 方块 + 物品 | `raw_mooncake` | 生月饼 | Raw Mooncake |
-| 方块 + 物品 | `mooncake` | 月饼 | Mooncake |
+| 方块 + 物品 | `mooncake` | 月饼（不会氧化） | Mooncake |
 | 方块 | `mooncake_dough_block` | 带馅面饼（`stamped` 状态） | Filled Mooncake Dough |
-| 方块 | `mooncake_block` | 月饼堆（`mooncakes` 1～4） | Mooncake |
+| 方块 | `mooncake_block` | 普通月饼堆（四格形态） | Mooncake |
+| 方块 + 物品 | `copper_mooncake` | 铜月饼（**会氧化**） | Copper Mooncake |
+| 方块 | `copper_mooncake_block` | 铜月饼堆（四格形态 + 氧化 + 涂蜡） | Copper Mooncake |
 
 ### 交互细节
 
@@ -160,6 +171,167 @@
 - 月饼 + 烟花 → 月饼形状的烟花（原案里有，留到阶段一之后）
 - 除可可豆以外的馅料
 
+## 阶段二：氧化与涂蜡（已实现）
+
+模组的正题终于来了 —— **月饼会坏**。
+
+但有一个前提，而且它是整个机制的核心：
+
+> **只有外面包了一圈铜的月饼才会氧化。**
+> 普通月饼就是面粉和馅，放多久都不会坏；包了铜才有东西可以生锈。
+
+所以阶段二先加了一个新物品：**铜月饼**（`copper_mooncake`），
+以及它对应的**铜月饼堆**（`copper_mooncake_block`）。
+
+```
+月饼 + 铜锭          →  铜月饼（形态原样保留，铜是"包"上去的）
+铜月饼 摆在地上      →  随机刻氧化：铜 → 斑驳 → 锈蚀 → 氧化（和铜块同一节奏）
+铜月饼 放在背包里    →  自己慢慢变质，默认两天一档
+蜜脾右键铜月饼堆     →  涂蜡，永久锁死氧化度（外观不变）
+蜜脾 + 铜月饼 合成   →  涂蜡的物品，同样锁死
+斧头右键铜月饼堆     →  有蜡先刮蜡，没蜡则氧化度退一档
+```
+
+**四个氧化等级全都可以摆在地上**，而且摆下去就是那一级的铜月饼堆 ——
+从创造栏拿一个「氧化的圆铜月饼」放下，方块直接就是氧化后的样子；
+挖掉一堆「涂蜡的锈蚀的」，掉出来的还是「涂蜡的锈蚀的」。
+物品和方块是同一套组件，来回搬不会丢信息。
+
+### 四个阶段
+
+| 阶段 | 名字 | 中文名 |
+|---|---|---|
+| `copper` | （无前缀） | 圆铜月饼 |
+| `tarnished` | Tarnished | 斑驳的圆铜月饼 |
+| `rusted` | Rusted | 锈蚀的圆铜月饼 |
+| `oxidized` | Oxidized | 氧化的圆铜月饼 |
+
+涂蜡再套一层前缀（`Waxed %s` / `涂蜡的%s`），于是名字可以长成
+**「涂蜡的锈蚀的圆铜月饼·花形纹」**。
+
+前缀是**两层可翻译文本套出来的**（`"锈蚀的%s"` 套在名字外面），
+不是给 4 氧化度 × 2 涂蜡 × 6 形态 = 48 种组合各写一条语言键。
+
+### 为什么是「两个方块」而不是「一个方块多两个属性」
+
+普通月饼堆 `mooncake_block` 只有四格形态（2401 种状态），
+铜月饼堆 `copper_mooncake_block` 才有氧化度和涂蜡（19208 种）。
+两者都是 2×2 四格、都能混装形态，但**不能混装到同一堆里** ——
+它们终究是两种东西。
+
+属性是**整块共用**的，普通月饼用不上氧化度和涂蜡。
+把两个方块合成一个的话，普通月饼堆要白背 4 × 2 倍的状态数（变成 48020），
+纯浪费。拆开之后总共 21609，比 48020 少一半还多。
+
+代价是两份方块状态文件和两套模型 —— 反正是脚本生成的，不值一提。
+
+### 为什么铜月饼不能再用切石机改纹样
+
+**原版的切石机配方不保留输入物品的组件**（`SingleItemRecipe#assemble` 拿到
+`ItemStackTemplate` 之后直接 `create()`，压根不看输入那摞东西）。
+给铜月饼加 6 条切石机配方，就会变成"锈蚀的铜月饼一切，氧化度没了" ——
+一个静默吞数据的陷阱，甚至能被当成"洗氧化度"的漏洞。
+
+所以纹样要在**包铜之前**用切石机切好，顺序是：
+
+```
+烤 → 切石机切纹样 → 包铜 → 等它氧化 / 涂蜡锁住
+```
+
+包铜用的 `crafting_transmute` 反而**会**保留组件，所以「包铜」这一步不会丢纹样。
+
+### 两条氧化线，两种机制
+
+| | 方块 | 物品 |
+|---|---|---|
+| 驱动 | `randomTick`（原版随机刻调度器） | `Item#inventoryTick` |
+| 频率 | 每随机刻 5.689% 概率（照抄铜块的 `ChangeOverTimeBlock`） | 默认 48000 刻（两天）一档 |
+| 范围 | 整堆共用 | 每一摞独立 |
+| 开关 | `blockOxidationEnabled` | `itemOxidationEnabled` + `itemOxidationTicksPerStage` |
+
+- **方块走 `randomTick`**，不是自己开 `tick()` —— 随机刻由原版调度，
+  我们不需要为它维护任何每刻遍历，符合"零每刻世界扫描"的红线。
+- **物品走 `inventoryTick`**，26.1 里这个钩子**只在服务端被调用**
+  （签名是 `inventoryTick(ItemStack, ServerLevel, Entity, EquipmentSlot)`），
+  所以连端都不用判。改动会由 `AbstractContainerMenu#broadcastChanges` 自动同步给客户端。
+- **物品只在玩家背包里变质**，塞进箱子就停 —— 箱子不 tick 物品，这是原版行为，不是 bug。
+
+### 为什么氧化和涂蜡是「整堆共用」，形态却是「一格一个」
+
+| 属性 | 粒度 | 取值 | 乘进去 |
+|---|---|---|---|
+| `nw` / `ne` / `sw` / `se` | 每格 | 7（空 + 6 形态） | 7⁴ = 2401 |
+| `oxidation` | 整块 | 4 | × 4 |
+| `waxed` | 整块 | 2 | × 2 |
+| | | **合计** | **19208** |
+
+氧化度**按格拆开会是 2401 × 4⁴ ≈ 61 万**，那才是真的会卡；
+现在 19208 和原版一些大型模组比还算克制。形态必须按格（玩家实测要求"混着摆"），
+氧化度和涂蜡按格没有任何玩法收益，所以按整块。
+
+副作用：**往一堆里加铜月饼时，氧化度和涂蜡状态必须和这一堆一致**，
+否则"塞进去一块新鲜的、拿出来变成锈的"这种亏谁都受不了 —— 不一致就返回 `PASS`。
+普通月饼堆没有这个限制（它压根没有这两个属性）。
+
+### 涂蜡为什么不改外观
+
+原版涂蜡铜块是**换一个方块**（走 `HoneycombItem.WAXABLES` 那张表和一份新材质）。
+我们这里涂蜡只是 `waxed=true` **一个方块状态位，不换方块、不换模型、不换贴图**：
+
+- 方块：在 `CopperMooncakeBlock#useItemOn` 里直接 `setValue(WAXED, true)`
+- 物品：`Item#getName` 里加前缀
+
+斧头刮蜡也一并在这里处理。这里有个**对我们有利的细节**：原版的交互顺序是
+先调**方块的** `useItemOn`，只有它没吃掉这次交互才轮到 `ItemStack#useOn`
+（`ServerPlayerGameMode` 里 `BlockState.useItemOn` 的调用在 `ItemStack.useOn` 之前）。
+所以我们返回 `SUCCESS` 就能把原版的 `HoneycombItem` / `AxeItem` 整个挡掉，
+不会双重处理，也不依赖 `WAXABLES` 那两张表。
+
+### 涂蜡 / 包铜用的是 `crafting_transmute`
+
+```json
+{
+  "type": "minecraft:crafting_transmute",
+  "input": "mooncake_overflow:copper_mooncake",
+  "material": "minecraft:honeycomb",
+  "result": { "id": "mooncake_overflow:copper_mooncake",
+              "components": { "mooncake_overflow:mooncake_waxed": true } }
+}
+```
+
+26.1 的 `TransmuteRecipe` 会把**输入物品的组件补丁原样搬给产物**
+（`ItemStackTemplate#apply(int, DataComponentPatch)`：先拿输入的补丁建栈，再盖模板自己的组件），
+所以形态和氧化度**原封不动**，只在上面加一个 `waxed=true`。包铜那一步用的是同一个配方类型：
+
+```json
+{ "input": "mooncake_overflow:mooncake",
+  "material": "minecraft:copper_ingot",
+  "result": { "id": "mooncake_overflow:copper_mooncake" } }
+```
+
+> 已知小瑕疵：`Ingredient` 在 26.1 里只是一个 `HolderSet<Item>`，**不支持组件谓词**，
+> 所以拿已经涂过蜡的铜月饼再合成一次也会匹配 —— 结果是白扔一块蜜脾。
+> 原版的染色配方（`#minecraft:bundles` + 同色染料）其实也是这个行为，
+> 想彻底堵住得写一个自定义 `CustomRecipe`，暂时不值这个复杂度。
+
+### 内容清单（阶段二新增）
+
+| 类型 | ID | 说明 |
+|---|---|---|
+| 方块 + 物品 | `copper_mooncake` | 铜月饼（会氧化的那一个） |
+| 方块 | `copper_mooncake_block` | 铜月饼堆，多 `oxidation` / `waxed` 两个属性 |
+| 组件 | `mooncake_oxidation` | 氧化度，`copper` 时不写 |
+| 组件 | `mooncake_waxed` | 涂蜡标记，`false` 时不写 |
+| 配置 | `blockOxidationEnabled` | 方块是否氧化 |
+| 配置 | `itemOxidationEnabled` | 物品是否变质 |
+| 配置 | `itemOxidationTicksPerStage` | 物品多少刻氧化一档 |
+| 配方 | `copper_mooncake` | `crafting_transmute`：月饼 + 铜锭 |
+| 配方 | `copper_mooncake_waxed` | `crafting_transmute`：铜月饼 + 蜜脾 |
+
+创造模式物品栏里额外放了**整条氧化链的样本**和**一个涂蜡样本**，
+不然想直接看效果得真等几个小时。
+**普通月饼只有铜阶段，没有氧化度** —— 它不会坏。
+
 ## 开发状态
 
 🟢 **月饼系统完成** —— 构建、资源、交互全部跑通，并经玩家在客户端逐项实测确认。
@@ -170,7 +342,10 @@
 - [x] **形态系统**：形状（圆/方）× 纹样（圆/方/花）= 6 种，切石机切换，组件承载
 - [x] **四格混装**：一个方块 2×2 四格各自独立，可以混着摆不同形态
 - [x] 食用（随时可吃）、Shift 摆放、取暖、掉落、中英文本地化
-- [ ] **氧化 + 涂蜡**（阶段二）：真正随时间氧化，蜜脾锁死
+- [x] **铜月饼**（阶段二）：月饼 + 铜锭，形态原样保留；**只有它才会氧化**
+- [x] **氧化**（阶段二）：方块走随机刻、物品走 `inventoryTick`，四个等级都能摆成月饼堆
+- [x] **涂蜡**（阶段二）：蜜脾右键方块 / 蜜脾合成物品，锁死氧化度且**不改外观**
+- [x] **刮除**（阶段二）：斧头右键方块，有蜡刮蜡、没蜡退一档氧化
 - [ ] **切开 / 拼合**（阶段三）：把一个圆月饼切成四份再拼成缝合怪
 - [ ] **月饼块全家桶**（阶段四）：数据包驱动自动生成形态矩阵
 - [ ] **月亮系统**（阶段五）：吃月亮
@@ -262,31 +437,38 @@ earlyWindowControl = false
 │   ├── some_ideas.md                     # 最初的构思与合成链
 │   └── absurd_ideas.md                   # 完整点子集 + 性能红线 + MVP 顺序
 ├── tools/
-│   ├── generate_textures.py              # 贴图程序化生成器
-│   ├── generate_block_models.py          # 月饼方块（1～4 块）模型生成器
+│   ├── generate_textures.py              # 贴图程序化生成器（含铜圈 / 氧化调色）
+│   ├── generate_block_models.py          # 两个月饼堆的模型 + multipart 生成器
 │   └── check_resources.py                # 资源一致性检查（改完资源务必跑一次）
 └── src/main/
     ├── java/org/cvrain/mooncakeoverflow/
-    │   ├── MooncakeOverflow.java         # 主类：注册、炼药锅交互、道歉信
-    │   ├── Config.java                   # 配置（目前只有 logApology）
+    │   ├── MooncakeOverflow.java          # 主类：注册、炼药锅交互、道歉信
+    │   ├── Config.java                    # 配置：道歉信 + 三个氧化开关
     │   ├── block/
-    │   │   ├── MooncakeDoughBlock.java   # 可压印的月饼面团方块
-    │   │   ├── PattyBlock.java           # 平放的饼（生月饼用）
-    │   │   └── MooncakeBlock.java        # 月饼堆（mooncakes 1～4 × pattern）
+    │   │   ├── MooncakeDoughBlock.java    # 可压印的月饼面团方块
+    │   │   ├── PattyBlock.java            # 平放的饼（生月饼用）
+    │   │   ├── PlainMooncakeBlock.java    # 普通月饼堆：只有四格形态
+    │   │   └── CopperMooncakeBlock.java   # 铜月饼堆：再加氧化 + 涂蜡
     │   ├── item/
-    │   │   └── MooncakeBlockItem.java    # Shift 右键放置 / 普通右键进食 / 名字随图案
+    │   │   ├── MooncakeBlockItem.java     # Shift 右键放置 / 右键进食 / 名字
+    │   │   ├── CopperMooncakeBlockItem.java # 铜月饼：名字前缀 + 背包变质 + 混装校验
+    │   │   └── ShapeBlockItem.java        # 生月饼物品，带形状字段
     │   ├── mooncake/
-    │   │   └── MooncakePattern.java      # 图案枚举：圆形 / 方形 / 花形
+    │   │   ├── MooncakeShape.java         # 轴一：形状（圆 / 方）
+    │   │   ├── MooncakePattern.java       # 轴二：纹样（圆 / 方 / 花）
+    │   │   ├── MooncakeKind.java          # 两轴的组合，6 种（+ 空格子 NONE）
+    │   │   ├── MooncakeOxidation.java     # 氧化度：铜 / 斑驳 / 锈蚀 / 氧化
+    │   │   └── MooncakeData.java          # 物品侧组件的读写（默认值不写组件）
     │   └── registry/
     │       ├── ModBlocks.java
     │       ├── ModItems.java
     │       ├── ModCreativeTabs.java
-    │       └── ModDataComponents.java    # mooncake_pattern 组件
+    │       └── ModDataComponents.java     # mooncake_kind / _oxidation / _waxed
     └── resources/
         ├── META-INF/mods.toml
         ├── pack.mcmeta
-        ├── assets/mooncake_overflow/     # items/ blockstates/ models/ textures/ lang/
-        └── data/mooncake_overflow/       # recipe/ loot_table/
+        ├── assets/mooncake_overflow/      # items/ blockstates/ models/ textures/ lang/
+        └── data/mooncake_overflow/        # recipe/ loot_table/
 ```
 
 ## 性能原则
@@ -297,11 +479,42 @@ earlyWindowControl = false
 
 1. **变体数据驱动** —— 不为每个变体写代码，也不给每个变体独立贴图（走调色板染色 + 程序化合成）
 2. **零每 tick 逻辑** —— 氧化复用原版铜的**随机刻**；月饼块**不用 BlockEntity**；
-   状态（馅料/象限/内容物）存在物品侧的 `DataComponent` 里；计时用 `Level#scheduleTick`
+   状态（形态/氧化度/涂蜡）存在物品侧的 `DataComponent` 里；计时用 `Level#scheduleTick`
 3. **程序化贴图只在资源重载时算一次**并缓存，运行时只查表
 
 **允许**：几百个变体、少量自定义实体、粒子效果、一次性高开销
 **不允许**：每 tick 扫描全世界、每帧动态生成模型/贴图、会无限增殖的方块或实体
+
+### 方块状态预算
+
+方块状态是**唯一**会随轴数量指数膨胀、而且绕不过去的东西。现在的账：
+
+| 方块 | 属性 | 粒度 | 取值数 | 状态数 |
+|---|---|---|---|---|
+| `mooncake_block` | `nw`/`ne`/`sw`/`se` | 每格 | 7（空 + 6 形态） | 7⁴ = **2401** |
+| `copper_mooncake_block` | 同上 + `oxidation` + `waxed` | 每格 / 整块 / 整块 | 7 / 4 / 2 | 7⁴ × 4 × 2 = **19208** |
+| | | | **合计** | **21609** |
+
+对比一下**没有**采用的方案：
+
+- 两个方块合成一个（普通月饼也背上氧化度和涂蜡）：`7⁴ × 4 × 2 × 2` 里外里变成 **48020**，纯浪费
+- 氧化度也按格拆开：`7⁴ × 4⁴ × 2 ≈ 39 万`，做实了就是玩家会来投诉的那种卡
+- 形态按整块共用（只能整堆一种形态）：`7 × 4 × 2 = 56`，但玩家明确要"各种月饼混着摆"，这是玩法需求
+
+所以规则是：**玩家能直接看见、且明确要求过的差异，才给一格一个属性**。
+
+涂蜡之所以不额外占模型，是因为它**不影响外观** ——
+两个方块的 24 + 96 条 multipart 规则里，一条都没提到 `waxed`，它纯粹是个行为开关位。
+
+> **实测**：新增铜月饼之后，资源重载里的模型烘焙阶段比之前慢了 ——
+> 旧代码 8～14 秒，新代码 20～23 秒（偶尔飙到 68 秒）。
+> MC 的模型烘焙是多线程的（`Worker-Main` 线程池），同一份代码的波动本身就很大，
+> 上面每组只有两三次采样，所以这个"2 倍"未必准。
+> 但状态数确实涨了 12%，慢一点是合理的。
+> 整轮启动（含烘焙）约 25 秒，属于**一次性的加载开销**，不影响游戏内帧率。
+>
+> 如果哪天觉得不能接受，最有效的一刀是把「每格独立形态」改成「形态整块共用」，
+> 状态数会从 21609 直接掉到两千以内 —— 代价是丢掉你要的混装。
 
 ## 资源与命名约定
 
@@ -316,6 +529,11 @@ earlyWindowControl = false
   ```
 
   脚本会同时输出一张 `/tmp/mooncake_textures_preview.png` 放大预览图方便人眼检查。
+
+  「包了一圈铜」是**画出来**的：饼面按 `COPPER_PATTERN_SCALE` 缩小纹样，
+  再套一圈 `copper_band()`（外圈受光 + 内圈压深 + 高光点）。
+  铜圈厚度 `BAND = 2` 像素、纹样 0.88 倍 —— 试过 0.72，八瓣花会挤成一团糊，0.88 是还能看清纹样的下限。
+
 - **26.1 API 备忘**（踩过的坑，别再用旧名字）：
   - `ResourceLocation` → **`Identifier`**
   - 物品 NBT → **`DataComponentType`**
@@ -349,6 +567,44 @@ earlyWindowControl = false
   - ⚠️ **多盒子拼一个形状时，顶面 UV 必须相对「这一块」归一化到 0..16**，
     不能直接用方块坐标。用方块坐标的话，7×7 的格子只会采到 16×16 贴图的左上角一小块，
     现象就是"每块只有四分之一个图案，四块拼起来才是完整的"（踩过）
+  - ⚠️ **`Item#inventoryTick` 的签名变了，而且只在服务端调用**：
+    `inventoryTick(ItemStack, ServerLevel, Entity, EquipmentSlot)`
+    （旧版是 `(ItemStack, Level, Entity, int, boolean)`）。`ItemStack#inventoryTick`
+    里直接 `if (level instanceof ServerLevel)` 才转发过去，所以写的时候不用判端
+  - `InteractionResult` 现在是**密封接口**，常量是 `SUCCESS` / `SUCCESS_SERVER` / `CONSUME` /
+    `FAIL` / `PASS` / `TRY_WITH_EMPTY_HAND`（`TRY_WITH_EMPTY_HAND` 那个是原版用来
+    "方块交互完了再走空手逻辑"的）
+  - `randomTick` / `useItemOn` / `useWithoutItem` 都在 **`BlockBehaviour`** 上，
+    不在 `Block` 里；`randomTick` 要生效必须给 `Properties#randomTicks()`
+  - ⚠️ **`Ingredient` 只是一个 `HolderSet<Item>`，不支持组件谓词**。
+    配方**原料**没法判断"有没有某个组件"，只有**产物**能带组件。
+    所以"物品 A + 蜜脾 → 同款物品 A 但多个组件"这种配方，用 `crafting_transmute`：
+    它会把输入的组件补丁原样搬到产物上，再盖模板自己的组件
+    （`ItemStackTemplate#apply(int, DataComponentPatch)`）
+  - ⚠️ **切石机（`StonecutterRecipe` / `SingleItemRecipe`）不保留输入物品的组件** ——
+    `assemble` 直接 `result.create()`，输入那摞东西压根不看。
+    所以"改外观但保留其他组件"的配方**不能**用切石机，只能用 `crafting_transmute`（合成台）。
+    给带组件的物品加切石机配方 = 静默吞数据的陷阱（踩过，见「为什么铜月饼不能再用切石机改纹样」）
+  - ⚠️ **原版先调方块的 `useItemOn`，再调 `ItemStack#useOn`**。
+    `ServerPlayerGameMode#useItemOn` 里 `BlockState.useItemOn` 在前，只有
+    `!result.consumesAction()` 时才继续走物品那一路。
+    想在方块上拦截某个物品（蜜脾、斧头）时这很有利：方块直接返回 `SUCCESS`
+    就能把原版的 `HoneycombItem` / `AxeItem` 逻辑整个挡掉
+  - **一个方块类可以按实例注册出属性集不同的多个方块** ——
+    `createBlockStateDefinition` 是实例方法，子类加属性、父类只加自己的那部分。
+    但注意它是**从父类构造器里被虚调用**的，所以父类的 `registerDefaultState`
+    只该设自己那部分属性；子类构造完成后要再 `registerDefaultState(defaultBlockState().setValue(...))`
+    把新属性补上。（`StateDefinition#any()` 返回的是**第一个完整状态**，
+    所有属性都已就位，所以中间态不会炸）
+  - 原版涂蜡是**换方块**（`HoneycombItem.WAXABLES` 那张 `Block → Block` 表）
+    + 斧头刮（`WAX_OFF_BY_BLOCK`）。如果涂蜡只是改一个状态位、不换方块，
+    这些表都帮不上忙，得在方块自己的 `useItemOn` 里处理
+  - 铜的随机刻氧化概率是 `ChangeOverTimeBlock#changeOverTime` 里的 `0.05688889F`，
+    直接照抄；这套接口（`getNext` / `getChanceModifier` / `getAge`）也可以自己实现
+  - `ItemStack#hurtAndBreak(int, LivingEntity, InteractionHand)` 是给"玩家用手里的东西"用的，
+    做斧头刮蜡这种交互时不用自己去算 `EquipmentSlot`
+  - ⚠️ **创造模式物品栏不允许重复条目**，同一个 `ItemStack` 放两次直接
+    `IllegalStateException: Accidentally adding the same item stack twice`（踩过两次）
 
 ### 改完资源记得跑检查
 

@@ -9,6 +9,10 @@
 方块是"2×2 四个格子、每格独立记形态"，所以模型拆成**单格模型**，
 再用 blockstate 的 `multipart` 按格拼起来（而不是列 7⁴ 种组合）。
 
+两种月饼堆：
+  mooncake_block          —— 普通月饼，不能吃铜锈（3 纹样 = 3 套贴图）
+  copper_mooncake_block   —— 包了一圈铜的月饼，会氧化（3 纹样 × 4 氧化度）
+
 ⚠️ 踩过的坑：顶面 UV 必须**相对这一块**归一化到 0..16。
    直接写方块坐标的话，7×7 的格子只会采到 16×16 贴图的左上角一小块，
    结果就是"每块月饼只有四分之一个图案，四块拼起来才是完整的"。
@@ -31,6 +35,9 @@ SHAPES = ("round", "square")
 PATTERNS = ("round", "square", "flower")
 # 形态 id = 形状_纹样，和 Java 那边 MooncakeKind 的序列化名一一对应
 KINDS = tuple(f"{s}_{p}" for s in SHAPES for p in PATTERNS)
+
+# 氧化四阶段：铜 → 斑驳 → 锈蚀 → 氧化
+OXIDATIONS = ("copper", "tarnished", "rusted", "oxidized")
 
 # 月饼方块：2×2 四个格子，每格 7×7
 CELLS = {"nw": (1, 1), "ne": (8, 1), "sw": (1, 8), "se": (8, 8)}
@@ -105,47 +112,86 @@ def write(rel: str, data: dict) -> None:
 
 
 def main() -> None:
-    # ---------- 月饼方块 ----------
-    # 单格模型：6 形态 × 4 位置 = 24 个
+    # ---------- 普通月饼堆 ----------
+    # 普通月饼**不氧化**（氧化是外面那圈铜的事），所以每个形态只要一套贴图。
     for kind in KINDS:
         pattern = kind.split("_", 1)[1]
-        top = f"mooncake_overflow:block/mooncake_top_{pattern}"
-        side = "mooncake_overflow:block/mooncake_side"
+        top = f"mooncake_overflow:block/mooncake_top_{pattern}_plain"
+        side = "mooncake_overflow:block/mooncake_side_plain"
+        square = kind.startswith("square")
         for cell, (x, z) in CELLS.items():
-            write(f"models/block/mooncake_piece_{kind}_{cell}",
-                  model(x, z, PIECE, HEIGHT, kind.startswith("square"), top, side))
+            write(f"models/block/mooncake_piece_{cell}_{kind}",
+                  model(x, z, PIECE, HEIGHT, square, top, side))
+        write(f"models/block/mooncake_item_{kind}",
+              model(CENTER, CENTER, CENTER_SIZE, HEIGHT, square, top, side))
 
-    # 单块居中模型（物品栏用）：6 个
+    # blockstate：multipart，每格 × 形态 一条规则 = 24 条
+    write("blockstates/mooncake_block", {"multipart": [
+        {"when": {cell: kind},
+         "apply": {"model": f"mooncake_overflow:block/mooncake_piece_{cell}_{kind}"}}
+        for cell in CELLS for kind in KINDS
+    ]})
+
+    # 物品模型：一层 select，按形态切换
+    write("items/mooncake", {"model": {
+        "type": "minecraft:select",
+        "property": "minecraft:component",
+        "component": "mooncake_overflow:mooncake_kind",
+        "cases": [
+            {"when": kind, "model": {"type": "minecraft:model",
+                                     "model": f"mooncake_overflow:block/mooncake_item_{kind}"}}
+            for kind in KINDS if kind != "round_round"
+        ],
+        "fallback": {"type": "minecraft:model",
+                     "model": "mooncake_overflow:block/mooncake_item_round_round"},
+    }})
+
+    # ---------- 铜月饼堆 ----------
+    # 「月饼外面包了一圈铜」才氧化，所以这一个方块比普通月饼堆多一个氧化度的轴。
     for kind in KINDS:
         pattern = kind.split("_", 1)[1]
-        write(f"models/block/mooncake_item_{kind}",
-              model(CENTER, CENTER, CENTER_SIZE, HEIGHT, kind.startswith("square"),
-                    f"mooncake_overflow:block/mooncake_top_{pattern}",
-                    "mooncake_overflow:block/mooncake_side"))
+        square = kind.startswith("square")
+        for ox in OXIDATIONS:
+            top = f"mooncake_overflow:block/copper_mooncake_top_{pattern}_{ox}"
+            side = f"mooncake_overflow:block/copper_mooncake_side_{ox}"
+            for cell, (x, z) in CELLS.items():
+                write(f"models/block/copper_mooncake_piece_{cell}_{kind}_{ox}",
+                      model(x, z, PIECE, HEIGHT, square, top, side))
+            write(f"models/block/copper_mooncake_item_{kind}_{ox}",
+                  model(CENTER, CENTER, CENTER_SIZE, HEIGHT, square, top, side))
 
-    write("blockstates/mooncake_block", {
-        "multipart": [
-            {"when": {cell: kind},
-             "apply": {"model": f"mooncake_overflow:block/mooncake_piece_{kind}_{cell}"}}
-            for cell in CELLS for kind in KINDS
-        ]
-    })
+    # blockstate：每格 × 形态 × 氧化度 一条规则 = 96 条
+    write("blockstates/copper_mooncake_block", {"multipart": [
+        {"when": {cell: kind, "oxidation": ox},
+         "apply": {"model": f"mooncake_overflow:block/copper_mooncake_piece_{cell}_{kind}_{ox}"}}
+        for cell in CELLS for kind in KINDS for ox in OXIDATIONS
+    ]})
 
-    write("items/mooncake", {
-        "model": {
+    # 物品模型：两层嵌套 select —— 外层按形态、内层按氧化度
+    def ox_select(kind: str) -> dict:
+        return {
             "type": "minecraft:select",
             "property": "minecraft:component",
-            "component": "mooncake_overflow:mooncake_kind",
+            "component": "mooncake_overflow:mooncake_oxidation",
             "cases": [
-                {"when": kind,
-                 "model": {"type": "minecraft:model",
-                           "model": f"mooncake_overflow:block/mooncake_item_{kind}"}}
-                for kind in KINDS if kind != "round_round"
+                {"when": ox, "model": {"type": "minecraft:model",
+                                       "model": f"mooncake_overflow:block/copper_mooncake_item_{kind}_{ox}"}}
+                for ox in OXIDATIONS if ox != "copper"
             ],
             "fallback": {"type": "minecraft:model",
-                         "model": "mooncake_overflow:block/mooncake_item_round_round"},
+                         "model": f"mooncake_overflow:block/copper_mooncake_item_{kind}_copper"},
         }
-    })
+
+    write("items/copper_mooncake", {"model": {
+        "type": "minecraft:select",
+        "property": "minecraft:component",
+        "component": "mooncake_overflow:mooncake_kind",
+        "cases": [
+            {"when": kind, "model": ox_select(kind)}
+            for kind in KINDS if kind != "round_round"
+        ],
+        "fallback": ox_select("round_round"),
+    }})
 
     # ---------- 面团方块：形状 × 是否压印 = 4 个模型 ----------
     top_raw = "mooncake_overflow:block/mooncake_dough_block"
