@@ -3,7 +3,6 @@ package org.cvrain.mooncakeoverflow.item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import org.cvrain.mooncakeoverflow.block.MooncakePileBlock;
 import org.cvrain.mooncakeoverflow.block.MooncakePileBlockEntity;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
@@ -84,7 +84,11 @@ public class MooncakeBlockItem extends BlockItem {
 
         ItemStack stack = context.getItemInHand();
         MooncakePileBlock.addPiece(level, pos, MooncakePileBlockEntity.Piece.of(stack));
-        serverLevel.playSound(null, pos, SoundEvents.SLIME_BLOCK_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+        // 和方块自己的 SoundType 保持一致（原版蛋糕是 WOOL）
+        // 注意别用 BlockItem#getPlaceSound —— 26.1 里它标了 @Deprecated
+        SoundType sound = level.getBlockState(pos).getSoundType();
+        serverLevel.playSound(null, pos, sound.getPlaceSound(), SoundSource.BLOCKS,
+                sound.getVolume(), sound.getPitch());
 
         if (!player.getAbilities().instabuild) {
             stack.shrink(1);

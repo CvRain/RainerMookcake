@@ -34,7 +34,7 @@ public final class ModBlocks {
                     .setId(BLOCKS.key("mooncake_dough_block"))
                     .mapColor(MapColor.TERRACOTTA_WHITE)
                     .strength(0.4F)
-                    .sound(SoundType.SLIME_BLOCK)
+                    .sound(SoundType.WOOL)
             ));
 
     public static final RegistryObject<Block> RAW_MOONCAKE = BLOCKS.register("raw_mooncake",
@@ -42,7 +42,7 @@ public final class ModBlocks {
                     .setId(BLOCKS.key("raw_mooncake"))
                     .mapColor(MapColor.TERRACOTTA_WHITE)
                     .strength(0.3F)
-                    .sound(SoundType.SLIME_BLOCK)
+                    .sound(SoundType.WOOL)
                     .noOcclusion()
             ));
 
@@ -58,7 +58,7 @@ public final class ModBlocks {
                     .setId(BLOCKS.key("mooncake_block"))
                     .mapColor(MapColor.SAND)
                     .strength(0.3F)
-                    .sound(SoundType.SLIME_BLOCK)
+                    .sound(SoundType.WOOL)
                     .randomTicks()
                     .noOcclusion()
             ));

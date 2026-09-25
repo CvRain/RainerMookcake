@@ -255,7 +255,13 @@ public class MooncakePileBlock extends Block implements EntityBlock {
             if (piece == null) {
                 return false;
             }
-            syncShapes(level, pos, pile);
+            // 拿空了就把方块也拆掉。留着的话会变成一个看不见又拆不掉的占位方块
+            // （形状是空的、方块又是 INVISIBLE，但那个位置已经不可放置 —— 幽灵方块）
+            if (pile.isEmpty()) {
+                level.removeBlock(pos, false);
+            } else {
+                syncShapes(level, pos, pile);
+            }
             ItemStack stack = piece.toStack();
             if (!player.getInventory().add(stack)) {
                 Block.popResource(serverLevel, pos, stack);
