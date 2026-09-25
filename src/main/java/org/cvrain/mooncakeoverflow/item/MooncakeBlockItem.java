@@ -18,6 +18,8 @@ import org.cvrain.mooncakeoverflow.block.MooncakePileBlockEntity;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
 
+import javax.annotation.Nullable;
+
 /**
  * 月饼堆的物品形态（普通月饼 / 铜月饼共用）。
  *
@@ -50,9 +52,20 @@ public class MooncakeBlockItem extends BlockItem {
         return stack.getItem() instanceof MooncakeBlockItem item && item.isCopperItem();
     }
 
-    /** 名字随形态变化，例如「圆月饼·方纹」。 */
+    /**
+     * 名字随形态变化，例如「圆月饼·方纹」。
+     *
+     * <p>五仁月饼更啰嗦：四个角各报一次名，串成
+     * 「五仁月饼（左上·圆月饼 + 右上·氧化的方铜月饼·花形纹 + …）」——
+     * 这正是这个模组的主题，**名称溢出**。
+     *
+     * <p>名字里那四个角是**切下来的位置**，不代表它摆下去占四格 ——
+     * 五仁月饼和普通月饼一样只占一格。
+     */
     @Override
     public Component getName(ItemStack stack) {
+        // 五仁月饼的名字走原版 custom_name 组件（见 CompositeMooncakeRecipe），
+        // 到不了这里；这里只管普通月饼的"形态名"。
         return Component.translatable(kindOf(stack).nameKey());
     }
 
@@ -83,6 +96,7 @@ public class MooncakeBlockItem extends BlockItem {
         }
 
         ItemStack stack = context.getItemInHand();
+        // 一个月饼就是一个月饼：只摆一格（五仁月饼也一样，它只是名字更长的月饼）
         MooncakePileBlock.addPiece(level, pos, MooncakePileBlockEntity.Piece.of(stack));
         // 和方块自己的 SoundType 保持一致（原版蛋糕是 WOOL）
         // 注意别用 BlockItem#getPlaceSound —— 26.1 里它标了 @Deprecated

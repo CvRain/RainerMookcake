@@ -1,0 +1,11 @@
+{
+  "type": "mooncake_overflow:component_stonecutting",
+  "ingredient": "mooncake_overflow:mooncake",
+  "result": {
+    "id": "mooncake_overflow:mooncake_quarter",
+    "count": 4,
+    "components": {
+      "mooncake_overflow:mooncake_corner": "nw"
+    }
+  }
+}

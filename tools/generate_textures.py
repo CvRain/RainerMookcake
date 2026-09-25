@@ -608,6 +608,20 @@ def block_mooncake_side_copper() -> Image.Image:
     return img
 
 
+def block_mooncake_composite_top() -> Image.Image:
+    """缝合月饼的顶面：四个象限各取一种氧化度拼起来，一眼就看得出是"拼的"。"""
+    img = new_image()
+    stages = ("copper", "tarnished", "rusted", "oxidized")
+    for i, stage in enumerate(stages):
+        src = oxidize(block_mooncake_top("round"), stage)
+        x0 = (i % 2) * (SIZE // 2)
+        y0 = (i // 2) * (SIZE // 2)
+        for y in range(SIZE // 2):
+            for x in range(SIZE // 2):
+                put(img, x0 + x, y0 + y, src.getpixel((x0 + x, y0 + y)))
+    return img
+
+
 # ---------------------------------------------------------------- 输出
 
 
@@ -638,6 +652,8 @@ def main() -> None:
     for pattern in ("round", "square", "flower"):
         outputs[f"block/mooncake_top_{pattern}_plain.png"] = block_mooncake_top(pattern)
     outputs["block/mooncake_side_plain.png"] = block_mooncake_side()
+    # 缝合月饼（四块拼回来那一块）的顶面
+    outputs["block/mooncake_composite_top.png"] = block_mooncake_composite_top()
 
     # 铜月饼：饼面外面包了一圈铜，所以是 3 纹样 × 4 氧化度
     for pattern in ("round", "square", "flower"):

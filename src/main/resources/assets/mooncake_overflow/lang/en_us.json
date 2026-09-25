@@ -27,5 +27,13 @@
   "mooncake_overflow.oxidation.rusted": "Rusted %s",
   "mooncake_overflow.oxidation.oxidized": "Oxidized %s",
   "mooncake_overflow.waxed": "Waxed %s",
-  "block.mooncake_overflow.mooncake_piece": "Mooncake Piece (technical)"
+  "block.mooncake_overflow.mooncake_piece": "Mooncake Piece (technical)",
+  "item.mooncake_overflow.mooncake_quarter": "Mooncake Quarter",
+  "mooncake_overflow.corner.nw": "Top Left",
+  "mooncake_overflow.corner.ne": "Top Right",
+  "mooncake_overflow.corner.sw": "Bottom Left",
+  "mooncake_overflow.corner.se": "Bottom Right",
+  "mooncake_overflow.quarter": "%s - %s",
+  "mooncake_overflow.quadrant": "%s - %s",
+  "mooncake_overflow.five_kernel": "Five-Kernel Mooncake (%s)"
 }

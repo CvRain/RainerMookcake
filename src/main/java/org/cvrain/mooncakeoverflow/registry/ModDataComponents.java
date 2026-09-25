@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.cvrain.mooncakeoverflow.MooncakeOverflow;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeOxidation;
+import org.cvrain.mooncakeoverflow.mooncake.PileCell;
 
 /**
  * 自定义物品组件。
@@ -62,4 +63,32 @@ public final class ModDataComponents {
                             .persistent(Codec.BOOL)
                             .networkSynchronized(ByteBufCodecs.BOOL)
                             .build());
+
+    /**
+     * 切开的那一片是月饼的哪一角。
+     *
+     * <p>切石机里四个角是**四个可选项**，所以它得记在物品上。
+     * 拼回一整块时按"在工作台里的摆放顺序"决定谁去哪一格，这个名字上的角更多是给玩家看的。
+     */
+    public static final RegistryObject<DataComponentType<PileCell>> MOONCAKE_CORNER =
+            DATA_COMPONENTS.register("mooncake_corner",
+                    () -> DataComponentType.<PileCell>builder()
+                            .persistent(PileCell.CODEC)
+                            .networkSynchronized(PileCell.STREAM_CODEC)
+                            .build());
+
+    /**
+     * 这一块是不是从**铜月饼**上切下来的。
+     *
+     * <p>为什么要单独一个标记：铜月饼的"铜阶段"本来就不写氧化度组件
+     * （那样才能和别的堆在一起），所以光看有没有氧化度分不出
+     * "普通月饼的四分之一"和"刚包好铜的四分之一"。
+     */
+    public static final RegistryObject<DataComponentType<Boolean>> MOONCAKE_COPPER =
+            DATA_COMPONENTS.register("mooncake_copper",
+                    () -> DataComponentType.<Boolean>builder()
+                            .persistent(Codec.BOOL)
+                            .networkSynchronized(ByteBufCodecs.BOOL)
+                            .build());
+
 }

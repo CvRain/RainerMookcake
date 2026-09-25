@@ -1,844 +1,1684 @@
 {
   "variants": {
-    "cell=none,kind=none,copper=false,oxidation=copper": {
+    "cell=none,kind=none,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=none,copper=false,oxidation=tarnished": {
+    "cell=none,kind=none,copper=false,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=none,copper=false,oxidation=rusted": {
+    "cell=none,kind=none,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=none,copper=false,oxidation=oxidized": {
+    "cell=none,kind=none,copper=false,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=none,copper=true,oxidation=copper": {
+    "cell=none,kind=none,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=none,copper=true,oxidation=tarnished": {
+    "cell=none,kind=none,copper=false,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=none,copper=true,oxidation=rusted": {
+    "cell=none,kind=none,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=none,copper=true,oxidation=oxidized": {
+    "cell=none,kind=none,copper=false,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=false,oxidation=copper": {
+    "cell=none,kind=none,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=false,oxidation=tarnished": {
+    "cell=none,kind=none,copper=true,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=false,oxidation=rusted": {
+    "cell=none,kind=none,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=false,oxidation=oxidized": {
+    "cell=none,kind=none,copper=true,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=true,oxidation=copper": {
+    "cell=none,kind=none,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=true,oxidation=tarnished": {
+    "cell=none,kind=none,copper=true,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=true,oxidation=rusted": {
+    "cell=none,kind=none,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_round,copper=true,oxidation=oxidized": {
+    "cell=none,kind=none,copper=true,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=false,oxidation=copper": {
+    "cell=none,kind=round_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=false,oxidation=tarnished": {
+    "cell=none,kind=round_round,copper=false,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=false,oxidation=rusted": {
+    "cell=none,kind=round_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=false,oxidation=oxidized": {
+    "cell=none,kind=round_round,copper=false,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=true,oxidation=copper": {
+    "cell=none,kind=round_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=true,oxidation=tarnished": {
+    "cell=none,kind=round_round,copper=false,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=true,oxidation=rusted": {
+    "cell=none,kind=round_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_square,copper=true,oxidation=oxidized": {
+    "cell=none,kind=round_round,copper=false,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=false,oxidation=copper": {
+    "cell=none,kind=round_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=false,oxidation=tarnished": {
+    "cell=none,kind=round_round,copper=true,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=false,oxidation=rusted": {
+    "cell=none,kind=round_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=false,oxidation=oxidized": {
+    "cell=none,kind=round_round,copper=true,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=true,oxidation=copper": {
+    "cell=none,kind=round_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=true,oxidation=tarnished": {
+    "cell=none,kind=round_round,copper=true,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=true,oxidation=rusted": {
+    "cell=none,kind=round_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=round_flower,copper=true,oxidation=oxidized": {
+    "cell=none,kind=round_round,copper=true,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=false,oxidation=copper": {
+    "cell=none,kind=round_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=false,oxidation=tarnished": {
+    "cell=none,kind=round_square,copper=false,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=false,oxidation=rusted": {
+    "cell=none,kind=round_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=false,oxidation=oxidized": {
+    "cell=none,kind=round_square,copper=false,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=true,oxidation=copper": {
+    "cell=none,kind=round_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=true,oxidation=tarnished": {
+    "cell=none,kind=round_square,copper=false,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=true,oxidation=rusted": {
+    "cell=none,kind=round_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_round,copper=true,oxidation=oxidized": {
+    "cell=none,kind=round_square,copper=false,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=false,oxidation=copper": {
+    "cell=none,kind=round_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=false,oxidation=tarnished": {
+    "cell=none,kind=round_square,copper=true,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=false,oxidation=rusted": {
+    "cell=none,kind=round_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=false,oxidation=oxidized": {
+    "cell=none,kind=round_square,copper=true,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=true,oxidation=copper": {
+    "cell=none,kind=round_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=true,oxidation=tarnished": {
+    "cell=none,kind=round_square,copper=true,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=true,oxidation=rusted": {
+    "cell=none,kind=round_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_square,copper=true,oxidation=oxidized": {
+    "cell=none,kind=round_square,copper=true,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=false,oxidation=copper": {
+    "cell=none,kind=round_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=false,oxidation=tarnished": {
+    "cell=none,kind=round_flower,copper=false,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=false,oxidation=rusted": {
+    "cell=none,kind=round_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=false,oxidation=oxidized": {
+    "cell=none,kind=round_flower,copper=false,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=true,oxidation=copper": {
+    "cell=none,kind=round_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=true,oxidation=tarnished": {
+    "cell=none,kind=round_flower,copper=false,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=true,oxidation=rusted": {
+    "cell=none,kind=round_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=none,kind=square_flower,copper=true,oxidation=oxidized": {
+    "cell=none,kind=round_flower,copper=false,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=false,oxidation=copper": {
+    "cell=none,kind=round_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=false,oxidation=tarnished": {
+    "cell=none,kind=round_flower,copper=true,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=false,oxidation=rusted": {
+    "cell=none,kind=round_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=false,oxidation=oxidized": {
+    "cell=none,kind=round_flower,copper=true,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=true,oxidation=copper": {
+    "cell=none,kind=round_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=true,oxidation=tarnished": {
+    "cell=none,kind=round_flower,copper=true,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=true,oxidation=rusted": {
+    "cell=none,kind=round_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=none,copper=true,oxidation=oxidized": {
+    "cell=none,kind=round_flower,copper=true,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=nw,kind=round_round,copper=false,oxidation=copper": {
+    "cell=none,kind=square_round,copper=false,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=false,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=false,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=false,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=none,kind=square_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=none,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=nw,kind=round_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_round"
     },
-    "cell=nw,kind=round_round,copper=false,oxidation=tarnished": {
+    "cell=nw,kind=round_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_round"
+    },
+    "cell=nw,kind=round_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_round"
     },
-    "cell=nw,kind=round_round,copper=false,oxidation=rusted": {
+    "cell=nw,kind=round_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_round"
+    },
+    "cell=nw,kind=round_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_round"
     },
-    "cell=nw,kind=round_round,copper=false,oxidation=oxidized": {
+    "cell=nw,kind=round_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_round"
+    },
+    "cell=nw,kind=round_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_round"
     },
-    "cell=nw,kind=round_round,copper=true,oxidation=copper": {
+    "cell=nw,kind=round_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_round"
+    },
+    "cell=nw,kind=round_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_round_copper"
     },
-    "cell=nw,kind=round_round,copper=true,oxidation=tarnished": {
+    "cell=nw,kind=round_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_round_copper"
+    },
+    "cell=nw,kind=round_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_round_tarnished"
     },
-    "cell=nw,kind=round_round,copper=true,oxidation=rusted": {
+    "cell=nw,kind=round_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_round_tarnished"
+    },
+    "cell=nw,kind=round_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_round_rusted"
     },
-    "cell=nw,kind=round_round,copper=true,oxidation=oxidized": {
+    "cell=nw,kind=round_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_round_rusted"
+    },
+    "cell=nw,kind=round_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_round_oxidized"
     },
-    "cell=nw,kind=round_square,copper=false,oxidation=copper": {
+    "cell=nw,kind=round_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_round_oxidized"
+    },
+    "cell=nw,kind=round_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_square"
     },
-    "cell=nw,kind=round_square,copper=false,oxidation=tarnished": {
+    "cell=nw,kind=round_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_square"
+    },
+    "cell=nw,kind=round_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_square"
     },
-    "cell=nw,kind=round_square,copper=false,oxidation=rusted": {
+    "cell=nw,kind=round_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_square"
+    },
+    "cell=nw,kind=round_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_square"
     },
-    "cell=nw,kind=round_square,copper=false,oxidation=oxidized": {
+    "cell=nw,kind=round_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_square"
+    },
+    "cell=nw,kind=round_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_square"
     },
-    "cell=nw,kind=round_square,copper=true,oxidation=copper": {
+    "cell=nw,kind=round_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_square"
+    },
+    "cell=nw,kind=round_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_square_copper"
     },
-    "cell=nw,kind=round_square,copper=true,oxidation=tarnished": {
+    "cell=nw,kind=round_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_square_copper"
+    },
+    "cell=nw,kind=round_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_square_tarnished"
     },
-    "cell=nw,kind=round_square,copper=true,oxidation=rusted": {
+    "cell=nw,kind=round_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_square_tarnished"
+    },
+    "cell=nw,kind=round_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_square_rusted"
     },
-    "cell=nw,kind=round_square,copper=true,oxidation=oxidized": {
+    "cell=nw,kind=round_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_square_rusted"
+    },
+    "cell=nw,kind=round_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_square_oxidized"
     },
-    "cell=nw,kind=round_flower,copper=false,oxidation=copper": {
+    "cell=nw,kind=round_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_square_oxidized"
+    },
+    "cell=nw,kind=round_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_flower"
     },
-    "cell=nw,kind=round_flower,copper=false,oxidation=tarnished": {
+    "cell=nw,kind=round_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_flower"
+    },
+    "cell=nw,kind=round_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_flower"
     },
-    "cell=nw,kind=round_flower,copper=false,oxidation=rusted": {
+    "cell=nw,kind=round_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_flower"
+    },
+    "cell=nw,kind=round_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_flower"
     },
-    "cell=nw,kind=round_flower,copper=false,oxidation=oxidized": {
+    "cell=nw,kind=round_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_flower"
+    },
+    "cell=nw,kind=round_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_round_flower"
     },
-    "cell=nw,kind=round_flower,copper=true,oxidation=copper": {
+    "cell=nw,kind=round_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_round_flower"
+    },
+    "cell=nw,kind=round_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_flower_copper"
     },
-    "cell=nw,kind=round_flower,copper=true,oxidation=tarnished": {
+    "cell=nw,kind=round_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_flower_copper"
+    },
+    "cell=nw,kind=round_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_flower_tarnished"
     },
-    "cell=nw,kind=round_flower,copper=true,oxidation=rusted": {
+    "cell=nw,kind=round_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_flower_tarnished"
+    },
+    "cell=nw,kind=round_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_flower_rusted"
     },
-    "cell=nw,kind=round_flower,copper=true,oxidation=oxidized": {
+    "cell=nw,kind=round_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_flower_rusted"
+    },
+    "cell=nw,kind=round_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_round_flower_oxidized"
     },
-    "cell=nw,kind=square_round,copper=false,oxidation=copper": {
+    "cell=nw,kind=round_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_round_flower_oxidized"
+    },
+    "cell=nw,kind=square_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_round"
     },
-    "cell=nw,kind=square_round,copper=false,oxidation=tarnished": {
+    "cell=nw,kind=square_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_round"
+    },
+    "cell=nw,kind=square_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_round"
     },
-    "cell=nw,kind=square_round,copper=false,oxidation=rusted": {
+    "cell=nw,kind=square_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_round"
+    },
+    "cell=nw,kind=square_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_round"
     },
-    "cell=nw,kind=square_round,copper=false,oxidation=oxidized": {
+    "cell=nw,kind=square_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_round"
+    },
+    "cell=nw,kind=square_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_round"
     },
-    "cell=nw,kind=square_round,copper=true,oxidation=copper": {
+    "cell=nw,kind=square_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_round"
+    },
+    "cell=nw,kind=square_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_round_copper"
     },
-    "cell=nw,kind=square_round,copper=true,oxidation=tarnished": {
+    "cell=nw,kind=square_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_round_copper"
+    },
+    "cell=nw,kind=square_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_round_tarnished"
     },
-    "cell=nw,kind=square_round,copper=true,oxidation=rusted": {
+    "cell=nw,kind=square_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_round_tarnished"
+    },
+    "cell=nw,kind=square_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_round_rusted"
     },
-    "cell=nw,kind=square_round,copper=true,oxidation=oxidized": {
+    "cell=nw,kind=square_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_round_rusted"
+    },
+    "cell=nw,kind=square_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_round_oxidized"
     },
-    "cell=nw,kind=square_square,copper=false,oxidation=copper": {
+    "cell=nw,kind=square_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_round_oxidized"
+    },
+    "cell=nw,kind=square_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_square"
     },
-    "cell=nw,kind=square_square,copper=false,oxidation=tarnished": {
+    "cell=nw,kind=square_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_square"
+    },
+    "cell=nw,kind=square_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_square"
     },
-    "cell=nw,kind=square_square,copper=false,oxidation=rusted": {
+    "cell=nw,kind=square_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_square"
+    },
+    "cell=nw,kind=square_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_square"
     },
-    "cell=nw,kind=square_square,copper=false,oxidation=oxidized": {
+    "cell=nw,kind=square_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_square"
+    },
+    "cell=nw,kind=square_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_square"
     },
-    "cell=nw,kind=square_square,copper=true,oxidation=copper": {
+    "cell=nw,kind=square_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_square"
+    },
+    "cell=nw,kind=square_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_square_copper"
     },
-    "cell=nw,kind=square_square,copper=true,oxidation=tarnished": {
+    "cell=nw,kind=square_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_square_copper"
+    },
+    "cell=nw,kind=square_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_square_tarnished"
     },
-    "cell=nw,kind=square_square,copper=true,oxidation=rusted": {
+    "cell=nw,kind=square_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_square_tarnished"
+    },
+    "cell=nw,kind=square_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_square_rusted"
     },
-    "cell=nw,kind=square_square,copper=true,oxidation=oxidized": {
+    "cell=nw,kind=square_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_square_rusted"
+    },
+    "cell=nw,kind=square_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_square_oxidized"
     },
-    "cell=nw,kind=square_flower,copper=false,oxidation=copper": {
+    "cell=nw,kind=square_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_square_oxidized"
+    },
+    "cell=nw,kind=square_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_flower"
     },
-    "cell=nw,kind=square_flower,copper=false,oxidation=tarnished": {
+    "cell=nw,kind=square_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_flower"
+    },
+    "cell=nw,kind=square_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_flower"
     },
-    "cell=nw,kind=square_flower,copper=false,oxidation=rusted": {
+    "cell=nw,kind=square_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_flower"
+    },
+    "cell=nw,kind=square_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_flower"
     },
-    "cell=nw,kind=square_flower,copper=false,oxidation=oxidized": {
+    "cell=nw,kind=square_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_flower"
+    },
+    "cell=nw,kind=square_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_nw_square_flower"
     },
-    "cell=nw,kind=square_flower,copper=true,oxidation=copper": {
+    "cell=nw,kind=square_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_nw_square_flower"
+    },
+    "cell=nw,kind=square_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_flower_copper"
     },
-    "cell=nw,kind=square_flower,copper=true,oxidation=tarnished": {
+    "cell=nw,kind=square_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_flower_copper"
+    },
+    "cell=nw,kind=square_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_flower_tarnished"
     },
-    "cell=nw,kind=square_flower,copper=true,oxidation=rusted": {
+    "cell=nw,kind=square_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_flower_tarnished"
+    },
+    "cell=nw,kind=square_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_flower_rusted"
     },
-    "cell=nw,kind=square_flower,copper=true,oxidation=oxidized": {
+    "cell=nw,kind=square_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_flower_rusted"
+    },
+    "cell=nw,kind=square_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_nw_square_flower_oxidized"
     },
-    "cell=ne,kind=none,copper=false,oxidation=copper": {
+    "cell=nw,kind=square_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_nw_square_flower_oxidized"
+    },
+    "cell=ne,kind=none,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=none,copper=false,oxidation=tarnished": {
+    "cell=ne,kind=none,copper=false,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=none,copper=false,oxidation=rusted": {
+    "cell=ne,kind=none,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=none,copper=false,oxidation=oxidized": {
+    "cell=ne,kind=none,copper=false,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=none,copper=true,oxidation=copper": {
+    "cell=ne,kind=none,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=none,copper=true,oxidation=tarnished": {
+    "cell=ne,kind=none,copper=false,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=none,copper=true,oxidation=rusted": {
+    "cell=ne,kind=none,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=none,copper=true,oxidation=oxidized": {
+    "cell=ne,kind=none,copper=false,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=ne,kind=round_round,copper=false,oxidation=copper": {
+    "cell=ne,kind=none,copper=true,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=none,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=none,copper=true,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=none,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=none,copper=true,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=none,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=none,copper=true,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=none,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=ne,kind=round_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_round"
     },
-    "cell=ne,kind=round_round,copper=false,oxidation=tarnished": {
+    "cell=ne,kind=round_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_round"
+    },
+    "cell=ne,kind=round_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_round"
     },
-    "cell=ne,kind=round_round,copper=false,oxidation=rusted": {
+    "cell=ne,kind=round_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_round"
+    },
+    "cell=ne,kind=round_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_round"
     },
-    "cell=ne,kind=round_round,copper=false,oxidation=oxidized": {
+    "cell=ne,kind=round_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_round"
+    },
+    "cell=ne,kind=round_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_round"
     },
-    "cell=ne,kind=round_round,copper=true,oxidation=copper": {
+    "cell=ne,kind=round_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_round"
+    },
+    "cell=ne,kind=round_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_round_copper"
     },
-    "cell=ne,kind=round_round,copper=true,oxidation=tarnished": {
+    "cell=ne,kind=round_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_round_copper"
+    },
+    "cell=ne,kind=round_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_round_tarnished"
     },
-    "cell=ne,kind=round_round,copper=true,oxidation=rusted": {
+    "cell=ne,kind=round_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_round_tarnished"
+    },
+    "cell=ne,kind=round_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_round_rusted"
     },
-    "cell=ne,kind=round_round,copper=true,oxidation=oxidized": {
+    "cell=ne,kind=round_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_round_rusted"
+    },
+    "cell=ne,kind=round_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_round_oxidized"
     },
-    "cell=ne,kind=round_square,copper=false,oxidation=copper": {
+    "cell=ne,kind=round_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_round_oxidized"
+    },
+    "cell=ne,kind=round_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_square"
     },
-    "cell=ne,kind=round_square,copper=false,oxidation=tarnished": {
+    "cell=ne,kind=round_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_square"
+    },
+    "cell=ne,kind=round_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_square"
     },
-    "cell=ne,kind=round_square,copper=false,oxidation=rusted": {
+    "cell=ne,kind=round_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_square"
+    },
+    "cell=ne,kind=round_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_square"
     },
-    "cell=ne,kind=round_square,copper=false,oxidation=oxidized": {
+    "cell=ne,kind=round_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_square"
+    },
+    "cell=ne,kind=round_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_square"
     },
-    "cell=ne,kind=round_square,copper=true,oxidation=copper": {
+    "cell=ne,kind=round_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_square"
+    },
+    "cell=ne,kind=round_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_square_copper"
     },
-    "cell=ne,kind=round_square,copper=true,oxidation=tarnished": {
+    "cell=ne,kind=round_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_square_copper"
+    },
+    "cell=ne,kind=round_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_square_tarnished"
     },
-    "cell=ne,kind=round_square,copper=true,oxidation=rusted": {
+    "cell=ne,kind=round_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_square_tarnished"
+    },
+    "cell=ne,kind=round_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_square_rusted"
     },
-    "cell=ne,kind=round_square,copper=true,oxidation=oxidized": {
+    "cell=ne,kind=round_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_square_rusted"
+    },
+    "cell=ne,kind=round_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_square_oxidized"
     },
-    "cell=ne,kind=round_flower,copper=false,oxidation=copper": {
+    "cell=ne,kind=round_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_square_oxidized"
+    },
+    "cell=ne,kind=round_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_flower"
     },
-    "cell=ne,kind=round_flower,copper=false,oxidation=tarnished": {
+    "cell=ne,kind=round_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_flower"
+    },
+    "cell=ne,kind=round_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_flower"
     },
-    "cell=ne,kind=round_flower,copper=false,oxidation=rusted": {
+    "cell=ne,kind=round_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_flower"
+    },
+    "cell=ne,kind=round_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_flower"
     },
-    "cell=ne,kind=round_flower,copper=false,oxidation=oxidized": {
+    "cell=ne,kind=round_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_flower"
+    },
+    "cell=ne,kind=round_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_round_flower"
     },
-    "cell=ne,kind=round_flower,copper=true,oxidation=copper": {
+    "cell=ne,kind=round_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_round_flower"
+    },
+    "cell=ne,kind=round_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_flower_copper"
     },
-    "cell=ne,kind=round_flower,copper=true,oxidation=tarnished": {
+    "cell=ne,kind=round_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_flower_copper"
+    },
+    "cell=ne,kind=round_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_flower_tarnished"
     },
-    "cell=ne,kind=round_flower,copper=true,oxidation=rusted": {
+    "cell=ne,kind=round_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_flower_tarnished"
+    },
+    "cell=ne,kind=round_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_flower_rusted"
     },
-    "cell=ne,kind=round_flower,copper=true,oxidation=oxidized": {
+    "cell=ne,kind=round_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_flower_rusted"
+    },
+    "cell=ne,kind=round_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_round_flower_oxidized"
     },
-    "cell=ne,kind=square_round,copper=false,oxidation=copper": {
+    "cell=ne,kind=round_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_round_flower_oxidized"
+    },
+    "cell=ne,kind=square_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_round"
     },
-    "cell=ne,kind=square_round,copper=false,oxidation=tarnished": {
+    "cell=ne,kind=square_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_round"
+    },
+    "cell=ne,kind=square_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_round"
     },
-    "cell=ne,kind=square_round,copper=false,oxidation=rusted": {
+    "cell=ne,kind=square_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_round"
+    },
+    "cell=ne,kind=square_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_round"
     },
-    "cell=ne,kind=square_round,copper=false,oxidation=oxidized": {
+    "cell=ne,kind=square_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_round"
+    },
+    "cell=ne,kind=square_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_round"
     },
-    "cell=ne,kind=square_round,copper=true,oxidation=copper": {
+    "cell=ne,kind=square_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_round"
+    },
+    "cell=ne,kind=square_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_round_copper"
     },
-    "cell=ne,kind=square_round,copper=true,oxidation=tarnished": {
+    "cell=ne,kind=square_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_round_copper"
+    },
+    "cell=ne,kind=square_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_round_tarnished"
     },
-    "cell=ne,kind=square_round,copper=true,oxidation=rusted": {
+    "cell=ne,kind=square_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_round_tarnished"
+    },
+    "cell=ne,kind=square_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_round_rusted"
     },
-    "cell=ne,kind=square_round,copper=true,oxidation=oxidized": {
+    "cell=ne,kind=square_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_round_rusted"
+    },
+    "cell=ne,kind=square_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_round_oxidized"
     },
-    "cell=ne,kind=square_square,copper=false,oxidation=copper": {
+    "cell=ne,kind=square_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_round_oxidized"
+    },
+    "cell=ne,kind=square_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_square"
     },
-    "cell=ne,kind=square_square,copper=false,oxidation=tarnished": {
+    "cell=ne,kind=square_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_square"
+    },
+    "cell=ne,kind=square_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_square"
     },
-    "cell=ne,kind=square_square,copper=false,oxidation=rusted": {
+    "cell=ne,kind=square_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_square"
+    },
+    "cell=ne,kind=square_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_square"
     },
-    "cell=ne,kind=square_square,copper=false,oxidation=oxidized": {
+    "cell=ne,kind=square_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_square"
+    },
+    "cell=ne,kind=square_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_square"
     },
-    "cell=ne,kind=square_square,copper=true,oxidation=copper": {
+    "cell=ne,kind=square_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_square"
+    },
+    "cell=ne,kind=square_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_square_copper"
     },
-    "cell=ne,kind=square_square,copper=true,oxidation=tarnished": {
+    "cell=ne,kind=square_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_square_copper"
+    },
+    "cell=ne,kind=square_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_square_tarnished"
     },
-    "cell=ne,kind=square_square,copper=true,oxidation=rusted": {
+    "cell=ne,kind=square_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_square_tarnished"
+    },
+    "cell=ne,kind=square_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_square_rusted"
     },
-    "cell=ne,kind=square_square,copper=true,oxidation=oxidized": {
+    "cell=ne,kind=square_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_square_rusted"
+    },
+    "cell=ne,kind=square_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_square_oxidized"
     },
-    "cell=ne,kind=square_flower,copper=false,oxidation=copper": {
+    "cell=ne,kind=square_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_square_oxidized"
+    },
+    "cell=ne,kind=square_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_flower"
     },
-    "cell=ne,kind=square_flower,copper=false,oxidation=tarnished": {
+    "cell=ne,kind=square_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_flower"
+    },
+    "cell=ne,kind=square_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_flower"
     },
-    "cell=ne,kind=square_flower,copper=false,oxidation=rusted": {
+    "cell=ne,kind=square_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_flower"
+    },
+    "cell=ne,kind=square_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_flower"
     },
-    "cell=ne,kind=square_flower,copper=false,oxidation=oxidized": {
+    "cell=ne,kind=square_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_flower"
+    },
+    "cell=ne,kind=square_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_ne_square_flower"
     },
-    "cell=ne,kind=square_flower,copper=true,oxidation=copper": {
+    "cell=ne,kind=square_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_ne_square_flower"
+    },
+    "cell=ne,kind=square_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_flower_copper"
     },
-    "cell=ne,kind=square_flower,copper=true,oxidation=tarnished": {
+    "cell=ne,kind=square_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_flower_copper"
+    },
+    "cell=ne,kind=square_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_flower_tarnished"
     },
-    "cell=ne,kind=square_flower,copper=true,oxidation=rusted": {
+    "cell=ne,kind=square_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_flower_tarnished"
+    },
+    "cell=ne,kind=square_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_flower_rusted"
     },
-    "cell=ne,kind=square_flower,copper=true,oxidation=oxidized": {
+    "cell=ne,kind=square_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_flower_rusted"
+    },
+    "cell=ne,kind=square_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_ne_square_flower_oxidized"
     },
-    "cell=sw,kind=none,copper=false,oxidation=copper": {
+    "cell=ne,kind=square_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_ne_square_flower_oxidized"
+    },
+    "cell=sw,kind=none,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=none,copper=false,oxidation=tarnished": {
+    "cell=sw,kind=none,copper=false,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=none,copper=false,oxidation=rusted": {
+    "cell=sw,kind=none,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=none,copper=false,oxidation=oxidized": {
+    "cell=sw,kind=none,copper=false,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=none,copper=true,oxidation=copper": {
+    "cell=sw,kind=none,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=none,copper=true,oxidation=tarnished": {
+    "cell=sw,kind=none,copper=false,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=none,copper=true,oxidation=rusted": {
+    "cell=sw,kind=none,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=none,copper=true,oxidation=oxidized": {
+    "cell=sw,kind=none,copper=false,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=sw,kind=round_round,copper=false,oxidation=copper": {
+    "cell=sw,kind=none,copper=true,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=none,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=none,copper=true,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=none,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=none,copper=true,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=none,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=none,copper=true,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=none,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=sw,kind=round_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_round"
     },
-    "cell=sw,kind=round_round,copper=false,oxidation=tarnished": {
+    "cell=sw,kind=round_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_round"
+    },
+    "cell=sw,kind=round_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_round"
     },
-    "cell=sw,kind=round_round,copper=false,oxidation=rusted": {
+    "cell=sw,kind=round_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_round"
+    },
+    "cell=sw,kind=round_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_round"
     },
-    "cell=sw,kind=round_round,copper=false,oxidation=oxidized": {
+    "cell=sw,kind=round_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_round"
+    },
+    "cell=sw,kind=round_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_round"
     },
-    "cell=sw,kind=round_round,copper=true,oxidation=copper": {
+    "cell=sw,kind=round_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_round"
+    },
+    "cell=sw,kind=round_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_round_copper"
     },
-    "cell=sw,kind=round_round,copper=true,oxidation=tarnished": {
+    "cell=sw,kind=round_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_round_copper"
+    },
+    "cell=sw,kind=round_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_round_tarnished"
     },
-    "cell=sw,kind=round_round,copper=true,oxidation=rusted": {
+    "cell=sw,kind=round_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_round_tarnished"
+    },
+    "cell=sw,kind=round_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_round_rusted"
     },
-    "cell=sw,kind=round_round,copper=true,oxidation=oxidized": {
+    "cell=sw,kind=round_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_round_rusted"
+    },
+    "cell=sw,kind=round_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_round_oxidized"
     },
-    "cell=sw,kind=round_square,copper=false,oxidation=copper": {
+    "cell=sw,kind=round_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_round_oxidized"
+    },
+    "cell=sw,kind=round_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_square"
     },
-    "cell=sw,kind=round_square,copper=false,oxidation=tarnished": {
+    "cell=sw,kind=round_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_square"
+    },
+    "cell=sw,kind=round_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_square"
     },
-    "cell=sw,kind=round_square,copper=false,oxidation=rusted": {
+    "cell=sw,kind=round_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_square"
+    },
+    "cell=sw,kind=round_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_square"
     },
-    "cell=sw,kind=round_square,copper=false,oxidation=oxidized": {
+    "cell=sw,kind=round_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_square"
+    },
+    "cell=sw,kind=round_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_square"
     },
-    "cell=sw,kind=round_square,copper=true,oxidation=copper": {
+    "cell=sw,kind=round_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_square"
+    },
+    "cell=sw,kind=round_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_square_copper"
     },
-    "cell=sw,kind=round_square,copper=true,oxidation=tarnished": {
+    "cell=sw,kind=round_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_square_copper"
+    },
+    "cell=sw,kind=round_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_square_tarnished"
     },
-    "cell=sw,kind=round_square,copper=true,oxidation=rusted": {
+    "cell=sw,kind=round_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_square_tarnished"
+    },
+    "cell=sw,kind=round_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_square_rusted"
     },
-    "cell=sw,kind=round_square,copper=true,oxidation=oxidized": {
+    "cell=sw,kind=round_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_square_rusted"
+    },
+    "cell=sw,kind=round_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_square_oxidized"
     },
-    "cell=sw,kind=round_flower,copper=false,oxidation=copper": {
+    "cell=sw,kind=round_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_square_oxidized"
+    },
+    "cell=sw,kind=round_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_flower"
     },
-    "cell=sw,kind=round_flower,copper=false,oxidation=tarnished": {
+    "cell=sw,kind=round_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_flower"
+    },
+    "cell=sw,kind=round_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_flower"
     },
-    "cell=sw,kind=round_flower,copper=false,oxidation=rusted": {
+    "cell=sw,kind=round_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_flower"
+    },
+    "cell=sw,kind=round_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_flower"
     },
-    "cell=sw,kind=round_flower,copper=false,oxidation=oxidized": {
+    "cell=sw,kind=round_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_flower"
+    },
+    "cell=sw,kind=round_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_round_flower"
     },
-    "cell=sw,kind=round_flower,copper=true,oxidation=copper": {
+    "cell=sw,kind=round_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_round_flower"
+    },
+    "cell=sw,kind=round_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_flower_copper"
     },
-    "cell=sw,kind=round_flower,copper=true,oxidation=tarnished": {
+    "cell=sw,kind=round_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_flower_copper"
+    },
+    "cell=sw,kind=round_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_flower_tarnished"
     },
-    "cell=sw,kind=round_flower,copper=true,oxidation=rusted": {
+    "cell=sw,kind=round_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_flower_tarnished"
+    },
+    "cell=sw,kind=round_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_flower_rusted"
     },
-    "cell=sw,kind=round_flower,copper=true,oxidation=oxidized": {
+    "cell=sw,kind=round_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_flower_rusted"
+    },
+    "cell=sw,kind=round_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_round_flower_oxidized"
     },
-    "cell=sw,kind=square_round,copper=false,oxidation=copper": {
+    "cell=sw,kind=round_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_round_flower_oxidized"
+    },
+    "cell=sw,kind=square_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_round"
     },
-    "cell=sw,kind=square_round,copper=false,oxidation=tarnished": {
+    "cell=sw,kind=square_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_round"
+    },
+    "cell=sw,kind=square_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_round"
     },
-    "cell=sw,kind=square_round,copper=false,oxidation=rusted": {
+    "cell=sw,kind=square_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_round"
+    },
+    "cell=sw,kind=square_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_round"
     },
-    "cell=sw,kind=square_round,copper=false,oxidation=oxidized": {
+    "cell=sw,kind=square_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_round"
+    },
+    "cell=sw,kind=square_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_round"
     },
-    "cell=sw,kind=square_round,copper=true,oxidation=copper": {
+    "cell=sw,kind=square_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_round"
+    },
+    "cell=sw,kind=square_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_round_copper"
     },
-    "cell=sw,kind=square_round,copper=true,oxidation=tarnished": {
+    "cell=sw,kind=square_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_round_copper"
+    },
+    "cell=sw,kind=square_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_round_tarnished"
     },
-    "cell=sw,kind=square_round,copper=true,oxidation=rusted": {
+    "cell=sw,kind=square_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_round_tarnished"
+    },
+    "cell=sw,kind=square_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_round_rusted"
     },
-    "cell=sw,kind=square_round,copper=true,oxidation=oxidized": {
+    "cell=sw,kind=square_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_round_rusted"
+    },
+    "cell=sw,kind=square_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_round_oxidized"
     },
-    "cell=sw,kind=square_square,copper=false,oxidation=copper": {
+    "cell=sw,kind=square_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_round_oxidized"
+    },
+    "cell=sw,kind=square_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_square"
     },
-    "cell=sw,kind=square_square,copper=false,oxidation=tarnished": {
+    "cell=sw,kind=square_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_square"
+    },
+    "cell=sw,kind=square_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_square"
     },
-    "cell=sw,kind=square_square,copper=false,oxidation=rusted": {
+    "cell=sw,kind=square_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_square"
+    },
+    "cell=sw,kind=square_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_square"
     },
-    "cell=sw,kind=square_square,copper=false,oxidation=oxidized": {
+    "cell=sw,kind=square_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_square"
+    },
+    "cell=sw,kind=square_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_square"
     },
-    "cell=sw,kind=square_square,copper=true,oxidation=copper": {
+    "cell=sw,kind=square_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_square"
+    },
+    "cell=sw,kind=square_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_square_copper"
     },
-    "cell=sw,kind=square_square,copper=true,oxidation=tarnished": {
+    "cell=sw,kind=square_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_square_copper"
+    },
+    "cell=sw,kind=square_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_square_tarnished"
     },
-    "cell=sw,kind=square_square,copper=true,oxidation=rusted": {
+    "cell=sw,kind=square_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_square_tarnished"
+    },
+    "cell=sw,kind=square_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_square_rusted"
     },
-    "cell=sw,kind=square_square,copper=true,oxidation=oxidized": {
+    "cell=sw,kind=square_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_square_rusted"
+    },
+    "cell=sw,kind=square_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_square_oxidized"
     },
-    "cell=sw,kind=square_flower,copper=false,oxidation=copper": {
+    "cell=sw,kind=square_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_square_oxidized"
+    },
+    "cell=sw,kind=square_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_flower"
     },
-    "cell=sw,kind=square_flower,copper=false,oxidation=tarnished": {
+    "cell=sw,kind=square_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_flower"
+    },
+    "cell=sw,kind=square_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_flower"
     },
-    "cell=sw,kind=square_flower,copper=false,oxidation=rusted": {
+    "cell=sw,kind=square_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_flower"
+    },
+    "cell=sw,kind=square_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_flower"
     },
-    "cell=sw,kind=square_flower,copper=false,oxidation=oxidized": {
+    "cell=sw,kind=square_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_flower"
+    },
+    "cell=sw,kind=square_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_sw_square_flower"
     },
-    "cell=sw,kind=square_flower,copper=true,oxidation=copper": {
+    "cell=sw,kind=square_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_sw_square_flower"
+    },
+    "cell=sw,kind=square_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_flower_copper"
     },
-    "cell=sw,kind=square_flower,copper=true,oxidation=tarnished": {
+    "cell=sw,kind=square_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_flower_copper"
+    },
+    "cell=sw,kind=square_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_flower_tarnished"
     },
-    "cell=sw,kind=square_flower,copper=true,oxidation=rusted": {
+    "cell=sw,kind=square_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_flower_tarnished"
+    },
+    "cell=sw,kind=square_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_flower_rusted"
     },
-    "cell=sw,kind=square_flower,copper=true,oxidation=oxidized": {
+    "cell=sw,kind=square_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_flower_rusted"
+    },
+    "cell=sw,kind=square_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_sw_square_flower_oxidized"
     },
-    "cell=se,kind=none,copper=false,oxidation=copper": {
+    "cell=sw,kind=square_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_sw_square_flower_oxidized"
+    },
+    "cell=se,kind=none,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=none,copper=false,oxidation=tarnished": {
+    "cell=se,kind=none,copper=false,oxidation=copper,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=none,copper=false,oxidation=rusted": {
+    "cell=se,kind=none,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=none,copper=false,oxidation=oxidized": {
+    "cell=se,kind=none,copper=false,oxidation=tarnished,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=none,copper=true,oxidation=copper": {
+    "cell=se,kind=none,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=none,copper=true,oxidation=tarnished": {
+    "cell=se,kind=none,copper=false,oxidation=rusted,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=none,copper=true,oxidation=rusted": {
+    "cell=se,kind=none,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=none,copper=true,oxidation=oxidized": {
+    "cell=se,kind=none,copper=false,oxidation=oxidized,partial=true": {
       "model": "mooncake_overflow:block/mooncake_pile_empty"
     },
-    "cell=se,kind=round_round,copper=false,oxidation=copper": {
+    "cell=se,kind=none,copper=true,oxidation=copper,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=none,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=none,copper=true,oxidation=tarnished,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=none,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=none,copper=true,oxidation=rusted,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=none,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=none,copper=true,oxidation=oxidized,partial=false": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=none,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_pile_empty"
+    },
+    "cell=se,kind=round_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_round"
     },
-    "cell=se,kind=round_round,copper=false,oxidation=tarnished": {
+    "cell=se,kind=round_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_round"
+    },
+    "cell=se,kind=round_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_round"
     },
-    "cell=se,kind=round_round,copper=false,oxidation=rusted": {
+    "cell=se,kind=round_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_round"
+    },
+    "cell=se,kind=round_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_round"
     },
-    "cell=se,kind=round_round,copper=false,oxidation=oxidized": {
+    "cell=se,kind=round_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_round"
+    },
+    "cell=se,kind=round_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_round"
     },
-    "cell=se,kind=round_round,copper=true,oxidation=copper": {
+    "cell=se,kind=round_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_round"
+    },
+    "cell=se,kind=round_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_round_copper"
     },
-    "cell=se,kind=round_round,copper=true,oxidation=tarnished": {
+    "cell=se,kind=round_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_round_copper"
+    },
+    "cell=se,kind=round_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_round_tarnished"
     },
-    "cell=se,kind=round_round,copper=true,oxidation=rusted": {
+    "cell=se,kind=round_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_round_tarnished"
+    },
+    "cell=se,kind=round_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_round_rusted"
     },
-    "cell=se,kind=round_round,copper=true,oxidation=oxidized": {
+    "cell=se,kind=round_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_round_rusted"
+    },
+    "cell=se,kind=round_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_round_oxidized"
     },
-    "cell=se,kind=round_square,copper=false,oxidation=copper": {
+    "cell=se,kind=round_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_round_oxidized"
+    },
+    "cell=se,kind=round_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_square"
     },
-    "cell=se,kind=round_square,copper=false,oxidation=tarnished": {
+    "cell=se,kind=round_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_square"
+    },
+    "cell=se,kind=round_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_square"
     },
-    "cell=se,kind=round_square,copper=false,oxidation=rusted": {
+    "cell=se,kind=round_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_square"
+    },
+    "cell=se,kind=round_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_square"
     },
-    "cell=se,kind=round_square,copper=false,oxidation=oxidized": {
+    "cell=se,kind=round_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_square"
+    },
+    "cell=se,kind=round_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_square"
     },
-    "cell=se,kind=round_square,copper=true,oxidation=copper": {
+    "cell=se,kind=round_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_square"
+    },
+    "cell=se,kind=round_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_square_copper"
     },
-    "cell=se,kind=round_square,copper=true,oxidation=tarnished": {
+    "cell=se,kind=round_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_square_copper"
+    },
+    "cell=se,kind=round_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_square_tarnished"
     },
-    "cell=se,kind=round_square,copper=true,oxidation=rusted": {
+    "cell=se,kind=round_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_square_tarnished"
+    },
+    "cell=se,kind=round_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_square_rusted"
     },
-    "cell=se,kind=round_square,copper=true,oxidation=oxidized": {
+    "cell=se,kind=round_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_square_rusted"
+    },
+    "cell=se,kind=round_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_square_oxidized"
     },
-    "cell=se,kind=round_flower,copper=false,oxidation=copper": {
+    "cell=se,kind=round_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_square_oxidized"
+    },
+    "cell=se,kind=round_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_flower"
     },
-    "cell=se,kind=round_flower,copper=false,oxidation=tarnished": {
+    "cell=se,kind=round_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_flower"
+    },
+    "cell=se,kind=round_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_flower"
     },
-    "cell=se,kind=round_flower,copper=false,oxidation=rusted": {
+    "cell=se,kind=round_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_flower"
+    },
+    "cell=se,kind=round_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_flower"
     },
-    "cell=se,kind=round_flower,copper=false,oxidation=oxidized": {
+    "cell=se,kind=round_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_flower"
+    },
+    "cell=se,kind=round_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_round_flower"
     },
-    "cell=se,kind=round_flower,copper=true,oxidation=copper": {
+    "cell=se,kind=round_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_round_flower"
+    },
+    "cell=se,kind=round_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_flower_copper"
     },
-    "cell=se,kind=round_flower,copper=true,oxidation=tarnished": {
+    "cell=se,kind=round_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_flower_copper"
+    },
+    "cell=se,kind=round_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_flower_tarnished"
     },
-    "cell=se,kind=round_flower,copper=true,oxidation=rusted": {
+    "cell=se,kind=round_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_flower_tarnished"
+    },
+    "cell=se,kind=round_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_flower_rusted"
     },
-    "cell=se,kind=round_flower,copper=true,oxidation=oxidized": {
+    "cell=se,kind=round_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_flower_rusted"
+    },
+    "cell=se,kind=round_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_round_flower_oxidized"
     },
-    "cell=se,kind=square_round,copper=false,oxidation=copper": {
+    "cell=se,kind=round_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_round_flower_oxidized"
+    },
+    "cell=se,kind=square_round,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_round"
     },
-    "cell=se,kind=square_round,copper=false,oxidation=tarnished": {
+    "cell=se,kind=square_round,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_round"
+    },
+    "cell=se,kind=square_round,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_round"
     },
-    "cell=se,kind=square_round,copper=false,oxidation=rusted": {
+    "cell=se,kind=square_round,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_round"
+    },
+    "cell=se,kind=square_round,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_round"
     },
-    "cell=se,kind=square_round,copper=false,oxidation=oxidized": {
+    "cell=se,kind=square_round,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_round"
+    },
+    "cell=se,kind=square_round,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_round"
     },
-    "cell=se,kind=square_round,copper=true,oxidation=copper": {
+    "cell=se,kind=square_round,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_round"
+    },
+    "cell=se,kind=square_round,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_round_copper"
     },
-    "cell=se,kind=square_round,copper=true,oxidation=tarnished": {
+    "cell=se,kind=square_round,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_round_copper"
+    },
+    "cell=se,kind=square_round,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_round_tarnished"
     },
-    "cell=se,kind=square_round,copper=true,oxidation=rusted": {
+    "cell=se,kind=square_round,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_round_tarnished"
+    },
+    "cell=se,kind=square_round,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_round_rusted"
     },
-    "cell=se,kind=square_round,copper=true,oxidation=oxidized": {
+    "cell=se,kind=square_round,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_round_rusted"
+    },
+    "cell=se,kind=square_round,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_round_oxidized"
     },
-    "cell=se,kind=square_square,copper=false,oxidation=copper": {
+    "cell=se,kind=square_round,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_round_oxidized"
+    },
+    "cell=se,kind=square_square,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_square"
     },
-    "cell=se,kind=square_square,copper=false,oxidation=tarnished": {
+    "cell=se,kind=square_square,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_square"
+    },
+    "cell=se,kind=square_square,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_square"
     },
-    "cell=se,kind=square_square,copper=false,oxidation=rusted": {
+    "cell=se,kind=square_square,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_square"
+    },
+    "cell=se,kind=square_square,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_square"
     },
-    "cell=se,kind=square_square,copper=false,oxidation=oxidized": {
+    "cell=se,kind=square_square,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_square"
+    },
+    "cell=se,kind=square_square,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_square"
     },
-    "cell=se,kind=square_square,copper=true,oxidation=copper": {
+    "cell=se,kind=square_square,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_square"
+    },
+    "cell=se,kind=square_square,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_square_copper"
     },
-    "cell=se,kind=square_square,copper=true,oxidation=tarnished": {
+    "cell=se,kind=square_square,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_square_copper"
+    },
+    "cell=se,kind=square_square,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_square_tarnished"
     },
-    "cell=se,kind=square_square,copper=true,oxidation=rusted": {
+    "cell=se,kind=square_square,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_square_tarnished"
+    },
+    "cell=se,kind=square_square,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_square_rusted"
     },
-    "cell=se,kind=square_square,copper=true,oxidation=oxidized": {
+    "cell=se,kind=square_square,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_square_rusted"
+    },
+    "cell=se,kind=square_square,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_square_oxidized"
     },
-    "cell=se,kind=square_flower,copper=false,oxidation=copper": {
+    "cell=se,kind=square_square,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_square_oxidized"
+    },
+    "cell=se,kind=square_flower,copper=false,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_flower"
     },
-    "cell=se,kind=square_flower,copper=false,oxidation=tarnished": {
+    "cell=se,kind=square_flower,copper=false,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_flower"
+    },
+    "cell=se,kind=square_flower,copper=false,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_flower"
     },
-    "cell=se,kind=square_flower,copper=false,oxidation=rusted": {
+    "cell=se,kind=square_flower,copper=false,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_flower"
+    },
+    "cell=se,kind=square_flower,copper=false,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_flower"
     },
-    "cell=se,kind=square_flower,copper=false,oxidation=oxidized": {
+    "cell=se,kind=square_flower,copper=false,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_flower"
+    },
+    "cell=se,kind=square_flower,copper=false,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/mooncake_piece_se_square_flower"
     },
-    "cell=se,kind=square_flower,copper=true,oxidation=copper": {
+    "cell=se,kind=square_flower,copper=false,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/mooncake_piece_part_se_square_flower"
+    },
+    "cell=se,kind=square_flower,copper=true,oxidation=copper,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_flower_copper"
     },
-    "cell=se,kind=square_flower,copper=true,oxidation=tarnished": {
+    "cell=se,kind=square_flower,copper=true,oxidation=copper,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_flower_copper"
+    },
+    "cell=se,kind=square_flower,copper=true,oxidation=tarnished,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_flower_tarnished"
     },
-    "cell=se,kind=square_flower,copper=true,oxidation=rusted": {
+    "cell=se,kind=square_flower,copper=true,oxidation=tarnished,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_flower_tarnished"
+    },
+    "cell=se,kind=square_flower,copper=true,oxidation=rusted,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_flower_rusted"
     },
-    "cell=se,kind=square_flower,copper=true,oxidation=oxidized": {
+    "cell=se,kind=square_flower,copper=true,oxidation=rusted,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_flower_rusted"
+    },
+    "cell=se,kind=square_flower,copper=true,oxidation=oxidized,partial=false": {
       "model": "mooncake_overflow:block/copper_mooncake_piece_se_square_flower_oxidized"
+    },
+    "cell=se,kind=square_flower,copper=true,oxidation=oxidized,partial=true": {
+      "model": "mooncake_overflow:block/copper_mooncake_piece_part_se_square_flower_oxidized"
     }
   }
 }

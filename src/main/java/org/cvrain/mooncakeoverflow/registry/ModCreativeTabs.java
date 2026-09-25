@@ -12,6 +12,8 @@ import org.cvrain.mooncakeoverflow.MooncakeOverflow;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeOxidation;
+import org.cvrain.mooncakeoverflow.mooncake.PileCell;
+import org.cvrain.mooncakeoverflow.item.MooncakeQuarterItem;
 
 /**
  * 创造模式物品栏。
@@ -68,6 +70,13 @@ public final class ModCreativeTabs {
                         }
                         output.accept(MooncakeData.copper(
                                 MooncakeKind.DEFAULT, MooncakeOxidation.DEFAULT, true));
+
+                        // 四分之一块：真等切石机切也行，这里给两个样本方便直接试
+                        output.accept(MooncakeQuarterItem.cutFrom(
+                                MooncakeData.plain(MooncakeKind.ROUND_FLOWER), PileCell.NW));
+                        output.accept(MooncakeQuarterItem.cutFrom(
+                                MooncakeData.copper(MooncakeKind.SQUARE_SQUARE,
+                                        MooncakeOxidation.RUSTED, false), PileCell.SE));
                     })
                     .build());
 }

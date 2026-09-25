@@ -264,6 +264,11 @@ def main() -> int:
     # 氧化前缀（MooncakeOxidation#prefixKey）和涂蜡前缀（MooncakeBlockItem#getName）
     live |= {f"{MODID}.oxidation.{k}" for k in ("tarnished", "rusted", "oxidized")}
     live.add(f"{MODID}.waxed")
+    # 四分之一块的角名和名字模板（MooncakeQuarterItem / PileCell#translationKey）
+    live |= {f"{MODID}.corner.{c}" for c in ("nw", "ne", "sw", "se")}
+    live.add(f"{MODID}.quarter")
+    live.add(f"{MODID}.five_kernel")
+    live.add(f"{MODID}.quadrant")
     for lang in ("en_us", "zh_cn"):
         path = os.path.join(ASSETS, "lang", f"{lang}.json")
         if not os.path.exists(path):

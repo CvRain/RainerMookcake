@@ -3,6 +3,9 @@ package org.cvrain.mooncakeoverflow.block;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -14,6 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.cvrain.mooncakeoverflow.item.MooncakeBlockItem;
+import org.cvrain.mooncakeoverflow.item.MooncakeQuarterItem;
+import org.cvrain.mooncakeoverflow.registry.ModItems;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeData;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeKind;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeOxidation;
@@ -24,6 +29,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 月饼堆的内容 —— 四格各放了一块什么月饼。
@@ -38,6 +44,9 @@ import java.util.List;
  * 以前它们必须是两个方块，因为方块状态没法表达"这格是铜的那格不是"。
  */
 public class MooncakePileBlockEntity extends BlockEntity {
+    private static final org.slf4j.Logger LOGGER =
+            com.mojang.logging.LogUtils.getLogger();
+
     public static final int SLOTS = PileCell.SLOTS.length;
 
     /**
@@ -47,37 +56,78 @@ public class MooncakePileBlockEntity extends BlockEntity {
      * @param copper    是不是铜月饼（只有铜月饼会氧化）
      * @param oxidation 氧化度，{@code copper} 为 false 时没有意义
      * @param waxed     涂没涂蜡
+     * @param name      **自定义名**（目前只有五仁月饼有）。放在地上再拿起来要原样还回去，
+     *                  否则"摆下去再挖出来"就是掉属性 —— 名字正是五仁月饼的全部特征。
+     *                  <p>类型是 {@code Optional} 而不是可空的 {@code Component}：
+     *                  DFU 的 {@code RecordCodecBuilder} 解码每个字段时会做
+     *                  {@code Optional.of(值)}，**字段的 codec 一旦解码出 null 就 NPE**，
+     *                  而且是在处理同步包时炸 —— 客户端直接崩。
+     * @param partial   **这一格是不是某个月饼的一角**（切开的片、五仁月饼的四格都是）。
+     *                  它决定渲染时画"整个纹样"还是"只画它那一象限的纹样"——
+     *                  四个 partial 拼起来才是一个完整的月饼，而不是四个小月饼摆成 2×2。
+     *                  掉落时也靠它区分：partial 掉"片"，否则掉"整块"
      */
-    public record Piece(MooncakeKind kind, boolean copper, MooncakeOxidation oxidation, boolean waxed) {
-        public static final Piece EMPTY =
-                new Piece(MooncakeKind.NONE, false, MooncakeOxidation.DEFAULT, false);
+    public record Piece(MooncakeKind kind, boolean copper, MooncakeOxidation oxidation, boolean waxed,
+                        Optional<Component> name, boolean partial) {
+        public static final Piece EMPTY = new Piece(
+                MooncakeKind.NONE, false, MooncakeOxidation.DEFAULT, false, Optional.empty(), false);
 
         public static final Codec<Piece> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 MooncakeKind.CODEC.fieldOf("kind").forGetter(Piece::kind),
                 Codec.BOOL.optionalFieldOf("copper", false).forGetter(Piece::copper),
                 MooncakeOxidation.CODEC.optionalFieldOf("oxidation", MooncakeOxidation.DEFAULT)
                         .forGetter(Piece::oxidation),
-                Codec.BOOL.optionalFieldOf("waxed", false).forGetter(Piece::waxed)
+                Codec.BOOL.optionalFieldOf("waxed", false).forGetter(Piece::waxed),
+                ComponentSerialization.CODEC.optionalFieldOf("name").forGetter(Piece::name),
+                Codec.BOOL.optionalFieldOf("partial", false).forGetter(Piece::partial)
         ).apply(instance, Piece::new));
 
         public boolean isEmpty() {
             return kind.isEmpty();
         }
 
-        /** 从物品读出一格内容（形态 / 是铜还是普通 / 氧化度 / 涂蜡）。 */
+        /**
+         * 从一整块月饼读出这一格内容。
+         *
+         * <p>整块月饼摆下去是**完整的一块**（{@code partial = false}），
+         * 跟切开的片不一样 —— 四块整月饼摆一起是"四块月饼"，
+         * 四个片摆一起才是"一个月饼"。
+         */
         public static Piece of(ItemStack stack) {
             return new Piece(
                     MooncakeData.kindOf(stack),
                     MooncakeBlockItem.isCopper(stack),
                     MooncakeData.oxidationOf(stack),
-                    MooncakeData.isWaxed(stack));
+                    MooncakeData.isWaxed(stack),
+                    Optional.ofNullable(stack.get(DataComponents.CUSTOM_NAME)),
+                    false);
         }
 
-        /** 还原成物品（形态 / 氧化度 / 涂蜡都跟着走）。 */
-        public ItemStack toStack() {
-            return copper
+        /**
+         * 还原成物品。
+         *
+         * <p>{@code partial} 的那一格还原成**一片**（四分之一块），
+         * 否则还原成**一整块**。这条很重要：不然"1 块月饼 → 切 4 片 → 摆进堆里 → 挖掉"
+         * 会掉出 4 块整月饼，凭空翻四倍。
+         *
+         * @param cell 这一格在哪 —— 片的名字里要带"左上/右上/左下/右下"
+         */
+        public ItemStack toStack(PileCell cell) {
+            if (partial) {
+                ItemStack slice = new ItemStack(ModItems.MOONCAKE_QUARTER.get());
+                MooncakeData.setKind(slice, kind);
+                MooncakeQuarterItem.setCopper(slice, copper);
+                MooncakeData.setOxidation(slice, oxidation);
+                MooncakeData.setWaxed(slice, waxed);
+                MooncakeQuarterItem.setCorner(slice, cell);
+                return slice;
+            }
+            ItemStack whole = copper
                     ? MooncakeData.copper(kind, oxidation, waxed)
                     : MooncakeData.plain(kind);
+            // 五仁月饼的全部特征就是这个自定义名，摆下去再挖出来必须原样还回去
+            name.ifPresent(custom -> whole.set(DataComponents.CUSTOM_NAME, custom));
+            return whole;
         }
     }
 
@@ -144,6 +194,17 @@ public class MooncakePileBlockEntity extends BlockEntity {
         return list;
     }
 
+    /** 挖掉这一堆应该掉什么（每格还原成整块或片）。 */
+    public List<ItemStack> drops() {
+        List<ItemStack> drops = new ArrayList<>(SLOTS);
+        for (int i = 0; i < SLOTS; i++) {
+            if (!pieces[i].isEmpty()) {
+                drops.add(pieces[i].toStack(PileCell.byIndex(i)));
+            }
+        }
+        return drops;
+    }
+
     // ------------------------------------------------------------------ 写
 
     /** 塞一块进去；满了返回 false。 */
@@ -186,7 +247,7 @@ public class MooncakePileBlockEntity extends BlockEntity {
             if (!piece.copper() || piece.waxed() == waxed) {
                 continue;
             }
-            pieces[i] = new Piece(piece.kind(), true, piece.oxidation(), waxed);
+            pieces[i] = new Piece(piece.kind(), true, piece.oxidation(), waxed, piece.name(), piece.partial());
             changed = true;
         }
         if (changed) {
@@ -223,7 +284,7 @@ public class MooncakePileBlockEntity extends BlockEntity {
             if (!piece.copper() || piece.waxed() || piece.oxidation().isFullyOxidized()) {
                 continue;
             }
-            pieces[i] = new Piece(piece.kind(), true, piece.oxidation().next(), false);
+            pieces[i] = new Piece(piece.kind(), true, piece.oxidation().next(), false, piece.name(), piece.partial());
             changed = true;
         }
         if (changed) {
@@ -239,7 +300,7 @@ public class MooncakePileBlockEntity extends BlockEntity {
             if (!piece.copper() || piece.oxidation() == MooncakeOxidation.DEFAULT) {
                 continue;
             }
-            pieces[i] = new Piece(piece.kind(), true, piece.oxidation().previous(), piece.waxed());
+            pieces[i] = new Piece(piece.kind(), true, piece.oxidation().previous(), piece.waxed(), piece.name(), piece.partial());
             changed = true;
         }
         if (changed) {
@@ -271,7 +332,19 @@ public class MooncakePileBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
-        List<Piece> loaded = input.read("pieces", Piece.CODEC.listOf()).orElse(List.of());
+
+        List<Piece> loaded;
+        try {
+            loaded = input.read("pieces", Piece.CODEC.listOf()).orElse(List.of());
+        } catch (RuntimeException e) {
+            // 坏数据不能把游戏带走。区分一下两条路径：
+            //   服务端从区块读 —— 原版会 catch 并记一条 ERROR
+            //   客户端收到同步包 —— 原版**不 catch**，直接"Failed to handle packet"然后崩
+            // 所以这里自己兜住，最差就是这一堆月饼变成空的。
+            LOGGER.error("月饼堆的内容读不出来，当作空的处理", e);
+            loaded = List.of();
+        }
+
         for (int i = 0; i < SLOTS; i++) {
             pieces[i] = i < loaded.size() ? loaded.get(i) : Piece.EMPTY;
         }

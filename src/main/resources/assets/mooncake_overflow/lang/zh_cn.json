@@ -27,5 +27,13 @@
   "mooncake_overflow.oxidation.rusted": "锈蚀的%s",
   "mooncake_overflow.oxidation.oxidized": "氧化的%s",
   "mooncake_overflow.waxed": "涂蜡的%s",
-  "block.mooncake_overflow.mooncake_piece": "月饼部件（技术方块）"
+  "block.mooncake_overflow.mooncake_piece": "月饼部件（技术方块）",
+  "item.mooncake_overflow.mooncake_quarter": "四分之一块月饼",
+  "mooncake_overflow.corner.nw": "左上",
+  "mooncake_overflow.corner.ne": "右上",
+  "mooncake_overflow.corner.sw": "左下",
+  "mooncake_overflow.corner.se": "右下",
+  "mooncake_overflow.quarter": "%s·%s",
+  "mooncake_overflow.quadrant": "%s·%s",
+  "mooncake_overflow.five_kernel": "五仁月饼（%s）"
 }

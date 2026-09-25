@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.cvrain.mooncakeoverflow.MooncakeOverflow;
 import org.cvrain.mooncakeoverflow.item.CopperMooncakeBlockItem;
 import org.cvrain.mooncakeoverflow.item.MooncakeBlockItem;
+import org.cvrain.mooncakeoverflow.item.MooncakeQuarterItem;
 import org.cvrain.mooncakeoverflow.item.ShapeBlockItem;
 import org.cvrain.mooncakeoverflow.mooncake.MooncakeShape;
 
@@ -122,4 +123,20 @@ public final class ModItems {
                                     .saturationModifier(0.8F)
                                     .alwaysEdible()
                                     .build())));
+
+    /**
+     * 四分之一块月饼：切石机从一整块月饼上切下来的一角。
+     *
+     * <p>它同时是：
+     * <ul>
+     *   <li>**弩的弹药**（继承 {@code ArrowItem} + 挂在 {@code minecraft:arrows} 标签上）</li>
+     *   <li>能**塞进月饼堆**的一格（对着月饼堆右键）</li>
+     *   <li>四块（左上/右上/左下/右下）能在工作台里**拼回一整块**</li>
+     * </ul>
+     *
+     * <p>刻意做成**不能吃**：右键被"塞进月饼堆"占了，而且四分之一块也不够塞牙缝。
+     */
+    public static final RegistryObject<Item> MOONCAKE_QUARTER = ITEMS.register("mooncake_quarter",
+            () -> new MooncakeQuarterItem(new Item.Properties()
+                    .setId(ITEMS.key("mooncake_quarter"))));
 }

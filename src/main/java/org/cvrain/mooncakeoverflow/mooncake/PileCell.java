@@ -1,6 +1,9 @@
 package org.cvrain.mooncakeoverflow.mooncake;
 
 import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 
 /**
@@ -27,6 +30,9 @@ public enum PileCell implements StringRepresentable {
 
     public static final Codec<PileCell> CODEC = StringRepresentable.fromEnum(PileCell::values);
 
+    public static final StreamCodec<ByteBuf, PileCell> STREAM_CODEC =
+            ByteBufCodecs.VAR_INT.map(id -> PileCell.values()[id], PileCell::ordinal);
+
     private final String name;
 
     PileCell(String name) {
@@ -45,5 +51,10 @@ public enum PileCell implements StringRepresentable {
 
     public static PileCell byIndex(int index) {
         return index >= 0 && index < SLOTS.length ? SLOTS[index] : NONE;
+    }
+
+    /** 语言键：{@code mooncake_overflow.corner.<name>}（左上 / 右上 / 左下 / 右下）。 */
+    public String translationKey() {
+        return "mooncake_overflow.corner." + this.name;
     }
 }

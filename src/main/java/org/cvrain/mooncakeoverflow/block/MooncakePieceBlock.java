@@ -42,6 +42,13 @@ public class MooncakePieceBlock extends Block {
     /** 铜月饼的氧化度。 */
     public static final EnumProperty<MooncakeOxidation> OXIDATION =
             EnumProperty.create("oxidation", MooncakeOxidation.class);
+    /**
+     * 这一格画"整个纹样"还是"只画它那一象限"。
+     *
+     * <p>整块月饼摆下去显示完整纹样（四块摆一起 = 四块月饼）；
+     * 切开的片 / 五仁月饼的一角只显示自己那一象限（四块拼起来 = 一个完整月饼）。
+     */
+    public static final BooleanProperty PARTIAL = BooleanProperty.create("partial");
 
     public MooncakePieceBlock(Properties properties) {
         super(properties);
@@ -49,7 +56,8 @@ public class MooncakePieceBlock extends Block {
                 .setValue(CELL, PileCell.NONE)
                 .setValue(KIND, MooncakeKind.NONE)
                 .setValue(COPPER, Boolean.FALSE)
-                .setValue(OXIDATION, MooncakeOxidation.DEFAULT));
+                .setValue(OXIDATION, MooncakeOxidation.DEFAULT)
+                .setValue(PARTIAL, Boolean.FALSE));
     }
 
     @Override
@@ -59,7 +67,7 @@ public class MooncakePieceBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(CELL, KIND, COPPER, OXIDATION);
+        builder.add(CELL, KIND, COPPER, OXIDATION, PARTIAL);
     }
 
     @Override
@@ -69,11 +77,12 @@ public class MooncakePieceBlock extends Block {
 
     /** 渲染器用：造一个能查到「第 cell 格、这个形态、这个氧化度」的模型的状态。 */
     public BlockState modelStateFor(PileCell cell, MooncakeKind kind, boolean copper,
-                                    MooncakeOxidation oxidation) {
+                                    MooncakeOxidation oxidation, boolean partial) {
         return defaultBlockState()
                 .setValue(CELL, cell)
                 .setValue(KIND, kind)
                 .setValue(COPPER, copper)
-                .setValue(OXIDATION, copper ? oxidation : MooncakeOxidation.DEFAULT);
+                .setValue(OXIDATION, copper ? oxidation : MooncakeOxidation.DEFAULT)
+                .setValue(PARTIAL, partial);
     }
 }

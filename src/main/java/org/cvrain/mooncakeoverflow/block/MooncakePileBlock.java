@@ -143,6 +143,7 @@ public class MooncakePileBlock extends Block implements EntityBlock {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state,
                             @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
+        // 一个月饼就占一格（五仁月饼也一样）
         addPiece(level, pos, MooncakePileBlockEntity.Piece.of(stack));
     }
 
@@ -262,7 +263,7 @@ public class MooncakePileBlock extends Block implements EntityBlock {
             } else {
                 syncShapes(level, pos, pile);
             }
-            ItemStack stack = piece.toStack();
+            ItemStack stack = piece.toStack(PileCell.byIndex(index));
             if (!player.getInventory().add(stack)) {
                 Block.popResource(serverLevel, pos, stack);
             }
@@ -308,13 +309,10 @@ public class MooncakePileBlock extends Block implements EntityBlock {
      */
     @Override
     protected List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
-        List<ItemStack> drops = new ArrayList<>(4);
         if (params.getOptionalParameter(LootContextParams.BLOCK_ENTITY)
                 instanceof MooncakePileBlockEntity pile) {
-            for (MooncakePileBlockEntity.Piece piece : pile.contents()) {
-                drops.add(piece.toStack());
-            }
+            return pile.drops();
         }
-        return drops;
+        return List.of();
     }
 }

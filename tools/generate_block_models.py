@@ -65,12 +65,22 @@ def boxes(x0: int, z0: int, size: int, square: bool) -> list[tuple[int, int, int
 
 def element(px0: int, pz0: int, px1: int, pz1: int,
             x0: int, z0: int, x1: int, z1: int,
-            height: int, top: str, side: str) -> dict:
-    """(px0,pz0)-(px1,pz1) 是这一块的包围盒，用来把顶面 UV 归一化到 0..16。"""
-    sx = 16.0 / (px1 - px0)
-    sz = 16.0 / (pz1 - pz0)
-    uv = [round((x0 - px0) * sx, 2), round((z0 - pz0) * sz, 2),
-          round((x1 - px0) * sx, 2), round((z1 - pz0) * sz, 2)]
+            height: int, top: str, side: str, partial: bool = False) -> dict:
+    """(px0,pz0)-(px1,pz1) 是这一块的包围盒，用来算顶面 UV。
+
+    两种模式：
+      partial=False（默认，整块月饼）：把这一块的包围盒归一化到 0..16，
+          所以每一格都显示**完整的纹样** —— 四块整月饼摆一起就是四块月饼。
+      partial=True（切开的片 / 五仁月饼的一角）：直接用方块坐标当 UV，
+          于是每一格只显示**它那一象限的纹样** —— 四片拼起来才是一个完整的月饼。
+    """
+    if partial:
+        uv = [x0, z0, x1, z1]
+    else:
+        sx = 16.0 / (px1 - px0)
+        sz = 16.0 / (pz1 - pz0)
+        uv = [round((x0 - px0) * sx, 2), round((z0 - pz0) * sz, 2),
+              round((x1 - px0) * sx, 2), round((z1 - pz0) * sz, 2)]
 
     faces = {}
     for face in FACES:
@@ -85,7 +95,7 @@ def element(px0: int, pz0: int, px1: int, pz1: int,
 
 
 def model(x0: int, z0: int, size: int, height: int, square: bool,
-          top: str, side: str) -> dict:
+          top: str, side: str, partial: bool = False) -> dict:
     return {
         "parent": "minecraft:block/block",
         "textures": {
@@ -94,7 +104,7 @@ def model(x0: int, z0: int, size: int, height: int, square: bool,
             "side": side,
         },
         "elements": [
-            element(x0, z0, x0 + size, z0 + size, *b, height, "#top", "#side")
+            element(x0, z0, x0 + size, z0 + size, *b, height, "#top", "#side", partial)
             for b in boxes(x0, z0, size, square)
         ],
     }
@@ -122,6 +132,9 @@ def main() -> None:
         for cell, (x, z) in CELLS.items():
             write(f"models/block/mooncake_piece_{cell}_{kind}",
                   model(x, z, PIECE, HEIGHT, square, top, side))
+            # partial 版：只画这一象限的纹样（切开的片 / 五仁月饼的一角）
+            write(f"models/block/mooncake_piece_part_{cell}_{kind}",
+                  model(x, z, PIECE, HEIGHT, square, top, side, partial=True))
         write(f"models/block/mooncake_item_{kind}",
               model(CENTER, CENTER, CENTER_SIZE, HEIGHT, square, top, side))
 
@@ -148,14 +161,18 @@ def main() -> None:
         for kind in ("none", *KINDS):
             for copper in (False, True):
                 for ox in OXIDATIONS:
-                    key = f"cell={cell},kind={kind},copper={str(copper).lower()},oxidation={ox}"
-                    if cell == "none" or kind == "none":
-                        target = "mooncake_overflow:block/mooncake_pile_empty"
-                    elif copper:
-                        target = f"mooncake_overflow:block/copper_mooncake_piece_{cell}_{kind}_{ox}"
-                    else:
-                        target = f"mooncake_overflow:block/mooncake_piece_{cell}_{kind}"
-                    piece_variants[key] = {"model": target}
+                    for partial in (False, True):
+                        key = (f"cell={cell},kind={kind},copper={str(copper).lower()},"
+                               f"oxidation={ox},partial={str(partial).lower()}")
+                        if cell == "none" or kind == "none":
+                            target = "mooncake_overflow:block/mooncake_pile_empty"
+                        elif copper:
+                            mid = "copper_mooncake_piece_part" if partial else "copper_mooncake_piece"
+                            target = f"mooncake_overflow:block/{mid}_{cell}_{kind}_{ox}"
+                        else:
+                            mid = "mooncake_piece_part" if partial else "mooncake_piece"
+                            target = f"mooncake_overflow:block/{mid}_{cell}_{kind}"
+                        piece_variants[key] = {"model": target}
     write("blockstates/mooncake_piece", {"variants": piece_variants})
 
     # 空模型：月饼堆的 81 个状态都指向它（方块是 INVISIBLE，本来也不画）
@@ -163,8 +180,32 @@ def main() -> None:
         "textures": {"particle": "mooncake_overflow:block/mooncake_top_round_plain"},
     })
 
-    # 物品模型：一层 select，按形态切换
+    # 缝合月饼的模型：四个象限各取一种氧化度的顶面拼起来，一眼就看得出是"拼的"
+    write("models/block/mooncake_composite", {
+        "parent": "minecraft:block/block",
+        "textures": {"particle": "mooncake_overflow:block/mooncake_top_round_plain",
+                     "top": "mooncake_overflow:block/mooncake_composite_top",
+                     "side": "mooncake_overflow:block/copper_mooncake_side_tarnished"},
+        "elements": [
+            {"from": [4, 0, 4], "to": [12, 3, 12],
+             "faces": {
+                 "up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+                 "down": {"uv": [0, 0, 16, 16], "texture": "#side", "cullface": "down"},
+                 "north": {"uv": [0, 0, 16, 16], "texture": "#side"},
+                 "south": {"uv": [0, 0, 16, 16], "texture": "#side"},
+                 "west": {"uv": [0, 0, 16, 16], "texture": "#side"},
+                 "east": {"uv": [0, 0, 16, 16], "texture": "#side"}}}
+        ],
+    })
+
+    # 物品模型：一层 select，按形态切换（缝合月饼用 has_component 条件整个换掉）
     write("items/mooncake", {"model": {
+        "type": "minecraft:condition",
+        "property": "minecraft:has_component",
+        "component": "minecraft:custom_name",
+        "on_true": {"type": "minecraft:model",
+                    "model": "mooncake_overflow:block/mooncake_composite"},
+        "on_false": {
         "type": "minecraft:select",
         "property": "minecraft:component",
         "component": "mooncake_overflow:mooncake_kind",
@@ -173,8 +214,9 @@ def main() -> None:
                                      "model": f"mooncake_overflow:block/mooncake_item_{kind}"}}
             for kind in KINDS if kind != "round_round"
         ],
-        "fallback": {"type": "minecraft:model",
-                     "model": "mooncake_overflow:block/mooncake_item_round_round"},
+            "fallback": {"type": "minecraft:model",
+                         "model": "mooncake_overflow:block/mooncake_item_round_round"},
+        },
     }})
 
     # ---------- 铜月饼的模型 ----------
@@ -188,6 +230,8 @@ def main() -> None:
             for cell, (x, z) in CELLS.items():
                 write(f"models/block/copper_mooncake_piece_{cell}_{kind}_{ox}",
                       model(x, z, PIECE, HEIGHT, square, top, side))
+                write(f"models/block/copper_mooncake_piece_part_{cell}_{kind}_{ox}",
+                      model(x, z, PIECE, HEIGHT, square, top, side, partial=True))
             write(f"models/block/copper_mooncake_item_{kind}_{ox}",
                   model(CENTER, CENTER, CENTER_SIZE, HEIGHT, square, top, side))
 
@@ -215,6 +259,58 @@ def main() -> None:
             for kind in KINDS if kind != "round_round"
         ],
         "fallback": ox_select("round_round"),
+    }})
+
+    # ---------- 四分之一块月饼（物品形态） ----------
+    # 切石机切下来的一角。纹理跟着形态和氧化度走；**不区分是哪一角** ——
+    # 四角在物品栏里长得一样，靠名字区分（模型是同一个"四分之一"小方块）。
+    for kind in KINDS:
+        pattern = kind.split("_", 1)[1]
+        square = kind.startswith("square")
+        write(f"models/block/mooncake_quarter_{kind}",
+              model(CENTER, CENTER, PIECE, 4, square,
+                    f"mooncake_overflow:block/mooncake_top_{pattern}_plain",
+                    "mooncake_overflow:block/mooncake_side_plain"))
+        for ox in OXIDATIONS:
+            write(f"models/block/copper_mooncake_quarter_{kind}_{ox}",
+                  model(CENTER, CENTER, PIECE, 4, square,
+                        f"mooncake_overflow:block/copper_mooncake_top_{pattern}_{ox}",
+                        f"mooncake_overflow:block/copper_mooncake_side_{ox}"))
+
+    # 物品模型：三层 select —— 形态 → 是不是铜的 → 氧化度
+    def quarter_ox_select(kind: str) -> dict:
+        return {
+            "type": "minecraft:select",
+            "property": "minecraft:component",
+            "component": "mooncake_overflow:mooncake_oxidation",
+            "cases": [
+                {"when": ox, "model": {"type": "minecraft:model",
+                                       "model": f"mooncake_overflow:block/copper_mooncake_quarter_{kind}_{ox}"}}
+                for ox in OXIDATIONS if ox != "copper"
+            ],
+            "fallback": {"type": "minecraft:model",
+                         "model": f"mooncake_overflow:block/copper_mooncake_quarter_{kind}_copper"},
+        }
+
+    def quarter_copper_select(kind: str) -> dict:
+        return {
+            "type": "minecraft:select",
+            "property": "minecraft:component",
+            "component": "mooncake_overflow:mooncake_copper",
+            "cases": [{"when": True, "model": quarter_ox_select(kind)}],
+            "fallback": {"type": "minecraft:model",
+                         "model": f"mooncake_overflow:block/mooncake_quarter_{kind}"},
+        }
+
+    write("items/mooncake_quarter", {"model": {
+        "type": "minecraft:select",
+        "property": "minecraft:component",
+        "component": "mooncake_overflow:mooncake_kind",
+        "cases": [
+            {"when": kind, "model": quarter_copper_select(kind)}
+            for kind in KINDS if kind != "round_round"
+        ],
+        "fallback": quarter_copper_select("round_round"),
     }})
 
     # ---------- 面团方块：形状 × 是否压印 = 4 个模型 ----------

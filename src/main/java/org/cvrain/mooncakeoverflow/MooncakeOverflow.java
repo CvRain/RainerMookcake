@@ -25,6 +25,7 @@ import org.cvrain.mooncakeoverflow.registry.ModBlocks;
 import org.cvrain.mooncakeoverflow.registry.ModCreativeTabs;
 import org.cvrain.mooncakeoverflow.registry.ModDataComponents;
 import org.cvrain.mooncakeoverflow.registry.ModItems;
+import org.cvrain.mooncakeoverflow.registry.ModRecipes;
 import org.slf4j.Logger;
 
 /**
@@ -65,6 +66,7 @@ public final class MooncakeOverflow {
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modBusGroup);
         ModDataComponents.DATA_COMPONENTS.register(modBusGroup);
         ModBlockEntities.BLOCK_ENTITIES.register(modBusGroup);
+        ModRecipes.RECIPE_SERIALIZERS.register(modBusGroup);
 
         // 炼药锅交互（原版的 CauldronInteraction.Dispatcher.put 是包私有的，所以走事件）
         PlayerInteractEvent.RightClickBlock.BUS.addListener(MooncakeOverflow::onRightClickBlock);

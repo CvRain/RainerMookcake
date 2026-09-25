@@ -65,7 +65,7 @@ public class MooncakePileRenderer
                 continue;
             }
             BlockState model = table.modelStateFor(
-                    cell, piece.kind(), piece.copper(), piece.oxidation());
+                    cell, piece.kind(), piece.copper(), piece.oxidation(), piece.partial());
             state.pieces[cell.index()] = movingBlock(level, pos, model, biome);
         }
     }
